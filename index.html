@@ -164,9 +164,10 @@
     }
 
     .nav-container {
-      display: flex;
+      display: grid;
+      grid-template-columns: 350px 1fr auto;
       align-items: center;
-      justify-content: space-between;
+      gap: 20px;
     }
 
     .logo {
@@ -174,7 +175,6 @@
       align-items: center;
       gap: 12px;
       transition: filter 0.3s ease;
-      min-width: 280px; /* Fixed width to prevent menu shifting */
     }
     
     .logo:hover {
@@ -411,6 +411,7 @@
       display: flex;
       align-items: center;
       gap: 32px;
+      justify-self: center;
     }
 
     .nav-menu a {
@@ -3552,6 +3553,11 @@
     }
 
     @media (max-width: 768px) {
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      
       .nav-menu,
       .navbar .btn {
         display: none;
