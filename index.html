@@ -174,6 +174,7 @@
       align-items: center;
       gap: 12px;
       transition: filter 0.3s ease;
+      min-width: 280px; /* Fixed width to prevent menu shifting */
     }
     
     .logo:hover {
@@ -1234,6 +1235,7 @@
     /* Mockup Window */
     .digital-mockup {
       position: relative;
+      padding-bottom: 80px; /* Space for nav and badge */
     }
     
     .mockup-window {
@@ -1242,6 +1244,9 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      height: 360px; /* Fixed height for all mockups */
+      display: flex;
+      flex-direction: column;
     }
     
     .mockup-header {
@@ -1275,7 +1280,8 @@
     
     .mockup-content {
       display: flex;
-      min-height: 280px;
+      flex: 1;
+      overflow: hidden;
     }
     
     .mockup-sidebar {
@@ -1300,7 +1306,8 @@
     
     .mockup-main {
       flex: 1;
-      padding: 16px;
+      padding: 12px;
+      overflow: hidden;
     }
     
     .mockup-toolbar {
@@ -1390,8 +1397,8 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
-      padding: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 15px 12px;
+      margin-top: 15px;
     }
     
     .nav-arrow {
@@ -1442,13 +1449,18 @@
     .mockup-slider {
       position: relative;
       width: 100%;
-      min-height: 400px;
+      height: 360px; /* Fixed height to match mockup-window */
     }
     
     .mockup-slide {
       display: none !important;
       opacity: 0;
       transition: opacity 0.5s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
     }
     
     .mockup-slide.active {
@@ -1456,11 +1468,17 @@
       opacity: 1;
     }
     
+    .mockup-slide .mockup-window {
+      height: 100%;
+    }
+    
     /* Production Dashboard */
     .mockup-production {
-      padding: 15px;
+      padding: 12px;
       display: flex;
-      gap: 15px;
+      gap: 12px;
+      height: 100%;
+      overflow: hidden;
     }
     
     .oee-section {
@@ -1468,13 +1486,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     
     .oee-gauge {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
     }
     
     .gauge-svg {
@@ -1491,14 +1509,14 @@
     }
     
     .oee-number {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--success);
       display: block;
     }
     
     .oee-label {
-      font-size: 0.65rem;
+      font-size: 0.55rem;
       color: var(--text-muted);
     }
     
@@ -1509,26 +1527,26 @@
     .oee-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-      font-size: 0.65rem;
+      gap: 6px;
+      margin-bottom: 4px;
+      font-size: 0.55rem;
     }
     
     .oee-item-label {
-      width: 70px;
+      width: 60px;
       color: var(--text-muted);
     }
     
     .oee-item-bar {
       flex: 1;
-      height: 6px;
+      height: 5px;
       background: rgba(255,255,255,0.1);
       border-radius: 3px;
       overflow: hidden;
     }
     
     .oee-item-value {
-      width: 30px;
+      width: 28px;
       text-align: right;
       color: var(--text);
     }
@@ -1538,23 +1556,23 @@
     }
     
     .machine-title {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--text);
     }
     
     .machine-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 6px;
     }
     
     .machine-item {
-      padding: 8px;
-      border-radius: 6px;
+      padding: 6px;
+      border-radius: 5px;
       text-align: center;
-      font-size: 0.6rem;
+      font-size: 0.55rem;
     }
     
     .machine-item.running {
@@ -1568,15 +1586,15 @@
     }
     
     .machine-icon {
-      font-size: 1rem;
+      font-size: 0.85rem;
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     
     .status-badge {
       display: block;
-      font-size: 0.55rem;
-      margin-top: 2px;
+      font-size: 0.5rem;
+      margin-top: 1px;
       opacity: 0.8;
     }
     
@@ -1585,32 +1603,36 @@
     
     /* Inventory Management */
     .mockup-inventory {
-      padding: 15px;
+      padding: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
     
     .inventory-summary {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 15px;
+      gap: 6px;
+      margin-bottom: 10px;
     }
     
     .inv-card {
       background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      padding: 10px;
+      border-radius: 6px;
+      padding: 8px 6px;
       text-align: center;
     }
     
     .inv-icon {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 6px;
-      font-size: 0.8rem;
+      margin: 0 auto 4px;
+      font-size: 0.7rem;
     }
     
     .inv-icon.blue { background: rgba(0, 168, 255, 0.2); }
@@ -1619,44 +1641,46 @@
     .inv-icon.red { background: rgba(239, 68, 68, 0.2); }
     
     .inv-number {
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--text);
       display: block;
     }
     
     .inv-label {
-      font-size: 0.55rem;
+      font-size: 0.5rem;
       color: var(--text-muted);
     }
     
     .inventory-alerts {
       background: rgba(0,0,0,0.2);
-      border-radius: 8px;
-      padding: 10px;
+      border-radius: 6px;
+      padding: 8px;
+      flex: 1;
+      overflow: hidden;
     }
     
     .alert-title {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--text);
     }
     
     .alert-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 0;
-      font-size: 0.6rem;
+      gap: 6px;
+      padding: 4px 0;
+      font-size: 0.55rem;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     
     .alert-item:last-child { border-bottom: none; }
     
-    .alert-icon { font-size: 0.75rem; }
+    .alert-icon { font-size: 0.65rem; }
     .alert-text { flex: 1; color: var(--text); }
-    .alert-time { color: var(--text-muted); font-size: 0.55rem; }
+    .alert-time { color: var(--text-muted); font-size: 0.5rem; }
     
     .alert-item.warning .alert-icon { color: var(--warning); }
     .alert-item.critical .alert-icon { color: #ef4444; }
@@ -1664,18 +1688,22 @@
     
     /* Safety Monitoring */
     .mockup-safety {
-      padding: 15px;
+      padding: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
     
     .safety-hero {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
-      margin-bottom: 15px;
-      padding: 15px;
+      gap: 15px;
+      margin-bottom: 10px;
+      padding: 12px;
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(0, 168, 255, 0.15));
-      border-radius: 12px;
+      border-radius: 10px;
     }
     
     .safety-days {
@@ -1683,7 +1711,7 @@
     }
     
     .days-number {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 800;
       background: linear-gradient(135deg, var(--success), var(--accent));
       -webkit-background-clip: text;
@@ -1693,19 +1721,19 @@
     }
     
     .days-label {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--text-muted);
     }
     
     .safety-shield {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     
     .safety-metrics {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-bottom: 12px;
+      gap: 15px;
+      margin-bottom: 10px;
     }
     
     .safety-metric {
@@ -1713,14 +1741,14 @@
     }
     
     .metric-circle {
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 6px;
-      font-size: 0.7rem;
+      margin: 0 auto 4px;
+      font-size: 0.65rem;
       font-weight: 700;
     }
     
@@ -1729,34 +1757,36 @@
     .metric-circle.purple { background: rgba(124, 58, 237, 0.2); color: var(--secondary); border: 2px solid var(--secondary); }
     
     .metric-label {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       color: var(--text-muted);
     }
     
     .safety-zones {
       background: rgba(0,0,0,0.2);
       border-radius: 8px;
-      padding: 10px;
+      padding: 8px;
+      flex: 1;
+      overflow: hidden;
     }
     
     .zone-title {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--text);
     }
     
     .zone-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      gap: 5px;
     }
     
     .zone-item {
-      padding: 8px;
-      border-radius: 6px;
+      padding: 6px 4px;
+      border-radius: 5px;
       text-align: center;
-      font-size: 0.6rem;
+      font-size: 0.55rem;
     }
     
     .zone-item.safe {
@@ -1780,48 +1810,52 @@
     
     /* Energy Dashboard */
     .mockup-energy {
-      padding: 15px;
+      padding: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
     
     .energy-main {
       display: flex;
-      gap: 15px;
-      margin-bottom: 15px;
+      gap: 12px;
+      margin-bottom: 10px;
     }
     
     .energy-gauge {
       flex: 0 0 auto;
       text-align: center;
-      padding: 15px;
+      padding: 10px;
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(239, 68, 68, 0.1));
-      border-radius: 12px;
+      border-radius: 10px;
     }
     
     .energy-icon {
-      font-size: 2rem;
-      margin-bottom: 5px;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
     }
     
     .energy-current {
       display: flex;
       align-items: baseline;
       justify-content: center;
-      gap: 3px;
+      gap: 2px;
     }
     
     .energy-value {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--warning);
     }
     
     .energy-unit {
-      font-size: 0.8rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
     
     .energy-label {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       color: var(--text-muted);
       display: block;
     }
@@ -1831,26 +1865,26 @@
     }
     
     .chart-title {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--text);
     }
     
     .mini-chart {
       display: flex;
       align-items: flex-end;
-      gap: 4px;
-      height: 60px;
-      padding: 5px;
+      gap: 3px;
+      height: 50px;
+      padding: 4px;
       background: rgba(0,0,0,0.2);
-      border-radius: 6px;
+      border-radius: 5px;
     }
     
     .chart-bar {
       flex: 1;
       background: linear-gradient(180deg, var(--accent), rgba(0, 168, 255, 0.3));
-      border-radius: 3px 3px 0 0;
+      border-radius: 2px 2px 0 0;
       transition: all 0.3s;
     }
     
@@ -1861,15 +1895,15 @@
     .chart-labels {
       display: flex;
       justify-content: space-between;
-      margin-top: 4px;
-      font-size: 0.5rem;
+      margin-top: 3px;
+      font-size: 0.45rem;
       color: var(--text-muted);
     }
     
     .energy-breakdown {
       background: rgba(0,0,0,0.2);
-      border-radius: 8px;
-      padding: 10px;
+      border-radius: 6px;
+      padding: 8px;
     }
     
     .breakdown-item {
@@ -1894,15 +1928,16 @@
     
     .mockup-badge {
       position: absolute;
-      bottom: -20px;
-      right: -20px;
+      bottom: 0;
+      right: 0;
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 16px 24px;
+      gap: 10px;
+      padding: 12px 18px;
       background: var(--gradient-primary);
       border-radius: var(--radius-lg);
-      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
+      box-shadow: 0 15px 30px rgba(124, 58, 237, 0.3);
+      z-index: 100;
     }
     
     .mockup-badge svg {
@@ -1925,20 +1960,22 @@
     .mockup-analytics {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 20px;
-      padding: 20px;
+      gap: 15px;
+      padding: 15px;
+      height: 100%;
+      overflow: hidden;
     }
     
     .analytics-left {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
     
     .circle-chart {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       background: conic-gradient(var(--success) 0deg 240deg, var(--accent) 240deg 360deg);
       display: flex;
@@ -1948,8 +1985,8 @@
     }
     
     .circle-inner {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: var(--primary-light);
       display: flex;
@@ -2099,55 +2136,768 @@
       overflow: hidden;
     }
     
-    /* Tire Process Visual */
-    .process-flow {
+    /* ========== TIRE MANUFACTURING ANIMATION ========== */
+    .tire-animation {
       width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .production-line {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .tire-stages {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5px;
+      margin-bottom: 8px;
+    }
+    
+    .stage {
+      text-align: center;
+      flex: 1;
+    }
+    
+    .stage-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 auto 4px;
+    }
+    
+    .stage.mixing .stage-box { background: linear-gradient(135deg, #00a8ff, #0066cc); }
+    .stage.prep .stage-box { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .stage.tbm .stage-box { background: linear-gradient(135deg, #10b981, #059669); }
+    .stage.curing .stage-box { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    
+    .stage-label {
+      font-size: 0.5rem;
+      color: var(--text-muted);
+    }
+    
+    /* Roller Conveyor System */
+    .roller-conveyor {
+      position: relative;
+      height: 90px;
+      margin: 5px 0;
+      perspective: 200px;
+    }
+    
+    .conveyor-side {
+      position: absolute;
+      top: 35px;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(180deg, #4a5568 0%, #2d3748 100%);
+      border-radius: 2px;
+      z-index: 5;
+    }
+    
+    .conveyor-side.left { top: 25px; }
+    .conveyor-side.right { top: 75px; }
+    
+    /* Rollers */
+    .rollers {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      right: 0;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5px;
+      z-index: 3;
+    }
+    
+    .roller {
+      width: 12px;
+      height: 50px;
+      background: linear-gradient(90deg, 
+        #718096 0%, 
+        #e2e8f0 20%, 
+        #cbd5e0 40%,
+        #e2e8f0 60%,
+        #a0aec0 80%,
+        #718096 100%
+      );
+      border-radius: 6px;
+      box-shadow: 
+        inset 0 2px 4px rgba(255,255,255,0.3),
+        inset 0 -2px 4px rgba(0,0,0,0.2),
+        2px 2px 4px rgba(0,0,0,0.3);
+      animation: rollerSpin 0.3s linear infinite;
+    }
+    
+    @keyframes rollerSpin {
+      0% { 
+        background-position: 0 0;
+        box-shadow: 
+          inset 0 2px 4px rgba(255,255,255,0.3),
+          inset 0 -2px 4px rgba(0,0,0,0.2),
+          2px 2px 4px rgba(0,0,0,0.3);
+      }
+      50% { 
+        box-shadow: 
+          inset 0 -2px 4px rgba(255,255,255,0.3),
+          inset 0 2px 4px rgba(0,0,0,0.2),
+          2px 2px 4px rgba(0,0,0,0.3);
+      }
+      100% { 
+        background-position: 0 0;
+        box-shadow: 
+          inset 0 2px 4px rgba(255,255,255,0.3),
+          inset 0 -2px 4px rgba(0,0,0,0.2),
+          2px 2px 4px rgba(0,0,0,0.3);
+      }
+    }
+    
+    /* Flat Tires (Top View) */
+    .flat-tires {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 70px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    
+    .flat-tire {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      top: 5px;
+      animation: tireSlide 5s linear infinite;
+    }
+    
+    .flat-tire.t1 { animation-delay: 0s; }
+    .flat-tire.t2 { animation-delay: 1.7s; }
+    .flat-tire.t3 { animation-delay: 3.4s; }
+    
+    @keyframes tireSlide {
+      0% { left: -70px; }
+      100% { left: calc(100% + 10px); }
+    }
+    
+    /* Tire Ring (Top View) */
+    .tire-ring {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background: radial-gradient(circle at center,
+        transparent 0%,
+        transparent 30%,
+        #1a1a1a 30%,
+        #2a2a2a 35%,
+        #1a1a1a 40%,
+        #0a0a0a 100%
+      );
+      box-shadow: 
+        0 4px 8px rgba(0,0,0,0.5),
+        inset 0 0 15px rgba(0,0,0,0.8),
+        inset 0 0 3px rgba(255,255,255,0.1);
+    }
+    
+    /* Tread Pattern */
+    .tire-tread-pattern {
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: repeating-conic-gradient(
+        from 0deg,
+        #2a2a2a 0deg 8deg,
+        #1a1a1a 8deg 16deg
+      );
+      mask: radial-gradient(circle, transparent 35%, black 36%, black 95%, transparent 96%);
+      -webkit-mask: radial-gradient(circle, transparent 35%, black 36%, black 95%, transparent 96%);
+    }
+    
+    /* Sidewall Text Effect */
+    .tire-sidewall {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(45deg, #2a2a2a, #1a1a1a) padding-box,
+                  linear-gradient(45deg, #3a3a3a, #1a1a1a) border-box;
+      mask: radial-gradient(circle, transparent 40%, black 41%, black 90%, transparent 91%);
+      -webkit-mask: radial-gradient(circle, transparent 40%, black 41%, black 90%, transparent 91%);
+    }
+    
+    /* Inner Ring / Rim Edge */
+    .tire-inner-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 35%;
+      height: 35%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%,
+        #505050 0%,
+        #3a3a3a 50%,
+        #2a2a2a 100%
+      );
+      box-shadow: 
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -2px 4px rgba(0,0,0,0.4),
+        0 0 0 2px #1a1a1a;
+    }
+    
+    .production-stats {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .prod-stat {
       text-align: center;
     }
     
-    .process-label {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      margin-bottom: 12px;
+    .prod-value {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
     }
     
-    .process-nodes {
+    .prod-value small {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    
+    .prod-value.running {
+      color: var(--success);
+      font-size: 0.7rem;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .prod-label {
+      font-size: 0.55rem;
+      color: var(--text-muted);
+    }
+    
+    /* ========== LADDER LOGIC ANIMATION ========== */
+    .ladder-animation {
+      width: 100%;
+      height: 100%;
+      background: #0d1520;
+      border-radius: 8px;
+      border: 1px solid rgba(0,168,255,0.2);
+      overflow: hidden;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    
+    .ladder-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      background: linear-gradient(180deg, #1a2535 0%, #151f2d 100%);
+      border-bottom: 1px solid #2a3a4a;
+    }
+    
+    .ladder-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+    
+    .ladder-status {
+      font-size: 0.55rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+    }
+    
+    .ladder-status.online {
+      color: #10b981;
+    }
+    
+    /* Ladder Program Container */
+    .ladder-program {
+      display: flex;
+      padding: 10px 8px;
+      height: calc(100% - 60px);
+    }
+    
+    /* Power Rails */
+    .power-rail-left,
+    .power-rail-right {
+      width: 4px;
+      background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+    }
+    
+    .rungs-container {
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      align-items: center;
     }
     
-    .node-row {
+    /* Individual Rung */
+    .ladder-rung {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+    }
+    
+    .rung-number {
+      width: 14px;
+      font-size: 0.5rem;
+      color: #4a5568;
+      text-align: center;
+      padding-top: 8px;
+    }
+    
+    .rung-logic {
+      flex: 1;
+      position: relative;
+    }
+    
+    /* Main Branch */
+    .main-branch {
       display: flex;
       align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
     }
     
-    .node {
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.65rem;
-      font-weight: 500;
+    /* Horizontal Wire */
+    .wire-h {
+      height: 2px;
+      flex: 1;
+      min-width: 8px;
+      background: #2a4a6a;
     }
     
-    .node.blue { background: var(--accent); color: var(--white); }
-    .node.green { background: var(--success); color: var(--white); }
-    .node.orange { background: var(--warning); color: var(--primary); }
+    .wire-h.energized {
+      background: #22d3ee;
+      box-shadow: 0 0 6px rgba(34, 211, 238, 0.6);
+    }
     
-    .node small {
-      display: block;
+    /* Contact Block */
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 2px;
+    }
+    
+    .contact {
+      display: flex;
+      align-items: center;
+      height: 24px;
+    }
+    
+    .contact-line {
+      width: 6px;
+      height: 2px;
+      background: #2a4a6a;
+    }
+    
+    .contact-symbol {
+      padding: 2px 4px;
       font-size: 0.55rem;
-      opacity: 0.8;
+      color: #64748b;
+      border: 1px solid #2a4a6a;
+      background: #0f172a;
+      min-width: 24px;
+      text-align: center;
     }
     
-    .arrow {
+    .contact.energized .contact-line {
+      background: #22d3ee;
+      box-shadow: 0 0 4px rgba(34, 211, 238, 0.5);
+    }
+    
+    .contact.energized .contact-symbol {
+      color: #22d3ee;
+      border-color: #22d3ee;
+      background: rgba(34, 211, 238, 0.1);
+      box-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+    }
+    
+    .contact.scanning .contact-symbol {
+      animation: contactScan 1.2s ease-in-out infinite;
+    }
+    
+    @keyframes contactScan {
+      0%, 100% { color: #64748b; border-color: #2a4a6a; background: #0f172a; }
+      50% { color: #22d3ee; border-color: #22d3ee; background: rgba(34, 211, 238, 0.1); box-shadow: 0 0 8px rgba(34, 211, 238, 0.3); }
+    }
+    
+    .contact-name {
+      font-size: 0.45rem;
+      color: #94a3b8;
+      margin-top: 1px;
+    }
+    
+    .contact-addr {
+      font-size: 0.4rem;
+      color: #64748b;
+    }
+    
+    /* Coil Block */
+    .coil-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 2px;
+    }
+    
+    .coil {
+      display: flex;
+      align-items: center;
+      height: 24px;
+    }
+    
+    .coil-line {
+      width: 6px;
+      height: 2px;
+      background: #2a4a6a;
+    }
+    
+    .coil-symbol {
+      padding: 2px 6px;
+      font-size: 0.55rem;
+      color: #64748b;
+      border: 1px solid #2a4a6a;
+      border-radius: 12px;
+      background: #0f172a;
+      min-width: 28px;
+      text-align: center;
+    }
+    
+    .coil.energized .coil-line {
+      background: #10b981;
+      box-shadow: 0 0 4px rgba(16, 185, 129, 0.5);
+    }
+    
+    .coil.energized .coil-symbol {
+      color: #10b981;
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+    
+    .coil.scanning .coil-symbol {
+      animation: coilScan 1.2s ease-in-out infinite;
+    }
+    
+    @keyframes coilScan {
+      0%, 100% { color: #64748b; border-color: #2a4a6a; background: #0f172a; }
+      50% { color: #10b981; border-color: #10b981; background: rgba(16, 185, 129, 0.1); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+    }
+    
+    .coil-name {
+      font-size: 0.45rem;
+      color: #94a3b8;
+      margin-top: 1px;
+    }
+    
+    /* Branch Line (Seal-in) */
+    .branch-line {
+      position: absolute;
+      left: 20px;
+      top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .wire-v {
+      width: 2px;
+      height: 12px;
+      background: #22d3ee;
+      box-shadow: 0 0 4px rgba(34, 211, 238, 0.5);
+    }
+    
+    .branch-contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .branch-contact .contact {
+      height: 20px;
+    }
+    
+    .branch-contact .contact-symbol {
+      font-size: 0.5rem;
+      padding: 1px 3px;
+      min-width: 20px;
+    }
+    
+    .branch-contact .contact-name {
+      font-size: 0.4rem;
+    }
+    
+    .seal-in .contact-line {
+      background: #22d3ee;
+      box-shadow: 0 0 4px rgba(34, 211, 238, 0.5);
+    }
+    
+    .seal-in .contact-symbol {
+      color: #22d3ee;
+      border-color: #22d3ee;
+      background: rgba(34, 211, 238, 0.1);
+    }
+    
+    /* Timer Block */
+    .timer-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 4px;
+    }
+    
+    .timer-box {
+      border: 2px solid #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+      padding: 3px 8px;
+      text-align: center;
+      min-width: 40px;
+    }
+    
+    .timer-type {
+      display: block;
+      font-size: 0.5rem;
+      font-weight: 600;
+      color: #f59e0b;
+    }
+    
+    .timer-preset {
+      display: block;
+      font-size: 0.4rem;
+      color: #94a3b8;
+    }
+    
+    .timer-name {
+      font-size: 0.4rem;
+      color: #64748b;
+      margin-top: 1px;
+    }
+    
+    .timer-block.scanning .timer-box {
+      animation: timerScan 1.2s ease-in-out infinite;
+    }
+    
+    @keyframes timerScan {
+      0%, 100% { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+      50% { border-color: #fbbf24; background: rgba(251, 191, 36, 0.2); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+    }
+    
+    .ladder-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 10px;
+      background: #0a0f18;
+      border-top: 1px solid #1a2535;
+      font-size: 0.5rem;
+    }
+    
+    .scan-info {
+      color: #606060;
+    }
+    
+    .scan-time {
+      color: #10b981;
+      animation: scanBlink 0.5s infinite;
+    }
+    
+    @keyframes scanBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .io-info {
+      color: #10b981;
+    }
+    
+    /* ========== REALTIME DASHBOARD ANIMATION ========== */
+    .realtime-dashboard {
+      width: 100%;
+      height: 100%;
+      background: #0a1628;
+      border-radius: 8px;
+      border: 1px solid rgba(0,168,255,0.2);
+      overflow: hidden;
+    }
+    
+    .realtime-dashboard .dash-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .realtime-dashboard .dash-url {
+      flex: 1;
+      font-size: 0.6rem;
       color: var(--text-muted);
+    }
+    
+    .live-badge {
+      font-size: 0.55rem;
+      color: #ef4444;
+      animation: livePulse 1s infinite;
+    }
+    
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    
+    .dash-body {
+      padding: 12px;
+    }
+    
+    .realtime-chart {
+      margin-bottom: 12px;
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+    
+    .chart-value {
+      color: var(--text);
+      font-weight: 600;
       font-size: 0.8rem;
     }
+    
+    .chart-value small {
+      font-size: 0.5rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    
+    .line-chart {
+      height: 60px;
+      background: rgba(0,168,255,0.05);
+      border-radius: 6px;
+      padding: 5px;
+    }
+    
+    .line-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .chart-line {
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: drawLine 3s ease forwards infinite;
+    }
+    
+    @keyframes drawLine {
+      0% { stroke-dashoffset: 300; }
+      50% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 0; }
+    }
+    
+    .chart-dot {
+      animation: dotPulse 1s ease-in-out infinite;
+    }
+    
+    @keyframes dotPulse {
+      0%, 100% { r: 4; opacity: 1; }
+      50% { r: 6; opacity: 0.7; }
+    }
+    
+    .realtime-stats {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .rt-stat {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .rt-bar-container {
+      height: 40px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      margin-bottom: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .rt-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 4px;
+    }
+    
+    .rt-bar.bar-1 {
+      background: linear-gradient(180deg, #00a8ff, #0066cc);
+      animation: barGrow1 2s ease-in-out infinite;
+    }
+    
+    .rt-bar.bar-2 {
+      background: linear-gradient(180deg, #10b981, #059669);
+      animation: barGrow2 2s ease-in-out infinite;
+    }
+    
+    .rt-bar.bar-3 {
+      background: linear-gradient(180deg, #8b5cf6, #6d28d9);
+      animation: barGrow3 2s ease-in-out infinite;
+    }
+    
+    @keyframes barGrow1 {
+      0%, 100% { height: 75%; }
+      50% { height: 90%; }
+    }
+    
+    @keyframes barGrow2 {
+      0%, 100% { height: 85%; }
+      50% { height: 99%; }
+    }
+    
+    @keyframes barGrow3 {
+      0%, 100% { height: 80%; }
+      50% { height: 95%; }
+    }
+    
+    .rt-label {
+      display: block;
+      font-size: 0.5rem;
+      color: var(--text-muted);
+    }
+    
+    .rt-value {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    /* Keep old Tire Process Visual for reference */
     
     .process-status {
       margin-top: 12px;
@@ -3865,30 +4615,82 @@
         <!-- Tire Manufacturing -->
         <div class="expertise-card">
           <div class="expertise-visual tire-process">
-            <div class="process-flow">
-              <div class="process-label">TIRE PRODUCTION PROCESS</div>
-              <div class="process-nodes">
-                <div class="node-row">
-                  <span class="node blue">Mixing</span>
-                  <span class="arrow">→</span>
-                  <span class="node blue">Extrusion</span>
+            <div class="tire-animation">
+              <div class="production-line">
+                <div class="tire-stages">
+                  <div class="stage mixing">
+                    <div class="stage-box">MIX</div>
+                    <div class="stage-label">Mixing</div>
+                  </div>
+                  <div class="stage prep">
+                    <div class="stage-box">PREP</div>
+                    <div class="stage-label">Preparation</div>
+                  </div>
+                  <div class="stage tbm">
+                    <div class="stage-box">TBM</div>
+                    <div class="stage-label">Building</div>
+                  </div>
+                  <div class="stage curing">
+                    <div class="stage-box">CUR</div>
+                    <div class="stage-label">Curing</div>
+                  </div>
                 </div>
-                <div class="node-row">
-                  <span class="node blue">Calender</span>
-                  <span class="arrow">→</span>
-                  <span class="node blue">Cutter</span>
-                  <span class="arrow">→</span>
-                  <span class="node green">TBM<br><small>1st & 2nd Stage</small></span>
-                  <span class="arrow">→</span>
-                  <span class="node orange">Curing</span>
-                </div>
-                <div class="node-row center">
-                  <span class="node green">After Cure</span>
+                
+                <!-- Roller Conveyor System -->
+                <div class="roller-conveyor">
+                  <div class="conveyor-side left"></div>
+                  <div class="conveyor-side right"></div>
+                  <div class="rollers">
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                  </div>
+                  <div class="flat-tires">
+                    <div class="flat-tire t1">
+                      <div class="tire-ring">
+                        <div class="tire-tread-pattern"></div>
+                        <div class="tire-sidewall"></div>
+                        <div class="tire-inner-ring"></div>
+                      </div>
+                    </div>
+                    <div class="flat-tire t2">
+                      <div class="tire-ring">
+                        <div class="tire-tread-pattern"></div>
+                        <div class="tire-sidewall"></div>
+                        <div class="tire-inner-ring"></div>
+                      </div>
+                    </div>
+                    <div class="flat-tire t3">
+                      <div class="tire-ring">
+                        <div class="tire-tread-pattern"></div>
+                        <div class="tire-sidewall"></div>
+                        <div class="tire-inner-ring"></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="process-status">
-                <span class="status-dot green"></span>
-                <span>LINE RUNNING</span>
+              <div class="production-stats">
+                <div class="prod-stat">
+                  <span class="prod-value">247 <small>tires/hr</small></span>
+                  <span class="prod-label">Production Rate</span>
+                </div>
+                <div class="prod-stat">
+                  <span class="prod-value running">● RUNNING</span>
+                  <span class="prod-label">Line Status</span>
+                </div>
               </div>
             </div>
           </div>
@@ -3897,10 +4699,11 @@
             <h3>Production Line Automation</h3>
             <p>Complete tire production automation from mixing through curing: SF preparation, TBM building machines, curing press, and after-cure inspection.</p>
             <div class="expertise-tags">
-              <span class="tag">Mixing Preparation (Hot/Cold)</span>
+              <span class="tag">SF</span>
+              <span class="tag">PREP</span>
               <span class="tag">TBM</span>
-              <span class="tag">Curing</span>
-              <span class="tag">After Cure & Transitique</span>
+              <span class="tag">CURING</span>
+              <span class="tag">AFTER CURE & Transitique</span>
             </div>
           </div>
         </div>
@@ -3908,28 +4711,101 @@
         <!-- PLC Programming -->
         <div class="expertise-card">
           <div class="expertise-visual plc-visual">
-            <div class="plc-window">
-              <div class="plc-header">MainRoutine <span class="online-badge">● ONLINE</span></div>
-              <div class="plc-diagram">
-                <div class="diagram-row">
-                  <span class="contact">Start_PB</span>
-                  <span class="contact">Stop_PB</span>
-                  <span class="coil">Motor_Run</span>
+            <div class="ladder-animation">
+              <div class="ladder-header">
+                <span class="ladder-title">MainRoutine</span>
+                <span class="ladder-status online">● ONLINE</span>
+              </div>
+              <div class="ladder-program">
+                <!-- Left Power Rail -->
+                <div class="power-rail-left"></div>
+                
+                <!-- Rungs Container -->
+                <div class="rungs-container">
+                  <!-- Rung 0 - Motor Start/Stop -->
+                  <div class="ladder-rung rung-0">
+                    <div class="rung-number">0</div>
+                    <div class="rung-logic">
+                      <!-- Main Branch -->
+                      <div class="main-branch">
+                        <div class="wire-h energized"></div>
+                        <div class="contact-block">
+                          <div class="contact no energized">
+                            <span class="contact-line left"></span>
+                            <span class="contact-symbol">] [</span>
+                            <span class="contact-line right"></span>
+                          </div>
+                          <span class="contact-name">"Start"</span>
+                          <span class="contact-addr">I0.0</span>
+                        </div>
+                        <div class="wire-h energized"></div>
+                        <div class="contact-block">
+                          <div class="contact nc energized">
+                            <span class="contact-line left"></span>
+                            <span class="contact-symbol">]/[</span>
+                            <span class="contact-line right"></span>
+                          </div>
+                          <span class="contact-name">"Stop"</span>
+                          <span class="contact-addr">I0.1</span>
+                        </div>
+                        <div class="wire-h energized"></div>
+                        <div class="coil-block">
+                          <div class="coil energized">
+                            <span class="coil-line left"></span>
+                            <span class="coil-symbol">( )</span>
+                            <span class="coil-line right"></span>
+                          </div>
+                          <span class="coil-name">M10.0</span>
+                        </div>
+                        <div class="wire-h energized"></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Rung 1 - Timer -->
+                  <div class="ladder-rung rung-1">
+                    <div class="rung-number">1</div>
+                    <div class="rung-logic">
+                      <div class="main-branch">
+                        <div class="wire-h"></div>
+                        <div class="contact-block">
+                          <div class="contact no scanning">
+                            <span class="contact-line left"></span>
+                            <span class="contact-symbol">] [</span>
+                            <span class="contact-line right"></span>
+                          </div>
+                          <span class="contact-name">"Sensor"</span>
+                          <span class="contact-addr">I0.2</span>
+                        </div>
+                        <div class="wire-h"></div>
+                        <div class="timer-block scanning">
+                          <div class="timer-box">
+                            <span class="timer-type">TON</span>
+                            <span class="timer-preset">T#2s</span>
+                          </div>
+                          <span class="timer-name">Timer_1</span>
+                        </div>
+                        <div class="wire-h"></div>
+                        <div class="coil-block">
+                          <div class="coil scanning">
+                            <span class="coil-line left"></span>
+                            <span class="coil-symbol">( )</span>
+                            <span class="coil-line right"></span>
+                          </div>
+                          <span class="coil-name">Q0.0</span>
+                        </div>
+                        <div class="wire-h"></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="diagram-row">
-                  <span class="branch"></span>
-                  <span class="timer">Delay_TMR</span>
-                </div>
-                <div class="diagram-row">
-                  <span class="contact">Sensor_1</span>
-                  <span class="box">TON<br><small>1.0s</small></span>
-                  <span class="contact">Auto_Mode</span>
-                </div>
-                <div class="diagram-row">
-                  <span class="contact">Auto_Mode</span>
-                  <span class="contact">Ready</span>
-                  <span class="coil">Conveyor</span>
-                </div>
+                
+                <!-- Right Power Rail -->
+                <div class="power-rail-right"></div>
+              </div>
+              <div class="ladder-footer">
+                <span class="scan-info">Scan: <span class="scan-time">8ms</span></span>
+                <span class="io-info">I/O: OK</span>
               </div>
             </div>
           </div>
@@ -3949,41 +4825,57 @@
         <!-- Operations Management -->
         <div class="expertise-card">
           <div class="expertise-visual dashboard-visual">
-            <div class="dashboard-window">
+            <div class="realtime-dashboard">
               <div class="dash-header">
                 <div class="mockup-dots small">
                   <span class="dot-red"></span>
                   <span class="dot-yellow"></span>
                   <span class="dot-green"></span>
                 </div>
-                <span class="dash-url">app.yourcompany.com</span>
-                <span class="dash-notification">🔔 New order received!</span>
+                <span class="dash-url">dashboard.aic.com</span>
+                <span class="live-badge">● LIVE</span>
               </div>
-              <div class="dash-content">
-                <div class="dash-sidebar">
-                  <div class="dash-icon active"></div>
-                  <div class="dash-icon"></div>
-                  <div class="dash-icon"></div>
-                </div>
-                <div class="dash-main">
-                  <div class="dash-stats">
-                    <div class="mini-stat">
-                      <span class="mini-value">2,847</span>
-                    </div>
-                    <div class="mini-stat">
-                      <span class="mini-value">98.5%</span>
-                    </div>
-                    <div class="mini-stat">
-                      <span class="mini-value">฿4.2M</span>
-                    </div>
+              <div class="dash-body">
+                <div class="realtime-chart">
+                  <div class="chart-header">
+                    <span>Production Output</span>
+                    <span class="chart-value">2,847 <small>units</small></span>
                   </div>
-                  <div class="dash-label">Performance Analytics</div>
-                  <div class="dash-bars">
-                    <div class="bar-item"><div class="bar cyan" style="height: 60%"></div></div>
-                    <div class="bar-item"><div class="bar green" style="height: 80%"></div></div>
-                    <div class="bar-item"><div class="bar blue" style="height: 45%"></div></div>
-                    <div class="bar-item"><div class="bar purple" style="height: 70%"></div></div>
-                    <div class="bar-item"><div class="bar orange" style="height: 55%"></div></div>
+                  <div class="line-chart">
+                    <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stop-color="#00a8ff" stop-opacity="0.3"/>
+                          <stop offset="100%" stop-color="#00a8ff" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path class="chart-area" d="M0,45 L20,40 L40,42 L60,35 L80,38 L100,30 L120,32 L140,25 L160,28 L180,20 L200,22 L200,60 L0,60 Z" fill="url(#chartGradient)"/>
+                      <path class="chart-line" d="M0,45 L20,40 L40,42 L60,35 L80,38 L100,30 L120,32 L140,25 L160,28 L180,20 L200,22" fill="none" stroke="#00a8ff" stroke-width="2"/>
+                      <circle class="chart-dot" cx="200" cy="22" r="4" fill="#00a8ff"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="realtime-stats">
+                  <div class="rt-stat">
+                    <div class="rt-bar-container">
+                      <div class="rt-bar bar-1"></div>
+                    </div>
+                    <span class="rt-label">OEE</span>
+                    <span class="rt-value">87%</span>
+                  </div>
+                  <div class="rt-stat">
+                    <div class="rt-bar-container">
+                      <div class="rt-bar bar-2"></div>
+                    </div>
+                    <span class="rt-label">Quality</span>
+                    <span class="rt-value">99%</span>
+                  </div>
+                  <div class="rt-stat">
+                    <div class="rt-bar-container">
+                      <div class="rt-bar bar-3"></div>
+                    </div>
+                    <span class="rt-label">Uptime</span>
+                    <span class="rt-value">94%</span>
                   </div>
                 </div>
               </div>
@@ -4068,38 +4960,41 @@
         </div>
         
         <div class="contact-form-wrapper">
-          <form class="contact-form">
+          <form class="contact-form" action="https://formspree.io/f/xzdzlwqa" method="POST">
+            <!-- Redirect back to website after submit -->
+            <input type="hidden" name="_next" value="https://nukools.github.io/aic-website/#contact">
+            
             <div class="form-group">
               <label>Your Name</label>
-              <input type="text" placeholder="John Smith">
+              <input type="text" name="name" placeholder="John Smith" required>
             </div>
             
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" placeholder="john@company.com">
+              <input type="email" name="email" placeholder="john@company.com" required>
             </div>
             
             <div class="form-group">
               <label>Company</label>
-              <input type="text" placeholder="Your Company">
+              <input type="text" name="company" placeholder="Your Company">
             </div>
             
             <div class="form-group">
               <label>Service Interest</label>
-              <select>
+              <select name="service">
                 <option value="">Select a service...</option>
-                <option value="plc">PLC Programming</option>
-                <option value="safety">Safety Systems</option>
-                <option value="hardware">Hardware Design</option>
-                <option value="panels">Control Panels</option>
-                <option value="electrical">Electrical Installation</option>
-                <option value="web">Web Applications</option>
+                <option value="PLC Programming">PLC Programming</option>
+                <option value="Safety Systems">Safety Systems</option>
+                <option value="Hardware Design">Hardware Design</option>
+                <option value="Control Panels">Control Panels</option>
+                <option value="Electrical Installation">Electrical Installation</option>
+                <option value="Web Applications">Web Applications</option>
               </select>
             </div>
             
             <div class="form-group">
               <label>Project Details</label>
-              <textarea placeholder="Tell us about your project..."></textarea>
+              <textarea name="message" placeholder="Tell us about your project..." required></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg full-width">Send Message</button>
@@ -4128,7 +5023,7 @@
           <ul>
             <li><a href="#about">About Us</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#expertise">Projects</a></li>
+            <li><a href="#expertise">Expertise</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -4139,7 +5034,7 @@
             <li><a href="#services">PLC Programming</a></li>
             <li><a href="#services">Safety Systems</a></li>
             <li><a href="#services">Control Panels</a></li>
-            <li><a href="#services">Web Applications</a></li>
+            <li><a href="#digital-solutions">Digital Solutions</a></li>
           </ul>
         </div>
         
@@ -4147,9 +5042,8 @@
           <h4>Technology</h4>
           <ul>
             <li><a href="#technology">Rockwell</a></li>
-            <li><a href="#technology">Nidec</a></li>
             <li><a href="#technology">Siemens</a></li>
-            <li><a href="#technology">Web / AI</a></li>
+            <li><a href="#technology">NIDEC</a></li>
           </ul>
         </div>
       </div>
@@ -4185,7 +5079,7 @@
     </svg>
   </button>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     /* ============================================
        A.I.C. Website - Main JavaScript
        ============================================ */
@@ -4278,30 +5172,43 @@
         statsObserver.observe(stat);
       });
       
-      // ---------- Image Slider ----------
-      const slides = document.querySelectorAll('.slide');
-      const dots = document.querySelectorAll('.dot');
+      // ---------- Image Slider (About Section) ----------
+      const sliderContainer = document.querySelector('.slider-container');
+      const slides = sliderContainer ? sliderContainer.querySelectorAll('.slide') : [];
+      const dots = document.querySelectorAll('.slider-dots .dot');
       const prevBtn = document.querySelector('.slider-btn.prev');
       const nextBtn = document.querySelector('.slider-btn.next');
       let currentSlide = 0;
       
       function showSlide(index) {
         slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === index);
+          if (i === index) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
         });
         dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === index);
+          if (i === index) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
         });
       }
       
       function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        if (slides.length > 0) {
+          currentSlide = (currentSlide + 1) % slides.length;
+          showSlide(currentSlide);
+        }
       }
       
       function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
+        if (slides.length > 0) {
+          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(currentSlide);
+        }
       }
       
       if (prevBtn && nextBtn) {
@@ -4316,8 +5223,11 @@
         });
       });
       
-      // Auto-slide every 5 seconds
-      setInterval(nextSlide, 5000);
+      // Initialize and Auto-slide every 5 seconds
+      if (slides.length > 0) {
+        showSlide(0);
+        setInterval(nextSlide, 5000);
+      }
       
       // ---------- Mockup Slider ----------
       const mockupSlides = document.querySelectorAll('.digital-mockup .mockup-slide');
@@ -4370,4 +5280,24 @@
         if (window.pageYOffset > 300) {
           scrollTopBtn.classList.add('visible');
         } else {
-          scroll
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+      
+      if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+      
+      // Debug log
+      console.log('Sliders initialized:', slides.length, 'about slides,', mockupSlides.length, 'mockup slides');
+      
+    });
+  </script>
+</body>
+</html>
+  
