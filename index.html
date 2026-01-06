@@ -615,6 +615,11 @@
       object-fit: cover;
     }
     
+    .slide img.full-image {
+      object-fit: contain;
+      background: #0d1f3c;
+    }
+    
     .slider-btn {
       position: absolute;
       top: 50%;
@@ -1031,6 +1036,12 @@
               <div class="slide">
                 <img src="images/project-6.jpg" alt="Industrial machinery">
               </div>
+              <div class="slide">
+                <img src="images/plc.png" alt="PLC Programming" class="full-image">
+              </div>
+              <div class="slide">
+                <img src="images/hmi.png" alt="HMI Design" class="full-image">
+              </div>
             </div>
             
             <button class="slider-btn prev" aria-label="Previous">
@@ -1046,6 +1057,8 @@
             
             <div class="slider-dots">
               <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
               <span class="dot"></span>
               <span class="dot"></span>
               <span class="dot"></span>
