@@ -5922,6 +5922,34 @@
       border: 2px solid rgba(255, 255, 255, 0.4);
     }
 
+    .chat-header-info {
+      flex: 1;
+    }
+
+    .chat-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .chat-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    .chat-close-btn svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+
     .chat-avatar::after {
       content: '';
       position: absolute;
@@ -6175,13 +6203,13 @@
     @media (max-width: 480px) {
       .chatbot-window {
         position: fixed;
-        width: 100%;
-        height: calc(100% - 60px);
-        max-height: calc(100vh - 60px);
-        bottom: 0;
-        right: 0;
-        left: 0;
-        border-radius: 20px 20px 0 0;
+        width: calc(100% - 20px);
+        height: 70vh;
+        max-height: 500px;
+        bottom: 90px;
+        right: 10px;
+        left: 10px;
+        border-radius: 20px;
         z-index: 10000;
       }
 
@@ -6198,7 +6226,7 @@
       }
 
       .chat-header {
-        padding: 14px 16px;
+        padding: 12px 16px;
       }
 
       .chat-avatar {
@@ -6215,8 +6243,19 @@
         font-size: 11px;
       }
 
+      .chat-close-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      .chat-close-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+
       .chat-messages {
-        padding: 16px;
+        padding: 12px;
+        max-height: calc(70vh - 180px);
       }
 
       .message-content {
@@ -6230,7 +6269,7 @@
       }
 
       .chat-input-area {
-        padding: 12px 16px;
+        padding: 10px 12px;
       }
 
       .chat-input {
@@ -6269,6 +6308,12 @@
         <h4>🔥 A.I.C. Sales Team</h4>
         <span>Online - พร้อมให้บริการ!</span>
       </div>
+      <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
     </div>
 
     <div class="chat-messages" id="chatMessages">
@@ -6525,13 +6570,26 @@ What project do you have in mind? I can provide a quick estimate!`
         }
       });
 
+      // Close button event listener
+      const closeBtn = document.getElementById('chatCloseBtn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          isOpen = false;
+          toggle.classList.remove('active');
+          window_chat.classList.remove('open');
+        });
+      }
+
       // 🚀 AUTO-OPEN CHATBOT - Sales Proactive Approach!
-      // เปิด Chatbot อัตโนมัติหลังเข้าเว็บ 3 วินาที
-      setTimeout(() => {
-        if (!isOpen) {
-          toggle.click();
-        }
-      }, 3000);
+      // เปิด Chatbot อัตโนมัติหลังเข้าเว็บ 3 วินาที (เฉพาะ Desktop)
+      const isMobile = window.innerWidth <= 480;
+      if (!isMobile) {
+        setTimeout(() => {
+          if (!isOpen) {
+            toggle.click();
+          }
+        }, 3000);
+      }
 
     })();
   </script>
