@@ -5488,15 +5488,15 @@
   <style>
     /* ---------- Chatbot Variables ---------- */
     .aic-chatbot {
-      --chat-primary: #1e3a5f;
-      --chat-secondary: #2d4a6f;
-      --chat-accent: #00a8ff;
-      --chat-accent-glow: #00d4ff;
+      --chat-primary: #ffffff;
+      --chat-secondary: #fff7ed;
+      --chat-accent: #f97316;
+      --chat-accent-glow: #fb923c;
       --chat-purple: #7c3aed;
-      --chat-text: #ffffff;
-      --chat-muted: #cbd5e1;
+      --chat-text: #1e293b;
+      --chat-muted: #64748b;
       --chat-white: #ffffff;
-      --chat-gradient: linear-gradient(135deg, #00a8ff 0%, #7c3aed 100%);
+      --chat-gradient: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
     }
 
     /* ---------- Chatbot Toggle Button ---------- */
@@ -5504,24 +5504,24 @@
       position: fixed;
       bottom: 100px;
       right: 30px;
-      width: 64px;
-      height: 64px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      background: var(--chat-gradient);
+      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
       border: none;
       cursor: pointer;
-      box-shadow: 0 8px 32px rgba(0, 168, 255, 0.4);
+      box-shadow: 0 8px 32px rgba(249, 115, 22, 0.5);
       z-index: 9998;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
-      animation: chatPulse 2s ease-in-out infinite;
+      animation: chatPulse 1.5s ease-in-out infinite;
     }
 
     .chatbot-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 40px rgba(0, 168, 255, 0.5);
+      transform: scale(1.15);
+      box-shadow: 0 12px 40px rgba(249, 115, 22, 0.6);
     }
 
     .chatbot-toggle.active {
@@ -5548,32 +5548,32 @@
     }
 
     @keyframes chatPulse {
-      0%, 100% { box-shadow: 0 8px 32px rgba(0, 168, 255, 0.4); }
-      50% { box-shadow: 0 8px 48px rgba(124, 58, 237, 0.6); }
+      0%, 100% { box-shadow: 0 8px 32px rgba(249, 115, 22, 0.5); }
+      50% { box-shadow: 0 8px 48px rgba(236, 72, 153, 0.7); }
     }
 
     /* Notification Badge */
     .chat-badge {
       position: absolute;
-      top: -4px;
-      right: -4px;
-      width: 20px;
-      height: 20px;
+      top: -6px;
+      right: -6px;
+      width: 24px;
+      height: 24px;
       background: #ef4444;
       border-radius: 50%;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: badgePop 0.3s ease;
+      animation: badgePulse 1s ease-in-out infinite;
+      border: 2px solid white;
     }
 
-    @keyframes badgePop {
-      0% { transform: scale(0); }
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
     }
 
     /* ---------- Chatbot Window ---------- */
@@ -5583,9 +5583,9 @@
       right: 30px;
       width: 400px;
       height: 550px;
-      background: var(--chat-primary);
+      background: #ffffff;
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -5594,7 +5594,7 @@
       visibility: hidden;
       transform: translateY(20px) scale(0.95);
       transition: all 0.3s ease;
-      border: 1px solid rgba(0, 168, 255, 0.2);
+      border: 1px solid #e2e8f0;
     }
 
     .chatbot-window.open {
@@ -5605,26 +5605,27 @@
 
     /* ---------- Chat Header ---------- */
     .chat-header {
-      background: var(--chat-secondary);
+      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
       padding: 16px 20px;
       display: flex;
       align-items: center;
       gap: 12px;
-      border-bottom: 1px solid rgba(0, 168, 255, 0.1);
+      border-bottom: none;
     }
 
     .chat-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--chat-gradient);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       color: white;
-      font-size: 14px;
+      font-size: 16px;
       position: relative;
+      border: 2px solid rgba(255, 255, 255, 0.4);
     }
 
     .chat-avatar::after {
@@ -5634,20 +5635,20 @@
       right: 2px;
       width: 10px;
       height: 10px;
-      background: #10b981;
+      background: #4ade80;
       border-radius: 50%;
-      border: 2px solid var(--chat-secondary);
+      border: 2px solid rgba(255, 255, 255, 0.5);
     }
 
     .chat-header-info h4 {
-      color: var(--chat-white);
+      color: #ffffff;
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 2px;
     }
 
     .chat-header-info span {
-      color: #10b981;
+      color: rgba(255, 255, 255, 0.8);
       font-size: 12px;
       display: flex;
       align-items: center;
@@ -5658,7 +5659,7 @@
       content: '';
       width: 6px;
       height: 6px;
-      background: #10b981;
+      background: #4ade80;
       border-radius: 50%;
       animation: pulse 1.5s ease-in-out infinite;
     }
@@ -5687,7 +5688,7 @@
     }
 
     .chat-messages::-webkit-scrollbar-thumb {
-      background: rgba(0, 168, 255, 0.3);
+      background: #cbd5e1;
       border-radius: 3px;
     }
 
@@ -5715,8 +5716,8 @@
     .message-avatar {
       width: 32px;
       height: 32px;
-      border-radius: 10px;
-      background: var(--chat-gradient);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -5727,25 +5728,27 @@
     }
 
     .message.user .message-avatar {
-      background: var(--chat-secondary);
-      color: var(--chat-accent);
+      background: #fef3c7;
+      color: #f97316;
     }
 
     .message-content {
-      background: rgba(255, 255, 255, 0.15);
+      background: #fff7ed;
       padding: 12px 16px;
       border-radius: 16px;
       border-top-left-radius: 4px;
-      color: var(--chat-text);
+      color: #1e293b;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.6;
+      border: 1px solid #fed7aa;
     }
 
     .message.user .message-content {
-      background: var(--chat-gradient);
+      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
       color: white;
       border-radius: 16px;
       border-top-right-radius: 4px;
+      border: none;
     }
 
     /* Typing Indicator */
@@ -5758,7 +5761,7 @@
     .typing-indicator span {
       width: 8px;
       height: 8px;
-      background: var(--chat-accent);
+      background: #f97316;
       border-radius: 50%;
       animation: typing 1.4s ease-in-out infinite;
     }
@@ -5780,26 +5783,28 @@
     }
 
     .quick-action {
-      background: rgba(0, 168, 255, 0.1);
-      border: 1px solid rgba(0, 168, 255, 0.3);
-      color: var(--chat-accent);
-      padding: 8px 14px;
-      border-radius: 20px;
+      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+      border: none;
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 25px;
       font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
     }
 
     .quick-action:hover {
-      background: rgba(0, 168, 255, 0.2);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
     }
 
     /* ---------- Chat Input ---------- */
     .chat-input-area {
       padding: 16px 20px;
-      background: var(--chat-secondary);
-      border-top: 1px solid rgba(0, 168, 255, 0.1);
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
     }
 
     .chat-input-wrapper {
@@ -5810,11 +5815,11 @@
 
     .chat-input {
       flex: 1;
-      background: var(--chat-primary);
-      border: 1px solid rgba(0, 168, 255, 0.2);
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
       border-radius: 12px;
       padding: 12px 16px;
-      color: var(--chat-white);
+      color: #1e293b;
       font-size: 14px;
       font-family: inherit;
       outline: none;
@@ -5822,18 +5827,19 @@
     }
 
     .chat-input::placeholder {
-      color: var(--chat-muted);
+      color: #94a3b8;
     }
 
     .chat-input:focus {
-      border-color: var(--chat-accent);
+      border-color: #f97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
     }
 
     .chat-send {
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: var(--chat-gradient);
+      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
       border: none;
       cursor: pointer;
       display: flex;
@@ -5863,12 +5869,12 @@
       text-align: center;
       padding: 8px;
       font-size: 11px;
-      color: var(--chat-muted);
-      background: var(--chat-primary);
+      color: #64748b;
+      background: #f1f5f9;
     }
 
     .chat-powered a {
-      color: var(--chat-accent);
+      color: #0066cc;
     }
 
     /* ---------- Mobile Responsive ---------- */
@@ -5907,8 +5913,8 @@
     <div class="chat-header">
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
-        <h4>A.I.C. Sales Assistant</h4>
-        <span>Online - Powered by AI</span>
+        <h4>🔥 A.I.C. Sales Team</h4>
+        <span>Online - พร้อมให้บริการ!</span>
       </div>
     </div>
 
@@ -5929,7 +5935,7 @@
     </div>
 
     <div class="chat-powered">
-      A.I.C. Sales Assistant © 2026
+      💬 ตอบกลับภายใน 1 นาที | A.I.C. © 2026
     </div>
   </div>
 
@@ -5963,31 +5969,29 @@
       let conversationHistory = [];
       let isFirstOpen = true;
 
-      // Welcome message
+      // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
-        th: `สวัสดีครับ! 👋 ยินดีต้อนรับสู่ A.I.C.
+        th: `🎯 สวัสดีครับ! ยินดีต้อนรับสู่ A.I.C.
 
-ผมพร้อมช่วยคุณเรื่อง:
-• ระบบ Automation & PLC
-• Safety Systems
-• Web Applications & Dashboards
+ผมเห็นว่าคุณกำลังสนใจด้าน Industrial Automation 
 
-สนใจบริการด้านไหนครับ?`,
-        en: `Hello! 👋 Welcome to A.I.C.
+✨ วันนี้เรามีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่!
 
-I can help you with:
-• Automation & PLC Systems
-• Safety Systems  
-• Web Applications & Dashboards
+มีโปรเจคอะไรในใจบ้างครับ? ผมช่วยประเมินราคาเบื้องต้นให้ได้เลย!`,
+        en: `🎯 Hello! Welcome to A.I.C.
 
-What service are you interested in?`
+I noticed you're interested in Industrial Automation!
+
+✨ We have special offers for new clients today!
+
+What project do you have in mind? I can provide a quick estimate!`
       };
 
       const quickActions = [
-        { text: 'PLC Programming', value: 'อยากทราบรายละเอียดบริการ PLC Programming' },
-        { text: 'Safety Systems', value: 'สนใจบริการ Safety Systems' },
-        { text: 'Web/Dashboard', value: 'ต้องการ Web Application หรือ Dashboard' },
-        { text: 'ขอใบเสนอราคา', value: 'อยากขอใบเสนอราคา' }
+        { text: '🔧 PLC Programming', value: 'สนใจ PLC Programming อยากทราบราคาเบื้องต้น' },
+        { text: '🛡️ Safety Systems', value: 'ต้องการระบบ Safety อยากปรึกษา' },
+        { text: '💻 Web/Dashboard', value: 'อยากได้ Web App หรือ Dashboard' },
+        { text: '📋 ขอใบเสนอราคา', value: 'ขอใบเสนอราคาครับ' }
       ];
 
       // Toggle chatbot
@@ -6168,10 +6172,13 @@ What service are you interested in?`
         }
       });
 
-      // Auto-open after delay (optional)
-      // setTimeout(() => {
-      //   if (!isOpen) toggle.click();
-      // }, 5000);
+      // 🚀 AUTO-OPEN CHATBOT - Sales Proactive Approach!
+      // เปิด Chatbot อัตโนมัติหลังเข้าเว็บ 3 วินาที
+      setTimeout(() => {
+        if (!isOpen) {
+          toggle.click();
+        }
+      }, 3000);
 
     })();
   </script>
