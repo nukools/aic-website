@@ -6297,6 +6297,66 @@
       border: none;
     }
 
+    /* TTS Speaker Button */
+    .tts-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: 8px;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+
+    .tts-button:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .tts-button.playing {
+      opacity: 1;
+      color: #f97316;
+    }
+
+    .tts-button.loading {
+      opacity: 0.5;
+      cursor: wait;
+    }
+
+    .tts-button svg {
+      width: 18px;
+      height: 18px;
+      color: #64748b;
+    }
+
+    .tts-button.playing svg {
+      color: #f97316;
+      animation: pulse-speaker 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse-speaker {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .message-content-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
     /* Typing Indicator */
     .typing-indicator {
       display: flex;
@@ -6581,6 +6641,10 @@
       const CONFIG = {
         // API endpoint from your existing Vercel app
         apiEndpoint: 'https://aic-inventory.vercel.app/api/website-chat',
+        // TTS API endpoint
+        ttsEndpoint: 'https://aic-inventory.vercel.app/api/tts',
+        // TTS voice (nova = female, alloy = neutral, echo = male)
+        ttsVoice: 'nova',
         // Alternative: Use your custom domain if available
         // apiEndpoint: 'https://your-domain.com/api/website-chat',
       };
@@ -6599,6 +6663,8 @@
       let isOpen = false;
       let conversationHistory = [];
       let isFirstOpen = true;
+      let currentAudio = null; // สำหรับเก็บ audio ที่กำลังเล่น
+      let isTTSEnabled = true; // เปิด/ปิด TTS
 
       // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
@@ -6645,7 +6711,7 @@ What project do you have in mind? I can provide a quick estimate!`
       });
 
       // Add message to chat
-      function addMessage(content, isBot = false, actions = null) {
+      function addMessage(content, isBot = false, actions = null, autoSpeak = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
         
@@ -6655,7 +6721,14 @@ What project do you have in mind? I can provide a quick estimate!`
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        contentDiv.innerHTML = content.replace(/\n/g, '<br>');
+        
+        // สร้าง wrapper สำหรับ content
+        const contentWrapper = document.createElement('div');
+        contentWrapper.className = 'message-content-wrapper';
+        
+        const textDiv = document.createElement('div');
+        textDiv.innerHTML = content.replace(/\n/g, '<br>');
+        contentWrapper.appendChild(textDiv);
 
         // Add quick actions if provided
         if (actions && actions.length > 0) {
@@ -6672,13 +6745,44 @@ What project do you have in mind? I can provide a quick estimate!`
             actionsDiv.appendChild(btn);
           });
           
-          contentDiv.appendChild(actionsDiv);
+          contentWrapper.appendChild(actionsDiv);
         }
 
+        // เพิ่มปุ่ม TTS สำหรับข้อความ Bot
+        if (isBot && isTTSEnabled) {
+          const actionsRow = document.createElement('div');
+          actionsRow.className = 'message-actions';
+          
+          const ttsBtn = document.createElement('button');
+          ttsBtn.className = 'tts-button';
+          ttsBtn.title = 'ฟังเสียง';
+          ttsBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+          `;
+          ttsBtn.addEventListener('click', () => speakText(content, ttsBtn));
+          actionsRow.appendChild(ttsBtn);
+          contentWrapper.appendChild(actionsRow);
+        }
+
+        contentDiv.appendChild(contentWrapper);
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(contentDiv);
         messages.appendChild(messageDiv);
         messages.scrollTop = messages.scrollHeight;
+        
+        // Auto-speak ถ้าเปิดไว้
+        if (isBot && autoSpeak && isTTSEnabled) {
+          const ttsBtn = contentDiv.querySelector('.tts-button');
+          if (ttsBtn) {
+            setTimeout(() => speakText(content, ttsBtn), 300);
+          }
+        }
+        
+        return messageDiv;
       }
 
       function addBotMessage(content, actions = null) {
@@ -6791,6 +6895,126 @@ What project do you have in mind? I can provide a quick estimate!`
         }
         
         throw new Error(data.error || 'Unknown error');
+      }
+
+      // 🔊 Text-to-Speech Function (OpenAI TTS)
+      async function speakText(text, button) {
+        // หยุดเสียงที่กำลังเล่นอยู่
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio = null;
+          // Reset ปุ่มเดิม
+          document.querySelectorAll('.tts-button.playing').forEach(btn => {
+            btn.classList.remove('playing');
+          });
+        }
+        
+        // ถ้ากดปุ่มเดิมที่กำลังเล่นอยู่ = หยุด
+        if (button.classList.contains('playing')) {
+          button.classList.remove('playing');
+          return;
+        }
+        
+        // แสดง loading state
+        button.classList.add('loading');
+        button.disabled = true;
+        
+        try {
+          // ลบ emoji และ format พิเศษออก
+          const cleanText = text
+            .replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '')
+            .replace(/<br>/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+          
+          // เรียก TTS API
+          const response = await fetch(CONFIG.ttsEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              text: cleanText,
+              voice: CONFIG.ttsVoice
+            })
+          });
+          
+          if (!response.ok) {
+            throw new Error('TTS request failed');
+          }
+          
+          const data = await response.json();
+          
+          if (data.success && data.audio) {
+            // สร้าง audio จาก base64
+            const audioBlob = base64ToBlob(data.audio, 'audio/mp3');
+            const audioUrl = URL.createObjectURL(audioBlob);
+            
+            currentAudio = new Audio(audioUrl);
+            
+            // เปลี่ยนเป็น playing state
+            button.classList.remove('loading');
+            button.classList.add('playing');
+            button.disabled = false;
+            
+            // เล่นเสียง
+            currentAudio.play();
+            
+            // เมื่อเล่นจบ
+            currentAudio.onended = () => {
+              button.classList.remove('playing');
+              currentAudio = null;
+              URL.revokeObjectURL(audioUrl);
+            };
+            
+            // เมื่อเกิด error
+            currentAudio.onerror = () => {
+              button.classList.remove('playing');
+              currentAudio = null;
+              console.error('Audio playback error');
+            };
+          }
+        } catch (error) {
+          console.error('TTS error:', error);
+          button.classList.remove('loading');
+          button.disabled = false;
+          
+          // Fallback: ใช้ Web Speech API
+          fallbackSpeak(text, button);
+        }
+      }
+      
+      // Helper: แปลง base64 เป็น Blob
+      function base64ToBlob(base64, mimeType) {
+        const byteCharacters = atob(base64);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        return new Blob([byteArray], { type: mimeType });
+      }
+      
+      // Fallback: Web Speech API (ฟรี แต่เสียงหุ่นยนต์)
+      function fallbackSpeak(text, button) {
+        if ('speechSynthesis' in window) {
+          const cleanText = text
+            .replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '')
+            .replace(/<br>/g, ' ')
+            .trim();
+          
+          const utterance = new SpeechSynthesisUtterance(cleanText);
+          utterance.lang = 'th-TH';
+          utterance.rate = 0.9;
+          
+          button.classList.add('playing');
+          
+          utterance.onend = () => {
+            button.classList.remove('playing');
+          };
+          
+          speechSynthesis.speak(utterance);
+        }
       }
 
       // Event listeners
