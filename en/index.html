@@ -499,16 +499,15 @@
     .lang-dropdown-btn {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
+      justify-content: center;
+      padding: 6px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
-      color: var(--text);
-      font-size: 0.9rem;
-      font-weight: 500;
+      width: 38px;
+      height: 38px;
     }
 
     .lang-dropdown-btn:hover {
@@ -517,17 +516,12 @@
     }
 
     .lang-dropdown-btn .lang-flag {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
+    .lang-dropdown-btn .lang-text,
     .lang-dropdown-btn .arrow {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-      opacity: 0.7;
-    }
-
-    .lang-dropdown:hover .arrow {
-      transform: rotate(180deg);
+      display: none;
     }
 
     .lang-dropdown-menu {
@@ -601,12 +595,14 @@
         z-index: 1002;
       }
       
-      .lang-dropdown-btn .lang-text {
-        display: none;
+      .lang-dropdown-btn {
+        width: 36px;
+        height: 36px;
+        padding: 5px;
       }
       
-      .lang-dropdown-btn {
-        padding: 8px 10px;
+      .lang-dropdown-btn .lang-flag {
+        font-size: 1.2rem;
       }
     }
 
@@ -4223,7 +4219,7 @@
         <div class="lang-dropdown">
           <button class="lang-dropdown-btn">
             <span class="lang-flag">🇺🇸</span>
-            <span class="lang-text">EN</span>
+            <span class="lang-text">ไทย</span>
             <span class="arrow">▼</span>
           </button>
           <div class="lang-dropdown-menu">
@@ -4499,7 +4495,7 @@
       </div>
       
       <div class="vision-quote">
-        <p><span class="quote-mark">"</span>Pioneering theแห่งการผลิตอัจฉริยะ — เชื่อมโยง proven industrial automation expertise with next-generation AI and digital technologies.</p>
+        <p><span class="quote-mark">"</span>Pioneering the Future of Intelligent Manufacturing — bridging proven industrial automation expertise with next-generation AI and digital technologies.</p>
       </div>
       
       <div class="vision-values">
@@ -4669,8 +4665,8 @@
           <h3>Web Applications & Dashboards</h3>
           <p>Custom web applications, real-time monitoring dashboards, and operations management systems — tailored to your business needs.</p>
           <div class="service-tags">
-            <span class="tag">Web App</span>
-            <span class="tag">Dashboard</span>
+            <span class="tag">เว็บแอป</span>
+            <span class="tag">แดชบอร์ด</span>
             <span class="tag">Analytics</span>
           </div>
         </div>
@@ -4980,7 +4976,7 @@
                     <span class="dot-yellow"></span>
                     <span class="dot-green"></span>
                   </div>
-                  <span class="mockup-title">Inventory Management</span>
+                  <span class="mockup-title">การจัดการสินค้าคงคลัง</span>
                 </div>
                 <div class="mockup-inventory">
                   <div class="inventory-summary">
@@ -4988,36 +4984,36 @@
                       <div class="inv-icon blue">📦</div>
                       <div class="inv-data">
                         <span class="inv-number">1,234</span>
-                        <span class="inv-label">Total SKUs</span>
+                        <span class="inv-label">SKU ทั้งหมด</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon green">✓</div>
                       <div class="inv-data">
                         <span class="inv-number">1,180</span>
-                        <span class="inv-label">In Stock</span>
+                        <span class="inv-label">ในสต็อก</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon orange">⚠</div>
                       <div class="inv-data">
                         <span class="inv-number">42</span>
-                        <span class="inv-label">Low Stock</span>
+                        <span class="inv-label">สต็อกต่ำ</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon red">✕</div>
                       <div class="inv-data">
                         <span class="inv-number">12</span>
-                        <span class="inv-label">Out of Stock</span>
+                        <span class="inv-label">หมดสต็อก</span>
                       </div>
                     </div>
                   </div>
                   <div class="inventory-alerts">
-                    <div class="alert-title">Recent Alerts</div>
+                    <div class="alert-title">การแจ้งเตือนล่าสุด</div>
                     <div class="alert-item warning">
                       <span class="alert-icon">⚠</span>
-                      <span class="alert-text">Raw Material A - Low stock (15 units)</span>
+                      <span class="alert-text">วัตถุดิบ A - สต็อกต่ำ (15 units)</span>
                       <span class="alert-time">2m ago</span>
                     </div>
                     <div class="alert-item critical">
@@ -5035,13 +5031,13 @@
                 <div class="analytics-stats">
                   <div class="stat-box">
                     <span class="stat-value">฿8.5M</span>
-                    <span class="stat-name">Inventory Value</span>
-                    <span class="stat-change green">Optimized</span>
+                    <span class="stat-name">มูลค่าสินค้าคงคลัง</span>
+                    <span class="stat-change green">ปรับปรุงแล้ว</span>
                   </div>
                   <div class="stat-box">
                     <span class="stat-value">98.4%</span>
-                    <span class="stat-name">Fill Rate</span>
-                    <span class="stat-change green">↑ 2.1% this month</span>
+                    <span class="stat-name">อัตราการเติม</span>
+                    <span class="stat-change green">↑ 2.1% เดือนนี้</span>
                   </div>
                 </div>
               </div>
@@ -5499,9 +5495,9 @@
             <h3>Operations Management System</h3>
             <p>Full-featured web application for project management, inventory tracking, workflow automation, and real-time reporting dashboards.</p>
             <div class="expertise-tags">
-              <span class="tag">Web App</span>
-              <span class="tag">Dashboard</span>
-              <span class="tag">Real-time</span>
+              <span class="tag">เว็บแอป</span>
+              <span class="tag">แดชบอร์ด</span>
+              <span class="tag">เรียลไทม์</span>
             </div>
           </div>
         </div>
@@ -6517,7 +6513,7 @@
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
         <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - Ready to help!</span>
+        <span>Online - พร้อมให้บริการ!</span>
       </div>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6544,7 +6540,7 @@
     </div>
 
     <div class="chat-powered">
-      💬 Reply within 1 minute | A.I.C. © 2026
+      💬 ตอบกลับภายใน 1 นาที | A.I.C. © 2026
     </div>
   </div>
 
@@ -6808,7 +6804,7 @@ What project do you have in mind? I can provide a quick estimate!`
           <div class="greeting-content">
             <span class="greeting-close">&times;</span>
             <p>👋 Hello! How can I help you?</p>
-            <span class="greeting-tap">${isMobileDevice ? 'Tap' : 'Click'}เพื่อคุยกับ AI Sales</span>
+            <span class="greeting-tap">${isMobileDevice ? 'Tap' : 'Click'}to chat with AI Sales</span>
           </div>
         `;
         
