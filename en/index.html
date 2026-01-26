@@ -4165,15 +4165,15 @@
       
       <!-- Language Selector -->
       <div class="lang-selector">
-        <button class="lang-btn active" data-lang="th" onclick="window.location.href='./'">
+        <button class="lang-btn" data-lang="th" onclick="window.location.href='../'">
           <span class="lang-flag">🇹🇭</span>
           <span class="lang-code">TH</span>
         </button>
-        <button class="lang-btn" data-lang="en" onclick="window.location.href='./en/'">
+        <button class="lang-btn active" data-lang="en" onclick="window.location.href='./'">
           <span class="lang-flag">🇺🇸</span>
           <span class="lang-code">EN</span>
         </button>
-        <button class="lang-btn" data-lang="zh" onclick="window.location.href='./zh/'">
+        <button class="lang-btn" data-lang="zh" onclick="window.location.href='../zh/'">
           <span class="lang-flag">🇨🇳</span>
           <span class="lang-code">中文</span>
         </button>
@@ -6450,7 +6450,7 @@
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
         <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - พร้อมให้บริการ!</span>
+        <span>Online - Ready to serve!</span>
       </div>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6477,7 +6477,7 @@
     </div>
 
     <div class="chat-powered">
-      💬 ตอบกลับภายใน 1 นาที | A.I.C. © 2026
+      💬 Reply within 1 minute | A.I.C. © 2026
     </div>
   </div>
 
@@ -6513,13 +6513,13 @@
 
       // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
-        th: `🎯 สวัสดีครับ! ยินดีต้อนรับสู่ A.I.C.
+        th: `🎯 สวัสดีครับ! Welcome to A.I.C.!
 
-ผมเห็นว่าคุณกำลังสนใจด้าน Industrial Automation 
+I see you are interested in Industrial Automation 
 
-✨ วันนี้เรามีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่!
+✨ We have special offers for new clients today!
 
-มีโปรเจคอะไรในใจบ้างครับ? ผมช่วยประเมินราคาเบื้องต้นให้ได้เลย!`,
+What project do you have in mind? I can provide a quick estimate!`,
         en: `🎯 Hello! Welcome to A.I.C.
 
 I noticed you're interested in Industrial Automation!
@@ -6530,10 +6530,10 @@ What project do you have in mind? I can provide a quick estimate!`
       };
 
       const quickActions = [
-        { text: '🔧 PLC Programming', value: 'สนใจ PLC Programming อยากทราบราคาเบื้องต้น' },
-        { text: '🛡️ Safety Systems', value: 'ต้องการระบบ Safety อยากปรึกษา' },
-        { text: '💻 Web/Dashboard', value: 'อยากได้ Web App หรือ Dashboard' },
-        { text: '📋 ขอใบเสนอราคา', value: 'ขอใบเสนอราคาครับ' }
+        { text: '🔧 PLC Programming', value: 'Interested in PLC Programming, need pricing' },
+        { text: '🛡️ Safety Systems', value: 'Need Safety System consultation' },
+        { text: '💻 Web/Dashboard', value: 'Want Web App or Dashboard' },
+        { text: '📋 Request a Quote', value: 'Request a Quote' }
       ];
 
       // Toggle chatbot
@@ -6740,7 +6740,7 @@ What project do you have in mind? I can provide a quick estimate!`
         bubble.innerHTML = `
           <div class="greeting-content">
             <span class="greeting-close">&times;</span>
-            <p>👋 สวัสดีครับ! มีอะไรให้ช่วยไหมครับ?</p>
+            <p>👋 Hello! How can I help you?</p>
             <span class="greeting-tap">${isMobileDevice ? 'แตะ' : 'คลิก'}เพื่อคุยกับ AI Sales</span>
           </div>
         `;
