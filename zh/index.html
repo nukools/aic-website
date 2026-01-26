@@ -6699,7 +6699,7 @@ What project do you have in mind? I can provide a quick estimate!`
           badge.style.display = 'none';
           setTimeout(() => {
             // ✅ Auto-speak welcome message
-            addBotMessage(welcomeMessage.zh, quickActions, true);
+            addBotMessage(welcomeMessage.zh, quickActions, false);
           }, 500);
           isFirstOpen = false;
         }
@@ -6836,7 +6836,7 @@ What project do you have in mind? I can provide a quick estimate!`
           const response = await callClaudeAPI(text);
           hideTyping();
           // ✅ Auto-speak enabled
-          addBotMessage(response, null, true);
+          addBotMessage(response, null, false);
           
           // Add to history
           conversationHistory.push({
@@ -6856,7 +6856,7 @@ What project do you have in mind? I can provide a quick estimate!`
 
 或填写下面的表单`;
           
-          addBotMessage(fallbackResponse, null, true);
+          addBotMessage(fallbackResponse, null, false);
         }
 
         sendBtn.disabled = false;

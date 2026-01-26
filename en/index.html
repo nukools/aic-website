@@ -6702,7 +6702,7 @@ What project do you have in mind? I can provide a quick estimate!`
           badge.style.display = 'none';
           setTimeout(() => {
             // ✅ Auto-speak welcome message
-            addBotMessage(welcomeMessage.en, quickActions, true);
+            addBotMessage(welcomeMessage.en, quickActions, false);
           }, 500);
           isFirstOpen = false;
         }
@@ -6839,7 +6839,7 @@ What project do you have in mind? I can provide a quick estimate!`
           const response = await callClaudeAPI(text);
           hideTyping();
           // ✅ Auto-speak enabled
-          addBotMessage(response, null, true);
+          addBotMessage(response, null, false);
           
           // Add to history
           conversationHistory.push({
@@ -6859,7 +6859,7 @@ Please contact our team directly:
 
 or fill out the form below`;
           
-          addBotMessage(fallbackResponse, null, true);
+          addBotMessage(fallbackResponse, null, false);
         }
 
         sendBtn.disabled = false;
