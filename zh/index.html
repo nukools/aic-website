@@ -499,16 +499,15 @@
     .lang-dropdown-btn {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
+      justify-content: center;
+      padding: 8px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
-      color: var(--text);
-      font-size: 0.9rem;
-      font-weight: 500;
+      width: 44px;
+      height: 38px;
     }
 
     .lang-dropdown-btn:hover {
@@ -517,17 +516,9 @@
     }
 
     .lang-dropdown-btn .lang-flag {
-      font-size: 1.2rem;
-    }
-
-    .lang-dropdown-btn .arrow {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-      opacity: 0.7;
-    }
-
-    .lang-dropdown:hover .arrow {
-      transform: rotate(180deg);
+      width: 24px;
+      height: 18px;
+      border-radius: 2px;
     }
 
     .lang-dropdown-menu {
@@ -593,20 +584,39 @@
       opacity: 1;
     }
 
+    .lang-option .lang-flag {
+      width: 24px;
+      height: 18px;
+      border-radius: 2px;
+    }
+
     @media (max-width: 768px) {
       .lang-dropdown {
-        position: fixed;
-        top: 16px;
-        right: 70px;
+        position: absolute;
+        top: 50%;
+        right: 60px;
+        transform: translateY(-50%);
         z-index: 1002;
       }
       
-      .lang-dropdown-btn .lang-text {
-        display: none;
+      .lang-dropdown-btn {
+        width: 36px;
+        height: 28px;
+        padding: 4px;
       }
       
-      .lang-dropdown-btn {
-        padding: 8px 10px;
+      .lang-dropdown-btn .lang-flag {
+        width: 20px;
+        height: 14px;
+      }
+      
+      /* แสดงชื่อบริษัทบนมือถือ แต่ย่อขนาด */
+      .logo-tagline {
+        font-size: 0.55rem;
+      }
+      
+      .logo-divider {
+        margin: 0 6px;
       }
     }
 
@@ -4213,7 +4223,7 @@
         <li><a href="#about">关于我们</a></li>
         <li><a href="#services">服务</a></li>
         <li><a href="#technology">技术</a></li>
-        <li><a href="#digital">数字解决方案</a></li>
+        <li><a href="#digital">Digital Solutions</a></li>
         <li><a href="#expertise">专业领域</a></li>
         <li><a href="#contact">联系我们</a></li>
       </ul>
@@ -4222,23 +4232,40 @@
         <!-- Language Dropdown -->
         <div class="lang-dropdown">
           <button class="lang-dropdown-btn">
-            <span class="lang-flag">🇨🇳</span>
-            <span class="lang-text">中文</span>
-            <span class="arrow">▼</span>
+            <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
+              <path fill="#de2910" d="M0 0h640v480H0z"/>
+              <path fill="#ffde00" d="M96 80l24 73.8H194l-60 43.6 23 73.7-61-44.2-61 44.2 23-73.7-60-43.6h74z"/>
+              <path fill="#ffde00" d="M192 56l-6 17.3-18-3 14 12-9.5 15.6 17-7 9.8 15.4-1-18.3 16.4-8-17.3-6zm48 48l-12 12.7-13.5-10 5.4 16.3-14 10.2 17 1.7 4 16.6 7-16 16.8-3.3-13-11zm0 64l-16 6.3-4.7-16.4-6 16.4-17-.5 13 10.5-5.3 16.2 14-10 14 10.3-5-16.4zm-48 48l-18 2.4 9 15.6-17-7.2-10 15.4 1.2-18.3-17-6.4 16.2-8 1.4-18.2 10 15z"/>
+            </svg>
           </button>
           <div class="lang-dropdown-menu">
             <a href="../" class="lang-option">
-              <span class="lang-flag">🇹🇭</span>
+              <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
+                <g fill-rule="evenodd">
+                  <path fill="#f4f5f8" d="M0 0h640v480H0z"/>
+                  <path fill="#2d2a4a" d="M0 162.5h640v160H0z"/>
+                  <path fill="#a51931" d="M0 0h640v82.5H0zm0 400h640v80H0z"/>
+                </g>
+              </svg>
               <span class="lang-name">ภาษาไทย</span>
               <span class="check">✓</span>
             </a>
             <a href="../en/" class="lang-option">
-              <span class="lang-flag">🇺🇸</span>
+              <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
+                <path fill="#bd3d44" d="M0 0h640v37h-640zm0 74h640v37h-640zm0 148h640v37h-640zm0 74h640v37h-640z"/>
+                <path fill="#fff" d="M0 37h640v37h-640zm0 74h640v37h-640zm0 74h640v37h-640zm0 74h640v37h-640zm0 74h640v37h-640z"/>
+                <path fill="#192f5d" d="M0 0h260v259H0z"/>
+                <g fill="#fff"><g id="s18c"><g id="s9c"><g id="s5c"><g id="s4c"><path id="sc" d="M26 17.3l3.2 9.8H40l-8.6 6.3 3.3 9.8-8.7-6.3-8.7 6.3 3.3-9.8-8.7-6.3h10.7z"/><use href="#sc" x="52"/></g><use href="#s4c" x="104"/></g><use href="#s4c" x="156"/></g><use href="#s5c" y="42"/></g><use href="#s9c" y="84"/></g><use href="#s18c" x="26" y="21"/></g>
+              </svg>
               <span class="lang-name">English</span>
               <span class="check">✓</span>
             </a>
             <a href="./" class="lang-option active">
-              <span class="lang-flag">🇨🇳</span>
+              <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
+                <path fill="#de2910" d="M0 0h640v480H0z"/>
+                <path fill="#ffde00" d="M96 80l24 73.8H194l-60 43.6 23 73.7-61-44.2-61 44.2 23-73.7-60-43.6h74z"/>
+                <path fill="#ffde00" d="M192 56l-6 17.3-18-3 14 12-9.5 15.6 17-7 9.8 15.4-1-18.3 16.4-8-17.3-6zm48 48l-12 12.7-13.5-10 5.4 16.3-14 10.2 17 1.7 4 16.6 7-16 16.8-3.3-13-11zm0 64l-16 6.3-4.7-16.4-6 16.4-17-.5 13 10.5-5.3 16.2 14-10 14 10.3-5-16.4zm-48 48l-18 2.4 9 15.6-17-7.2-10 15.4 1.2-18.3-17-6.4 16.2-8 1.4-18.2 10 15z"/>
+              </svg>
               <span class="lang-name">中文</span>
               <span class="check">✓</span>
             </a>
@@ -4275,13 +4302,13 @@
         <h1 class="hero-title">
           开创<br>
           未来的 <span class="gradient-text">智能</span><br>
-          <span class="gradient-text">制造业</span>
+          <span class="gradient-text">制造</span>
         </h1>
         
         <p class="hero-description">
-          从工业自动化到人工智能解决方案 — 
-          我们设计能提高效率、确保安全 
-          并改变亚洲工厂的系统。
+          从工业自动化到AI解决方案 — 
+          我们设计的系统提高效率、确保安全 
+          并改变亚洲各地的工厂。
         </p>
         
         <div class="hero-buttons">
@@ -4310,7 +4337,7 @@
         </div>
         <div class="stat-card">
           <span class="stat-number">11</span>
-          <span class="stat-label">专家工程师</span>
+          <span class="stat-label">专业工程师</span>
         </div>
       </div>
     </div>
@@ -4319,7 +4346,7 @@
   <!-- Clients Bar -->
   <section class="clients-bar">
     <div class="container">
-      <p class="clients-label">行业领导者信赖</p>
+      <p class="clients-label">受到行业领袖的信赖</p>
       <div class="clients-logos">
         <span class="client-logo">MICHELIN</span>
         <span class="client-logo">AkzoNobel</span>
@@ -4339,7 +4366,7 @@
             <span class="label-line"></span>
           </div>
           
-          <h2 class="section-title">自2014年以来的工程卓越</h2>
+          <h2 class="section-title">自2014年起的工程卓越</h2>
           
           <p class="about-text">
             Auto Innovate Construction (A.I.C.) 是一家领先的工业自动化公司 
@@ -4499,7 +4526,7 @@
       </div>
       
       <div class="vision-quote">
-        <p><span class="quote-mark">"</span>开创แห่งการผลิตอัจฉริยะ — เชื่อมโยง 自动化专业知识与下一代AI和 数字技术相结合。</p>
+        <p><span class="quote-mark">"</span>开创แห่งการผลิตอัจฉริยะ — เชื่อมโยง ความเชี่ยวชาญด้านระบบอัตโนมัติอุตสาหกรรมที่พิสูจน์แล้ว กับ เทคโนโลยี AI และดิจิทัลรุ่นใหม่</p>
       </div>
       
       <div class="vision-values">
@@ -4510,7 +4537,7 @@
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
           </div>
-          <h4>卓越/h4>
+          <h4>卓越</h4>
           <p>米其林级标准</p>
         </div>
         
@@ -4521,8 +4548,8 @@
               <polyline points="9 12 11 14 15 10"/>
             </svg>
           </div>
-          <h4>安全第一/h4>
-          <p>在安全问题上零妥协</p>
+          <h4>安全第一</h4>
+          <p>安全零妥协</p>
         </div>
         
         <div class="value-item">
@@ -4534,7 +4561,7 @@
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <h4>合作伙伴/h4>
+          <h4>合作伙伴</h4>
           <p>与客户共同成长</p>
         </div>
         
@@ -4544,7 +4571,7 @@
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <h4>创新/h4>
+          <h4>创新</h4>
           <p>拥抱AI和数字技术</p>
         </div>
       </div>
@@ -4561,7 +4588,7 @@
       </div>
       
       <h2 class="section-title centered">端到端自动化解决方案</h2>
-      <p class="section-subtitle">从初始设计到调试及以后 — 我们提供针对您需求定制的 自动化解决方案。tailored to your needs.</p>
+      <p class="section-subtitle">从初始设计到调试及后续 — 我们提供 自动化解决方案。tailored to your needs.</p>
       
       <div class="services-grid">
         <!-- PLC Programming -->
@@ -4632,7 +4659,7 @@
               <line x1="12" y1="17" x2="12" y2="21"/>
             </svg>
           </div>
-          <h3>控制面板</h3>
+          <h3>控制柜</h3>
           <p>Professional control panel fabrication and wiring — from design to assembly, meeting international standards.</p>
           <div class="service-tags">
             <span class="tag">Fabrication</span>
@@ -4669,8 +4696,8 @@
           <h3>Web Applications & Dashboards</h3>
           <p>Custom web applications, real-time monitoring dashboards, and operations management systems — tailored to your business needs.</p>
           <div class="service-tags">
-            <span class="tag">Web App</span>
-            <span class="tag">Dashboard</span>
+            <span class="tag">เว็บแอป</span>
+            <span class="tag">แดชบอร์ด</span>
             <span class="tag">Analytics</span>
           </div>
         </div>
@@ -4683,12 +4710,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>TECHNOLOGY</span>
+        <span>技术</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">Multi-Platform Expertise</h2>
-      <p class="section-subtitle">We work with leading automation platforms to deliver the best solution for your needs.</p>
+      <h2 class="section-title centered">多平台专业知识</h2>
+      <p class="section-subtitle">我们与领先的自动化平台合作，为您提供最佳解决方案。</p>
       
       <div class="tech-grid">
         <!-- Rockwell -->
@@ -4701,7 +4728,7 @@
             <span class="level-dot filled"></span>
             <span class="level-dot filled"></span>
           </div>
-          <p class="tech-desc">Expert Level — Former System Integrator</p>
+          <p class="tech-desc">专家级 — 前系统集成商</p>
         </div>
         
         <!-- Nidec -->
@@ -4714,7 +4741,7 @@
             <span class="level-dot filled"></span>
             <span class="level-dot filled"></span>
           </div>
-          <p class="tech-desc">Expert Level — Specialized Partner</p>
+          <p class="tech-desc">专家级 — 专业合作伙伴</p>
         </div>
         
         <!-- Siemens -->
@@ -4727,7 +4754,7 @@
             <span class="level-dot"></span>
             <span class="level-dot"></span>
           </div>
-          <p class="tech-desc">不断发展</p>
+          <p class="tech-desc">正在发展</p>
         </div>
         
         <!-- Web / AI -->
@@ -4740,7 +4767,7 @@
             <span class="level-dot filled"></span>
             <span class="level-dot"></span>
           </div>
-          <p class="tech-desc">Digital Transformation</p>
+          <p class="tech-desc">数字化转型</p>
         </div>
       </div>
     </div>
@@ -4753,13 +4780,13 @@
         <div class="digital-content">
           <div class="section-label">
             <span class="label-line"></span>
-            <span>DIGITAL TRANSFORMATION</span>
+            <span>数字化转型</span>
             <span class="label-line"></span>
           </div>
           
-          <h2 class="section-title">Custom Web Applications<br><span class="gradient-text">&</span> Smart Dashboards</h2>
+          <h2 class="section-title">定制网络应用<br><span class="gradient-text">&</span> Smart Dashboards</h2>
           
-          <p class="digital-desc">Beyond industrial automation, we develop powerful web-based solutions that streamline your operations and provide real-time visibility into your business.</p>
+          <p class="digital-desc">除了工业自动化，我们还开发强大的网络 解决方案，简化您的运营并提供实时可见性 到您的业务中。</p>
           
           <div class="digital-features">
             <div class="digital-feature">
@@ -4771,8 +4798,8 @@
                 </svg>
               </div>
               <div>
-                <h4>Operations Management</h4>
-                <p>Project tracking, inventory, workflow automation</p>
+                <h4>运营管理</h4>
+                <p>项目跟踪、库存、工作流自动化</p>
               </div>
             </div>
             
@@ -4786,7 +4813,7 @@
               </div>
               <div>
                 <h4>实时仪表板</h4>
-                <p>Production monitoring & business analytics</p>
+                <p>生产监控和 业务分析</p>
               </div>
             </div>
             
@@ -4800,8 +4827,8 @@
                 </svg>
               </div>
               <div>
-                <h4>System Integration</h4>
-                <p>Connect PLC data to web dashboards</p>
+                <h4>系统集成</h4>
+                <p>将PLC数据连接到网络仪表板</p>
               </div>
             </div>
             
@@ -4812,14 +4839,14 @@
                 </svg>
               </div>
               <div>
-                <h4>Cloud & On-Premise</h4>
-                <p>Flexible deployment options</p>
+                <h4>云端和本地</h4>
+                <p>灵活的部署选项</p>
               </div>
             </div>
           </div>
           
           <a href="#contact" class="btn btn-primary btn-lg">
-            Discuss Your Project
+            讨论您的项目
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -4980,7 +5007,7 @@
                     <span class="dot-yellow"></span>
                     <span class="dot-green"></span>
                   </div>
-                  <span class="mockup-title">库存管理</span>
+                  <span class="mockup-title">การจัดการสินค้าคงคลัง</span>
                 </div>
                 <div class="mockup-inventory">
                   <div class="inventory-summary">
@@ -4988,36 +5015,36 @@
                       <div class="inv-icon blue">📦</div>
                       <div class="inv-data">
                         <span class="inv-number">1,234</span>
-                        <span class="inv-label">Total SKUs</span>
+                        <span class="inv-label">SKU ทั้งหมด</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon green">✓</div>
                       <div class="inv-data">
                         <span class="inv-number">1,180</span>
-                        <span class="inv-label">In Stock</span>
+                        <span class="inv-label">ในสต็อก</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon orange">⚠</div>
                       <div class="inv-data">
                         <span class="inv-number">42</span>
-                        <span class="inv-label">Low Stock</span>
+                        <span class="inv-label">สต็อกต่ำ</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon red">✕</div>
                       <div class="inv-data">
                         <span class="inv-number">12</span>
-                        <span class="inv-label">Out of Stock</span>
+                        <span class="inv-label">หมดสต็อก</span>
                       </div>
                     </div>
                   </div>
                   <div class="inventory-alerts">
-                    <div class="alert-title">Recent Alerts</div>
+                    <div class="alert-title">การแจ้งเตือนล่าสุด</div>
                     <div class="alert-item warning">
                       <span class="alert-icon">⚠</span>
-                      <span class="alert-text">Raw Material A - Low stock (15 units)</span>
+                      <span class="alert-text">วัตถุดิบ A - สต็อกต่ำ (15 units)</span>
                       <span class="alert-time">2m ago</span>
                     </div>
                     <div class="alert-item critical">
@@ -5035,13 +5062,13 @@
                 <div class="analytics-stats">
                   <div class="stat-box">
                     <span class="stat-value">฿8.5M</span>
-                    <span class="stat-name">Inventory Value</span>
-                    <span class="stat-change green">Optimized</span>
+                    <span class="stat-name">มูลค่าสินค้าคงคลัง</span>
+                    <span class="stat-change green">ปรับปรุงแล้ว</span>
                   </div>
                   <div class="stat-box">
                     <span class="stat-value">98.4%</span>
-                    <span class="stat-name">Fill Rate</span>
-                    <span class="stat-change green">↑ 2.1% this month</span>
+                    <span class="stat-name">อัตราการเติม</span>
+                    <span class="stat-change green">↑ 2.1% เดือนนี้</span>
                   </div>
                 </div>
               </div>
@@ -5203,8 +5230,8 @@
               <polyline points="20 6 9 17 4 12"/>
             </svg>
             <div>
-              <span>Ready for</span>
-              <strong>Your Business</strong>
+              <span>准备好为</span>
+              <strong>您的业务</strong>
             </div>
           </div>
         </div>
@@ -5217,12 +5244,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>WHAT WE DO</span>
+        <span>我们的专业</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">Our Expertise</h2>
-      <p class="section-subtitle">Comprehensive automation and digital solutions across various industries.</p>
+      <h2 class="section-title centered">我们的专业领域</h2>
+      <p class="section-subtitle">跨行业的综合自动化和数字解决方案。</p>
       
       <div class="expertise-grid">
         <!-- Tire Manufacturing -->
@@ -5308,9 +5335,9 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag orange">TIRE MANUFACTURING</span>
-            <h3>Production Line Automation</h3>
-            <p>Complete tire production automation from mixing through curing: SF preparation, TBM building machines, curing press, and after-cure inspection.</p>
+            <span class="expertise-tag orange">轮胎制造</span>
+            <h3>生产线自动化</h3>
+            <p>从混合到硫化的完整轮胎生产自动化: SF准备、TBM成型机、硫化机和后硫化检查。</p>
             <div class="expertise-tags">
               <span class="tag">SF</span>
               <span class="tag">PREP</span>
@@ -5423,9 +5450,9 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag purple">INDUSTRIAL AUTOMATION</span>
+            <span class="expertise-tag purple">工业自动化</span>
             <h3>PLC编程</h3>
-            <p>Expert PLC programming in all IEC 61131-3 languages: Ladder Diagram, Sequential Function Chart, Structured Text, and Function Block Diagram.</p>
+            <p>所有IEC 61131-3语言的专家级PLC编程: 梯形图、顺序功能图、结构化文本和功能块图。</p>
             <div class="expertise-tags">
               <span class="tag">Ladder</span>
               <span class="tag">SFC</span>
@@ -5496,12 +5523,12 @@
           </div>
           <div class="expertise-content">
             <span class="expertise-tag cyan">数字解决方案</span>
-            <h3>Operations Management System</h3>
-            <p>Full-featured web application for project management, inventory tracking, workflow automation, and real-time reporting dashboards.</p>
+            <h3>运营管理系统</h3>
+            <p>用于项目管理、库存跟踪、工作流自动化和实时报告仪表板的全功能网络应用。</p>
             <div class="expertise-tags">
-              <span class="tag">Web App</span>
-              <span class="tag">Dashboard</span>
-              <span class="tag">Real-time</span>
+              <span class="tag">เว็บแอป</span>
+              <span class="tag">แดชบอร์ด</span>
+              <span class="tag">เรียลไทม์</span>
             </div>
           </div>
         </div>
@@ -5514,8 +5541,8 @@
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info">
-          <h2 class="contact-title">Let's Build Something Great Together</h2>
-          <p class="contact-desc">Ready to transform your operations with intelligent automation? Get in touch with our team to discuss your project.</p>
+          <h2 class="contact-title">让我们一起创造伟大</h2>
+          <p class="contact-desc">พร้อมที่จะเปลี่ยนโฉมการดำเนินงานด้วยระบบอัตโนมัติอัจฉริยะหรือยัง? ติดต่อทีมงานเพื่อ讨论您的项目</p>
           
           <div class="contact-items">
             <div class="contact-item">
@@ -5525,7 +5552,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Phone</span>
+                <span class="contact-label">电话</span>
                 <a href="tel:+66891900588" class="contact-value">+66 89-190-0588</a>
               </div>
             </div>
@@ -5538,7 +5565,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Email</span>
+                <span class="contact-label">电子邮件</span>
                 <a href="#" class="contact-value" id="contactEmail" onclick="window.location.href='mail'+'to:'+'nukools'+'@'+'autoinnovate.com'">nukools<span>@</span>autoinnovate.com</a>
               </div>
             </div>
@@ -5551,7 +5578,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Location</span>
+                <span class="contact-label">地址</span>
                 <span class="contact-value">126/15 Banglamung, Chonburi 20150, Thailand</span>
               </div>
             </div>
@@ -5565,7 +5592,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Website</span>
+                <span class="contact-label">网站</span>
                 <a href="https://www.autoinnovate.com" target="_blank" class="contact-value">www.autoinnovate.com</a>
               </div>
             </div>
@@ -5599,18 +5626,18 @@
             </div>
             
             <div class="form-group">
-              <label>Company</label>
-              <input type="text" name="company" placeholder="Your Company">
+              <label>公司</label>
+              <input type="text" name="company" placeholder="您的公司">
             </div>
             
             <div class="form-group">
-              <label>Service Interest</label>
+              <label>感兴趣的服务</label>
               <select name="service">
                 <option value="">选择服务...</option>
                 <option value="PLC Programming">PLC编程</option>
                 <option value="Safety Systems">安全系统</option>
                 <option value="Hardware Design">硬件设计</option>
-                <option value="Control Panels">控制面板</option>
+                <option value="Control Panels">控制柜</option>
                 <option value="Electrical Installation">电气安装</option>
                 <option value="Web Applications">网络应用</option>
               </select>
@@ -5618,7 +5645,7 @@
             
             <div class="form-group">
               <label>项目详情</label>
-              <textarea name="message" placeholder="บอกเราเกี่ยวกับโปรเจคของคุณ..." required></textarea>
+              <textarea name="message" placeholder="告诉我们您的项目..." required></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg full-width" id="submitBtn">
@@ -5651,7 +5678,7 @@
         </div>
         
         <div class="footer-links">
-          <h4>Company</h4>
+          <h4>公司</h4>
           <ul>
             <li><a href="#about">About Us</a></li>
             <li><a href="#services">Services</a></li>
@@ -5665,8 +5692,8 @@
           <ul>
             <li><a href="#services">PLC编程</a></li>
             <li><a href="#services">安全系统</a></li>
-            <li><a href="#services">控制面板</a></li>
-            <li><a href="#digital-solutions">数字解决方案</a></li>
+            <li><a href="#services">控制柜</a></li>
+            <li><a href="#digital-solutions">Digital Solutions</a></li>
           </ul>
         </div>
         
@@ -6517,7 +6544,7 @@
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
         <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - 随时为您服务!</span>
+        <span>Online - พร้อมให้บริการ!</span>
       </div>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6544,7 +6571,7 @@
     </div>
 
     <div class="chat-powered">
-      💬 1分钟内回复 | A.I.C. © 2026
+      💬 ตอบกลับภายใน 1 นาที | A.I.C. © 2026
     </div>
   </div>
 
@@ -6808,7 +6835,7 @@ What project do you have in mind? I can provide a quick estimate!`
           <div class="greeting-content">
             <span class="greeting-close">&times;</span>
             <p>👋 您好！有什么可以帮您的吗？</p>
-            <span class="greeting-tap">${isMobileDevice ? 'แตะ' : 'คลิก'}เพื่อคุยกับ AI Sales</span>
+            <span class="greeting-tap">${isMobileDevice ? '点击' : '点击'}与AI销售聊天</span>
           </div>
         `;
         
