@@ -178,10 +178,16 @@
     }
 
     .nav-container {
-      display: grid;
-      grid-template-columns: 350px 1fr auto;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .logo {
@@ -485,73 +491,122 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* Language Selector */
-    .lang-selector {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-right: 16px;
-      padding: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Language Dropdown */
+    .lang-dropdown {
+      position: relative;
     }
 
-    .lang-btn {
+    .lang-dropdown-btn {
       display: flex;
       align-items: center;
-      gap: 4px;
-      padding: 6px 10px;
-      background: transparent;
-      border: none;
-      border-radius: 6px;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
-      color: var(--text-muted);
-      font-size: 0.8rem;
+      color: var(--text);
+      font-size: 0.9rem;
       font-weight: 500;
     }
 
-    .lang-btn:hover {
+    .lang-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .lang-dropdown-btn .lang-flag {
+      font-size: 1.2rem;
+    }
+
+    .lang-dropdown-btn .arrow {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+      opacity: 0.7;
+    }
+
+    .lang-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 150px;
+      background: rgba(15, 30, 50, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+    }
+
+    .lang-dropdown:hover .lang-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .lang-option:hover {
       background: rgba(255, 255, 255, 0.1);
       color: var(--text);
     }
 
-    .lang-btn.active {
+    .lang-option.active {
       background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
       color: white;
     }
 
-    .lang-flag {
-      font-size: 1rem;
+    .lang-option .lang-flag {
+      font-size: 1.3rem;
     }
 
-    .lang-code {
-      font-size: 0.75rem;
-      text-transform: uppercase;
+    .lang-option .lang-name {
+      flex: 1;
     }
 
-    @media (max-width: 1024px) {
-      .lang-selector {
-        margin-right: 8px;
-      }
-      
-      .lang-btn {
-        padding: 4px 6px;
-      }
-      
-      .lang-code {
-        display: none;
-      }
+    .lang-option .check {
+      opacity: 0;
+      font-size: 0.8rem;
+    }
+
+    .lang-option.active .check {
+      opacity: 1;
     }
 
     @media (max-width: 768px) {
-      .lang-selector {
+      .lang-dropdown {
         position: fixed;
-        top: 18px;
+        top: 16px;
         right: 70px;
         z-index: 1002;
-        margin-right: 0;
+      }
+      
+      .lang-dropdown-btn .lang-text {
+        display: none;
+      }
+      
+      .lang-dropdown-btn {
+        padding: 8px 10px;
       }
     }
 
@@ -4155,31 +4210,43 @@
       </a>
       
       <ul class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#technology">Technology</a></li>
+        <li><a href="#about">เกี่ยวกับเรา</a></li>
+        <li><a href="#services">บริการ</a></li>
+        <li><a href="#technology">เทคโนโลยี</a></li>
         <li><a href="#digital">Digital Solutions</a></li>
-        <li><a href="#expertise">Expertise</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#expertise">ความเชี่ยวชาญ</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
       </ul>
       
-      <!-- Language Selector -->
-      <div class="lang-selector">
-        <button class="lang-btn active" data-lang="th" onclick="window.location.href='./'">
-          <span class="lang-flag">🇹🇭</span>
-          <span class="lang-code">TH</span>
-        </button>
-        <button class="lang-btn" data-lang="en" onclick="window.location.href='./en/'">
-          <span class="lang-flag">🇺🇸</span>
-          <span class="lang-code">EN</span>
-        </button>
-        <button class="lang-btn" data-lang="zh" onclick="window.location.href='./zh/'">
-          <span class="lang-flag">🇨🇳</span>
-          <span class="lang-code">中文</span>
-        </button>
+      <div class="nav-right">
+        <!-- Language Dropdown -->
+        <div class="lang-dropdown">
+          <button class="lang-dropdown-btn">
+            <span class="lang-flag">🇹🇭</span>
+            <span class="lang-text">ไทย</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="lang-dropdown-menu">
+            <a href="./" class="lang-option active">
+              <span class="lang-flag">🇹🇭</span>
+              <span class="lang-name">ภาษาไทย</span>
+              <span class="check">✓</span>
+            </a>
+            <a href="./en/" class="lang-option">
+              <span class="lang-flag">🇺🇸</span>
+              <span class="lang-name">English</span>
+              <span class="check">✓</span>
+            </a>
+            <a href="./zh/" class="lang-option">
+              <span class="lang-flag">🇨🇳</span>
+              <span class="lang-name">中文</span>
+              <span class="check">✓</span>
+            </a>
+          </div>
+        </div>
+        
+        <a href="#contact" class="btn btn-primary">ขอใบเสนอราคา</a>
       </div>
-      
-      <a href="#contact" class="btn btn-primary">Get a Quote</a>
       
       <!-- Mobile Menu Button -->
       <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -4202,48 +4269,48 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          Automation Excellence Since 2014
+          ผู้นำด้าน Automation ตั้งแต่ปี 2014
         </div>
         
         <h1 class="hero-title">
-          Pioneering the<br>
-          Future of <span class="gradient-text">Intelligent</span><br>
-          <span class="gradient-text">Manufacturing</span>
+          บุกเบิกอนาคต<br>
+          แห่ง <span class="gradient-text">การผลิต</span><br>
+          <span class="gradient-text">อัจฉริยะ</span>
         </h1>
         
         <p class="hero-description">
-          From industrial automation to AI-powered solutions — 
-          we engineer systems that drive efficiency, ensure safety, 
-          and transform factories across Asia.
+          จากระบบ Industrial Automation สู่โซลูชัน AI — 
+          เราออกแบบระบบที่เพิ่มประสิทธิภาพ รับรองความปลอดภัย 
+          และเปลี่ยนโฉมโรงงานทั่วเอเชีย
         </p>
         
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">
-            Start Your Project
+            เริ่มโปรเจคของคุณ
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
+          <a href="#services" class="btn btn-outline btn-lg">ดูบริการทั้งหมด</a>
         </div>
       </div>
       
       <div class="hero-stats">
         <div class="stat-card">
           <span class="stat-number">11+</span>
-          <span class="stat-label">Years Experience</span>
+          <span class="stat-label">ปีประสบการณ์</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">100+</span>
-          <span class="stat-label">Projects Delivered</span>
+          <span class="stat-label">โปรเจคที่ส่งมอบ</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">3</span>
-          <span class="stat-label">Countries Served</span>
+          <span class="stat-label">ประเทศที่ให้บริการ</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">11</span>
-          <span class="stat-label">Expert Engineers</span>
+          <span class="stat-label">วิศวกรผู้เชี่ยวชาญ</span>
         </div>
       </div>
     </div>
@@ -4252,7 +4319,7 @@
   <!-- Clients Bar -->
   <section class="clients-bar">
     <div class="container">
-      <p class="clients-label">TRUSTED BY INDUSTRY LEADERS</p>
+      <p class="clients-label">ได้รับความไว้วางใจจากบริษัทชั้นนำ</p>
       <div class="clients-logos">
         <span class="client-logo">MICHELIN</span>
         <span class="client-logo">AkzoNobel</span>
@@ -4268,11 +4335,11 @@
         <div class="about-content">
           <div class="section-label">
             <span class="label-line"></span>
-            <span>ABOUT US</span>
+            <span>เกี่ยวกับเรา</span>
             <span class="label-line"></span>
           </div>
           
-          <h2 class="section-title">Engineering Excellence Since 2014</h2>
+          <h2 class="section-title">ความเป็นเลิศด้านวิศวกรรมตั้งแต่ปี 2014</h2>
           
           <p class="about-text">
             Auto Innovate Construction (A.I.C.) is a leading industrial automation company 
@@ -4489,11 +4556,11 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>OUR SERVICES</span>
+        <span>บริการของเรา</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">End-to-End Automation Solutions</h2>
+      <h2 class="section-title centered">โซลูชัน Automation ครบวงจร</h2>
       <p class="section-subtitle">From initial design to commissioning and beyond — we deliver complete automation solutions tailored to your needs.</p>
       
       <div class="services-grid">
@@ -4660,7 +4727,7 @@
             <span class="level-dot"></span>
             <span class="level-dot"></span>
           </div>
-          <p class="tech-desc">Growing Expertise</p>
+          <p class="tech-desc">กำลังพัฒนา</p>
         </div>
         
         <!-- Web / AI -->
@@ -5428,7 +5495,7 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag cyan">DIGITAL SOLUTIONS</span>
+            <span class="expertise-tag cyan">โซลูชันดิจิทัล</span>
             <h3>Operations Management System</h3>
             <p>Full-featured web application for project management, inventory tracking, workflow automation, and real-time reporting dashboards.</p>
             <div class="expertise-tags">
@@ -5522,12 +5589,12 @@
           <!-- Contact Form -->
           <form class="contact-form" id="contactForm">
             <div class="form-group">
-              <label>Your Name</label>
+              <label>ชื่อของคุณ</label>
               <input type="text" name="name" placeholder="John Smith" required>
             </div>
             
             <div class="form-group">
-              <label>Email Address</label>
+              <label>อีเมล</label>
               <input type="email" name="email" placeholder="john@company.com" required>
             </div>
             
@@ -5539,7 +5606,7 @@
             <div class="form-group">
               <label>Service Interest</label>
               <select name="service">
-                <option value="">Select a service...</option>
+                <option value="">เลือกบริการ...</option>
                 <option value="PLC Programming">PLC Programming</option>
                 <option value="Safety Systems">Safety Systems</option>
                 <option value="Hardware Design">Hardware Design</option>
@@ -5550,12 +5617,12 @@
             </div>
             
             <div class="form-group">
-              <label>Project Details</label>
-              <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+              <label>รายละเอียดโปรเจค</label>
+              <textarea name="message" placeholder="บอกเราเกี่ยวกับโปรเจคของคุณ..." required></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg full-width" id="submitBtn">
-              <span class="btn-text">Send Message</span>
+              <span class="btn-text">ส่งข้อความ</span>
               <span class="btn-loading" style="display: none;">
                 <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
@@ -5614,7 +5681,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>© 2026 Auto Innovate Construction Co., Ltd. All rights reserved.</p>
+        <p>© 2026 Auto Innovate Construction Co., Ltd. สงวนลิขสิทธิ์.</p>
         <div class="social-links">
           <a href="#" aria-label="LinkedIn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

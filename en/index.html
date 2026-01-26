@@ -178,10 +178,16 @@
     }
 
     .nav-container {
-      display: grid;
-      grid-template-columns: 350px 1fr auto;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .logo {
@@ -485,73 +491,122 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* Language Selector */
-    .lang-selector {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-right: 16px;
-      padding: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Language Dropdown */
+    .lang-dropdown {
+      position: relative;
     }
 
-    .lang-btn {
+    .lang-dropdown-btn {
       display: flex;
       align-items: center;
-      gap: 4px;
-      padding: 6px 10px;
-      background: transparent;
-      border: none;
-      border-radius: 6px;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
-      color: var(--text-muted);
-      font-size: 0.8rem;
+      color: var(--text);
+      font-size: 0.9rem;
       font-weight: 500;
     }
 
-    .lang-btn:hover {
+    .lang-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .lang-dropdown-btn .lang-flag {
+      font-size: 1.2rem;
+    }
+
+    .lang-dropdown-btn .arrow {
+      font-size: 0.7rem;
+      transition: transform 0.2s ease;
+      opacity: 0.7;
+    }
+
+    .lang-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 150px;
+      background: rgba(15, 30, 50, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+    }
+
+    .lang-dropdown:hover .lang-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .lang-option:hover {
       background: rgba(255, 255, 255, 0.1);
       color: var(--text);
     }
 
-    .lang-btn.active {
+    .lang-option.active {
       background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
       color: white;
     }
 
-    .lang-flag {
-      font-size: 1rem;
+    .lang-option .lang-flag {
+      font-size: 1.3rem;
     }
 
-    .lang-code {
-      font-size: 0.75rem;
-      text-transform: uppercase;
+    .lang-option .lang-name {
+      flex: 1;
     }
 
-    @media (max-width: 1024px) {
-      .lang-selector {
-        margin-right: 8px;
-      }
-      
-      .lang-btn {
-        padding: 4px 6px;
-      }
-      
-      .lang-code {
-        display: none;
-      }
+    .lang-option .check {
+      opacity: 0;
+      font-size: 0.8rem;
+    }
+
+    .lang-option.active .check {
+      opacity: 1;
     }
 
     @media (max-width: 768px) {
-      .lang-selector {
+      .lang-dropdown {
         position: fixed;
-        top: 18px;
+        top: 16px;
         right: 70px;
         z-index: 1002;
-        margin-right: 0;
+      }
+      
+      .lang-dropdown-btn .lang-text {
+        display: none;
+      }
+      
+      .lang-dropdown-btn {
+        padding: 8px 10px;
       }
     }
 
@@ -4163,23 +4218,35 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       
-      <!-- Language Selector -->
-      <div class="lang-selector">
-        <button class="lang-btn" data-lang="th" onclick="window.location.href='../'">
-          <span class="lang-flag">🇹🇭</span>
-          <span class="lang-code">TH</span>
-        </button>
-        <button class="lang-btn active" data-lang="en" onclick="window.location.href='./'">
-          <span class="lang-flag">🇺🇸</span>
-          <span class="lang-code">EN</span>
-        </button>
-        <button class="lang-btn" data-lang="zh" onclick="window.location.href='../zh/'">
-          <span class="lang-flag">🇨🇳</span>
-          <span class="lang-code">中文</span>
-        </button>
+      <div class="nav-right">
+        <!-- Language Dropdown -->
+        <div class="lang-dropdown">
+          <button class="lang-dropdown-btn">
+            <span class="lang-flag">🇺🇸</span>
+            <span class="lang-text">EN</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="lang-dropdown-menu">
+            <a href="../" class="lang-option">
+              <span class="lang-flag">🇺🇸</span>
+              <span class="lang-name">ภาษาไทย</span>
+              <span class="check">✓</span>
+            </a>
+            <a href="./" class="lang-option active">
+              <span class="lang-flag">🇺🇸</span>
+              <span class="lang-name">English</span>
+              <span class="check">✓</span>
+            </a>
+            <a href="../zh/" class="lang-option">
+              <span class="lang-flag">🇨🇳</span>
+              <span class="lang-name">中文</span>
+              <span class="check">✓</span>
+            </a>
+          </div>
+        </div>
+        
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
       </div>
-      
-      <a href="#contact" class="btn btn-primary">Get a Quote</a>
       
       <!-- Mobile Menu Button -->
       <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -4268,7 +4335,7 @@
         <div class="about-content">
           <div class="section-label">
             <span class="label-line"></span>
-            <span>ABOUT US</span>
+            <span>About</span>
             <span class="label-line"></span>
           </div>
           
@@ -4333,52 +4400,52 @@
           <div class="image-slider">
             <div class="slider-container">
               <div class="slide active">
-                <img src="images/project-1.jpg" alt="Industrial Control Panel">
+                <img src="../images/project-1.jpg" alt="Industrial Control Panel">
               </div>
               <div class="slide">
-                <img src="images/project-2.jpg" alt="A.I.C. Engineer working">
+                <img src="../images/project-2.jpg" alt="A.I.C. Engineer working">
               </div>
               <div class="slide">
-                <img src="images/project-3.jpg" alt="Control panel maintenance">
+                <img src="../images/project-3.jpg" alt="Control panel maintenance">
               </div>
               <div class="slide">
-                <img src="images/project-4.jpg" alt="Safety system work">
+                <img src="../images/project-4.jpg" alt="Safety system work">
               </div>
               <div class="slide">
-                <img src="images/project-5.jpg" alt="A.I.C. Engineer on site">
+                <img src="../images/project-5.jpg" alt="A.I.C. Engineer on site">
               </div>
               <div class="slide">
-                <img src="images/project-6.jpg" alt="Industrial machinery">
+                <img src="../images/project-6.jpg" alt="Industrial machinery">
               </div>
               <div class="slide">
-                <img src="images/project-7.jpg" alt="Project work">
+                <img src="../images/project-7.jpg" alt="Project work">
               </div>
               <div class="slide">
-                <img src="images/project-8.jpg" alt="Automation project">
+                <img src="../images/project-8.jpg" alt="Automation project">
               </div>
               <div class="slide">
-                <img src="images/project-9.jpg" alt="Engineering work">
+                <img src="../images/project-9.jpg" alt="Engineering work">
               </div>
               <div class="slide">
-                <img src="images/project-10.jpg" alt="Industrial project">
+                <img src="../images/project-10.jpg" alt="Industrial project">
               </div>
               <div class="slide">
-                <img src="images/project-11.jpg" alt="A.I.C. Project">
+                <img src="../images/project-11.jpg" alt="A.I.C. Project">
               </div>
               <div class="slide">
-                <img src="images/AIC_Outing_2026_photo_1.jpg" alt="A.I.C. Outing 2026 - Team Meeting">
+                <img src="../images/AIC_Outing_2026_photo_1.jpg" alt="A.I.C. Outing 2026 - Team Meeting">
               </div>
               <div class="slide">
-                <img src="images/AIC_Outing_2026_photo_2.jpg" alt="A.I.C. Outing 2026 - Team Collaboration">
+                <img src="../images/AIC_Outing_2026_photo_2.jpg" alt="A.I.C. Outing 2026 - Team Collaboration">
               </div>
               <div class="slide">
-                <img src="images/AIC_Outing_2026_photo_3.jpg" alt="A.I.C. Outing 2026 - Team Photo">
+                <img src="../images/AIC_Outing_2026_photo_3.jpg" alt="A.I.C. Outing 2026 - Team Photo">
               </div>
               <div class="slide">
-                <img src="images/plc.png" alt="PLC Programming" class="full-image">
+                <img src="../images/plc.png" alt="PLC Programming" class="full-image">
               </div>
               <div class="slide">
-                <img src="images/hmi.png" alt="HMI Design" class="full-image">
+                <img src="../images/hmi.png" alt="HMI Design" class="full-image">
               </div>
             </div>
             
@@ -6450,7 +6517,7 @@
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
         <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - Ready to serve!</span>
+        <span>Online - Ready to help!</span>
       </div>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6513,13 +6580,13 @@
 
       // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
-        th: `🎯 สวัสดีครับ! Welcome to A.I.C.!
+        th: `🎯 สวัสดีครับ! ยินดีต้อนรับสู่ A.I.C.
 
-I see you are interested in Industrial Automation 
+ผมเห็นว่าคุณกำลังสนใจด้าน Industrial Automation 
 
-✨ We have special offers for new clients today!
+✨ วันนี้เรามีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่!
 
-What project do you have in mind? I can provide a quick estimate!`,
+มีโปรเจคอะไรในใจบ้างครับ? ผมช่วยประเมินราคาเบื้องต้นให้ได้เลย!`,
         en: `🎯 Hello! Welcome to A.I.C.
 
 I noticed you're interested in Industrial Automation!
@@ -6530,10 +6597,10 @@ What project do you have in mind? I can provide a quick estimate!`
       };
 
       const quickActions = [
-        { text: '🔧 PLC Programming', value: 'Interested in PLC Programming, need pricing' },
-        { text: '🛡️ Safety Systems', value: 'Need Safety System consultation' },
-        { text: '💻 Web/Dashboard', value: 'Want Web App or Dashboard' },
-        { text: '📋 Request a Quote', value: 'Request a Quote' }
+        { text: '🔧 PLC Programming', value: 'สนใจ PLC Programming อยากทราบราคาเบื้องต้น' },
+        { text: '🛡️ Safety Systems', value: 'ต้องการระบบ Safety อยากปรึกษา' },
+        { text: '💻 Web/Dashboard', value: 'อยากได้ Web App หรือ Dashboard' },
+        { text: '📋 ขอใบเสนอราคา', value: 'ขอใบเสนอราคาครับ' }
       ];
 
       // Toggle chatbot
