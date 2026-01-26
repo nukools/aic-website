@@ -6901,21 +6901,30 @@ What project do you have in mind? I can provide a quick estimate!`
 
       // 🔊 Text-to-Speech Function (OpenAI TTS)
       async function speakText(text, button) {
-        // หยุดเสียงที่กำลังเล่นอยู่
+        // 🔇 หยุดเสียงที่กำลังเล่นอยู่ทันที
         if (currentAudio) {
           currentAudio.pause();
+          currentAudio.currentTime = 0;
           currentAudio = null;
-          // Reset ปุ่มเดิม
-          document.querySelectorAll('.tts-button.playing').forEach(btn => {
-            btn.classList.remove('playing');
-          });
         }
         
-        // ถ้ากดปุ่มเดิมที่กำลังเล่นอยู่ = หยุด
-        if (button.classList.contains('playing')) {
-          button.classList.remove('playing');
+        // Reset ปุ่มทั้งหมดที่กำลังเล่น/loading
+        document.querySelectorAll('.tts-button.playing, .tts-button.loading').forEach(btn => {
+          btn.classList.remove('playing', 'loading');
+          btn.disabled = false;
+        });
+        
+        // ถ้ากดปุ่มเดิมที่กำลังเล่นอยู่ = หยุดเฉยๆ
+        if (button.dataset.wasPlaying === 'true') {
+          button.dataset.wasPlaying = 'false';
           return;
         }
+        
+        // Mark ว่าปุ่มนี้กำลังจะเล่น
+        document.querySelectorAll('.tts-button').forEach(btn => {
+          btn.dataset.wasPlaying = 'false';
+        });
+        button.dataset.wasPlaying = 'true';
         
         // แสดง loading state
         button.classList.add('loading');
@@ -6924,10 +6933,14 @@ What project do you have in mind? I can provide a quick estimate!`
         try {
           // ลบ emoji และ format พิเศษออก
           const cleanText = text
-            .replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '')
+            .replace(/[\u{1F300}-\u{1F9FF}]/gu, '') // ลบ emoji ทั้งหมด
             .replace(/<br>/g, ' ')
             .replace(/\s+/g, ' ')
             .trim();
+          
+          if (!cleanText) {
+            throw new Error('No text to speak');
+          }
           
           // เรียก TTS API
           const response = await fetch(CONFIG.ttsEndpoint, {
@@ -6965,6 +6978,7 @@ What project do you have in mind? I can provide a quick estimate!`
             // เมื่อเล่นจบ
             currentAudio.onended = () => {
               button.classList.remove('playing');
+              button.dataset.wasPlaying = 'false';
               currentAudio = null;
               URL.revokeObjectURL(audioUrl);
             };
@@ -6972,6 +6986,7 @@ What project do you have in mind? I can provide a quick estimate!`
             // เมื่อเกิด error
             currentAudio.onerror = () => {
               button.classList.remove('playing');
+              button.dataset.wasPlaying = 'false';
               currentAudio = null;
               console.error('Audio playback error');
             };

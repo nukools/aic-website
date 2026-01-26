@@ -6897,28 +6897,42 @@ What project do you have in mind? I can provide a quick estimate!`
 
       // 🔊 Text-to-Speech Function (OpenAI TTS)
       async function speakText(text, button) {
+        // 🔇 หยุดเสียงที่กำลังเล่นอยู่ทันที
         if (currentAudio) {
           currentAudio.pause();
+          currentAudio.currentTime = 0;
           currentAudio = null;
-          document.querySelectorAll('.tts-button.playing').forEach(btn => {
-            btn.classList.remove('playing');
-          });
         }
         
-        if (button.classList.contains('playing')) {
-          button.classList.remove('playing');
+        // Reset ปุ่มทั้งหมดที่กำลังเล่น/loading
+        document.querySelectorAll('.tts-button.playing, .tts-button.loading').forEach(btn => {
+          btn.classList.remove('playing', 'loading');
+          btn.disabled = false;
+        });
+        
+        // ถ้ากดปุ่มเดิมที่กำลังเล่นอยู่ = หยุดเฉยๆ
+        if (button.dataset.wasPlaying === 'true') {
+          button.dataset.wasPlaying = 'false';
           return;
         }
+        
+        // Mark ว่าปุ่มนี้กำลังจะเล่น
+        document.querySelectorAll('.tts-button').forEach(btn => {
+          btn.dataset.wasPlaying = 'false';
+        });
+        button.dataset.wasPlaying = 'true';
         
         button.classList.add('loading');
         button.disabled = true;
         
         try {
           const cleanText = text
-            .replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '')
+            .replace(/[\u{1F300}-\u{1F9FF}]/gu, '')
             .replace(/<br>/g, ' ')
             .replace(/\s+/g, ' ')
             .trim();
+          
+          if (!cleanText) throw new Error('No text to speak');
           
           const response = await fetch(CONFIG.ttsEndpoint, {
             method: 'POST',
@@ -6943,12 +6957,14 @@ What project do you have in mind? I can provide a quick estimate!`
             
             currentAudio.onended = () => {
               button.classList.remove('playing');
+              button.dataset.wasPlaying = 'false';
               currentAudio = null;
               URL.revokeObjectURL(audioUrl);
             };
             
             currentAudio.onerror = () => {
               button.classList.remove('playing');
+              button.dataset.wasPlaying = 'false';
               currentAudio = null;
             };
           }
@@ -6956,6 +6972,7 @@ What project do you have in mind? I can provide a quick estimate!`
           console.error('TTS error:', error);
           button.classList.remove('loading');
           button.disabled = false;
+          button.dataset.wasPlaying = 'false';
           fallbackSpeak(text, button);
         }
       }
