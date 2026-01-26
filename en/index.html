@@ -6701,7 +6701,8 @@ What project do you have in mind? I can provide a quick estimate!`
         if (isOpen && isFirstOpen) {
           badge.style.display = 'none';
           setTimeout(() => {
-            addBotMessage(welcomeMessage.en, quickActions);
+            // ✅ Auto-speak welcome message
+            addBotMessage(welcomeMessage.en, quickActions, true);
           }, 500);
           isFirstOpen = false;
         }
@@ -6784,8 +6785,8 @@ What project do you have in mind? I can provide a quick estimate!`
         return messageDiv;
       }
 
-      function addBotMessage(content, actions = null) {
-        addMessage(content, true, actions);
+      function addBotMessage(content, actions = null, autoSpeak = false) {
+        addMessage(content, true, actions, autoSpeak);
       }
 
       function addUserMessage(content) {
@@ -6837,7 +6838,8 @@ What project do you have in mind? I can provide a quick estimate!`
         try {
           const response = await callClaudeAPI(text);
           hideTyping();
-          addBotMessage(response);
+          // ✅ Auto-speak enabled
+          addBotMessage(response, null, true);
           
           // Add to history
           conversationHistory.push({
@@ -6857,7 +6859,7 @@ Please contact our team directly:
 
 or fill out the form below`;
           
-          addBotMessage(fallbackResponse);
+          addBotMessage(fallbackResponse, null, true);
         }
 
         sendBtn.disabled = false;

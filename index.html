@@ -6700,7 +6700,8 @@ What project do you have in mind? I can provide a quick estimate!`
         if (isOpen && isFirstOpen) {
           badge.style.display = 'none';
           setTimeout(() => {
-            addBotMessage(welcomeMessage.th, quickActions);
+            // ✅ เพิ่ม autoSpeak = true เพื่อให้พูดทักทายอัตโนมัติ
+            addBotMessage(welcomeMessage.th, quickActions, true);
           }, 500);
           isFirstOpen = false;
         }
@@ -6785,8 +6786,8 @@ What project do you have in mind? I can provide a quick estimate!`
         return messageDiv;
       }
 
-      function addBotMessage(content, actions = null) {
-        addMessage(content, true, actions);
+      function addBotMessage(content, actions = null, autoSpeak = false) {
+        addMessage(content, true, actions, autoSpeak);
       }
 
       function addUserMessage(content) {
@@ -6838,7 +6839,8 @@ What project do you have in mind? I can provide a quick estimate!`
         try {
           const response = await callClaudeAPI(text);
           hideTyping();
-          addBotMessage(response);
+          // ✅ เพิ่ม autoSpeak = true เพื่อให้พูดอัตโนมัติ
+          addBotMessage(response, null, true);
           
           // Add to history
           conversationHistory.push({
@@ -6858,7 +6860,7 @@ What project do you have in mind? I can provide a quick estimate!`
 
 หรือกรอกแบบฟอร์มด้านล่างครับ`;
           
-          addBotMessage(fallbackResponse);
+          addBotMessage(fallbackResponse, null, true);
         }
 
         sendBtn.disabled = false;
