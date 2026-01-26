@@ -4522,7 +4522,7 @@
       </div>
       
       <div class="vision-quote">
-        <p><span class="quote-mark">"</span>Pioneering theแห่งการผลิตอัจฉริยะ — เชื่อมโยง ความเชี่ยวชาญด้านระบบอัตโนมัติอุตสาหกรรมที่พิสูจน์แล้ว กับ เทคโนโลยี AI และดิจิทัลรุ่นใหม่</p>
+        <p><span class="quote-mark">"</span>Pioneering the Future of Intelligent Manufacturing — bridging proven industrial automation expertise with next-generation AI and digital technologies.</p>
       </div>
       
       <div class="vision-values">
@@ -4692,8 +4692,8 @@
           <h3>Web Applications & Dashboards</h3>
           <p>Custom web applications, real-time monitoring dashboards, and operations management systems — tailored to your business needs.</p>
           <div class="service-tags">
-            <span class="tag">เว็บแอป</span>
-            <span class="tag">แดชบอร์ด</span>
+            <span class="tag">Web App</span>
+            <span class="tag">Dashboard</span>
             <span class="tag">Analytics</span>
           </div>
         </div>
@@ -5522,9 +5522,9 @@
             <h3>Operations Management System</h3>
             <p>Full-featured web application for project management, inventory tracking, workflow automation, and real-time reporting dashboards.</p>
             <div class="expertise-tags">
-              <span class="tag">เว็บแอป</span>
-              <span class="tag">แดชบอร์ด</span>
-              <span class="tag">เรียลไทม์</span>
+              <span class="tag">Web App</span>
+              <span class="tag">Dashboard</span>
+              <span class="tag">Real-time</span>
             </div>
           </div>
         </div>
@@ -5538,7 +5538,7 @@
       <div class="contact-grid">
         <div class="contact-info">
           <h2 class="contact-title">Let's Build Something Great Together</h2>
-          <p class="contact-desc">พร้อมที่จะเปลี่ยนโฉมการดำเนินงานด้วยระบบอัตโนมัติอัจฉริยะหรือยัง? ติดต่อทีมงานเพื่อDiscuss Your Project</p>
+          <p class="contact-desc">Ready to transform your operations with intelligent automation? Get in touch with our team to discuss your project.</p>
           
           <div class="contact-items">
             <div class="contact-item">
@@ -6540,7 +6540,7 @@
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
         <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - พร้อมให้บริการ!</span>
+        <span>Online - Ready to help!</span>
       </div>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6603,13 +6603,13 @@
 
       // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
-        th: `🎯 สวัสดีครับ! ยินดีต้อนรับสู่ A.I.C.
+        th: `🎯 Hello! Welcome to A.I.C.
 
-ผมเห็นว่าคุณกำลังสนใจด้าน Industrial Automation 
+I noticed you're interested in Industrial Automation!
 
-✨ วันนี้เรามีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่!
+✨ We have special offers for new clients today!
 
-มีโปรเจคอะไรในใจบ้างครับ? ผมช่วยประเมินราคาเบื้องต้นให้ได้เลย!`,
+What project do you have in mind? I can provide a quick estimate!`,
         en: `🎯 Hello! Welcome to A.I.C.
 
 I noticed you're interested in Industrial Automation!
@@ -6620,10 +6620,10 @@ What project do you have in mind? I can provide a quick estimate!`
       };
 
       const quickActions = [
-        { text: '🔧 PLC Programming', value: 'สนใจ PLC Programming อยากทราบราคาเบื้องต้น' },
-        { text: '🛡️ Safety Systems', value: 'ต้องการระบบ Safety อยากปรึกษา' },
-        { text: '💻 Web/Dashboard', value: 'อยากได้ Web App หรือ Dashboard' },
-        { text: '📋 ขอใบเสนอราคา', value: 'ขอใบเสนอราคาครับ' }
+        { text: '🔧 PLC Programming', value: 'Interested in PLC Programming, want to know pricing' },
+        { text: '🛡️ Safety Systems', value: 'Need Safety systems, want to consult' },
+        { text: '💻 Web/Dashboard', value: 'Want Web App or Dashboard' },
+        { text: '📋 Get a Quote', value: 'I want to get a quote' }
       ];
 
       // Toggle chatbot
@@ -6635,7 +6635,7 @@ What project do you have in mind? I can provide a quick estimate!`
         if (isOpen && isFirstOpen) {
           badge.style.display = 'none';
           setTimeout(() => {
-            addBotMessage(welcomeMessage.th, quickActions);
+            addBotMessage(welcomeMessage.en, quickActions);
           }, 500);
           isFirstOpen = false;
         }
@@ -6748,12 +6748,12 @@ What project do you have in mind? I can provide a quick estimate!`
           console.error('Chat error:', error);
           
           // Fallback response
-          const fallbackResponse = `ขอโทษครับ ระบบขัดข้องชั่วคราว 🙏
+          const fallbackResponse = `Sorry, the system is temporarily unavailable 🙏
 
 กรุณาติดต่อทีมของเราโดยตรง:
 📧 nukools@autoinnovate.com
 
-หรือกรอกแบบฟอร์มด้านล่างครับ`;
+or fill out the form below`;
           
           addBotMessage(fallbackResponse);
         }
