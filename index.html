@@ -3591,15 +3591,26 @@
       
       .digital-grid {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 40px;
       }
       
       .digital-mockup {
         order: -1;
+        height: auto;
+        min-height: 350px;
+      }
+      
+      .mockup-slider {
+        height: 350px;
       }
       
       .expertise-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .expertise-visual {
+        height: 180px;
+        overflow: visible;
       }
       
       .contact-grid {
@@ -3881,7 +3892,26 @@
       }
       
       .digital-mockup {
-        height: 250px;
+        height: auto;
+        min-height: 300px;
+        margin-bottom: 20px;
+        padding-bottom: 60px;
+      }
+      
+      .mockup-slider {
+        height: auto;
+        min-height: 280px;
+      }
+      
+      .mockup-slide .mockup-window {
+        transform: scale(0.9);
+        transform-origin: top center;
+        height: auto;
+        min-height: 260px;
+      }
+      
+      .mockup-nav {
+        bottom: 0;
       }
       
       .digital-feature {
@@ -3921,7 +3951,13 @@
       }
       
       .expertise-visual {
-        height: 150px;
+        height: 200px;
+        overflow: visible;
+      }
+      
+      .expertise-visual svg {
+        max-width: 100%;
+        height: auto;
       }
       
       .expertise-title {
