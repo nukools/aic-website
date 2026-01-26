@@ -6640,13 +6640,116 @@ What project do you have in mind? I can provide a quick estimate!`
 
       // 🚀 AUTO-OPEN CHATBOT - Sales Proactive Approach!
       // เปิด Chatbot อัตโนมัติหลังเข้าเว็บ 3 วินาที (เฉพาะ Desktop)
-      const isMobile = window.innerWidth <= 480;
+      const isMobile = window.innerWidth <= 768;
       if (!isMobile) {
+        // Desktop: เปิด chatbot เต็มรูปแบบ
         setTimeout(() => {
           if (!isOpen) {
             toggle.click();
           }
         }, 3000);
+      } else {
+        // Mobile: แสดง greeting bubble popup
+        setTimeout(() => {
+          showGreetingBubble();
+        }, 2000);
+      }
+
+      // 📱 Mobile Greeting Bubble
+      function showGreetingBubble() {
+        // สร้าง greeting bubble
+        const bubble = document.createElement('div');
+        bubble.id = 'greetingBubble';
+        bubble.innerHTML = `
+          <div class="greeting-content">
+            <span class="greeting-close">&times;</span>
+            <p>👋 สวัสดีครับ! มีอะไรให้ช่วยไหมครับ?</p>
+            <span class="greeting-tap">แตะเพื่อคุยกับ AI Sales</span>
+          </div>
+        `;
+        bubble.style.cssText = `
+          position: fixed;
+          bottom: 85px;
+          right: 16px;
+          background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+          color: white;
+          padding: 0;
+          border-radius: 16px;
+          box-shadow: 0 8px 32px rgba(249, 115, 22, 0.4);
+          z-index: 9997;
+          max-width: 220px;
+          animation: bubbleSlideIn 0.5s ease-out;
+          cursor: pointer;
+        `;
+        
+        // Add styles for content
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes bubbleSlideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+          }
+          #greetingBubble .greeting-content {
+            padding: 14px 16px;
+            position: relative;
+          }
+          #greetingBubble .greeting-close {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.8;
+          }
+          #greetingBubble .greeting-close:hover {
+            opacity: 1;
+          }
+          #greetingBubble p {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            font-weight: 500;
+            padding-right: 16px;
+          }
+          #greetingBubble .greeting-tap {
+            font-size: 11px;
+            opacity: 0.85;
+          }
+          #greetingBubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 28px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #ec4899;
+          }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(bubble);
+
+        // Click bubble to open chat
+        bubble.addEventListener('click', (e) => {
+          if (!e.target.classList.contains('greeting-close')) {
+            bubble.remove();
+            toggle.click();
+          }
+        });
+
+        // Close button
+        bubble.querySelector('.greeting-close').addEventListener('click', (e) => {
+          e.stopPropagation();
+          bubble.remove();
+        });
+
+        // Auto hide after 8 seconds
+        setTimeout(() => {
+          if (document.getElementById('greetingBubble')) {
+            bubble.style.animation = 'bubbleSlideIn 0.3s ease-out reverse';
+            setTimeout(() => bubble.remove(), 300);
+          }
+        }, 8000);
       }
 
     })();
