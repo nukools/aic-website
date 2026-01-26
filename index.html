@@ -178,16 +178,10 @@
     }
 
     .nav-container {
-      display: flex;
+      display: grid;
+      grid-template-columns: 350px 1fr auto;
       align-items: center;
-      justify-content: space-between;
       gap: 20px;
-    }
-    
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
     }
 
     .logo {
@@ -469,7 +463,6 @@
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 1001;
     }
 
     .mobile-menu-btn span {
@@ -477,171 +470,6 @@
       height: 2px;
       background: var(--text);
       transition: all var(--transition-normal);
-    }
-
-    .mobile-menu-btn.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-btn.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-btn.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    /* Language Dropdown */
-    .lang-dropdown {
-      position: relative;
-    }
-
-    .lang-dropdown-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      color: var(--text);
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .lang-dropdown-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .lang-dropdown-btn .lang-flag {
-      font-size: 1.2rem;
-    }
-
-    .lang-dropdown-btn .arrow {
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-      opacity: 0.7;
-    }
-
-    .lang-dropdown:hover .arrow {
-      transform: rotate(180deg);
-    }
-
-    .lang-dropdown-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      min-width: 150px;
-      background: rgba(15, 30, 50, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      padding: 8px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      z-index: 1001;
-    }
-
-    .lang-dropdown:hover .lang-dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .lang-option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .lang-option:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text);
-    }
-
-    .lang-option.active {
-      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-      color: white;
-    }
-
-    .lang-option .lang-flag {
-      font-size: 1.3rem;
-    }
-
-    .lang-option .lang-name {
-      flex: 1;
-    }
-
-    .lang-option .check {
-      opacity: 0;
-      font-size: 0.8rem;
-    }
-
-    .lang-option.active .check {
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      .lang-dropdown {
-        position: fixed;
-        top: 16px;
-        right: 70px;
-        z-index: 1002;
-      }
-      
-      .lang-dropdown-btn .lang-text {
-        display: none;
-      }
-      
-      .lang-dropdown-btn {
-        padding: 8px 10px;
-      }
-    }
-
-    /* Mobile Menu Dropdown */
-    @media (max-width: 768px) {
-      .nav-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(10, 22, 40, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-      }
-
-      .nav-menu.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .nav-menu li a {
-        font-size: 1.5rem;
-        padding: 10px 20px;
-      }
-
-      .nav-menu li a:hover {
-        color: var(--accent);
-      }
     }
 
     /* ---------- Hero Section ---------- */
@@ -3716,26 +3544,15 @@
       
       .digital-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
       }
       
       .digital-mockup {
         order: -1;
-        height: auto;
-        min-height: 350px;
-      }
-      
-      .mockup-slider {
-        height: 350px;
       }
       
       .expertise-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .expertise-visual {
-        height: 180px;
-        overflow: visible;
       }
       
       .contact-grid {
@@ -3750,15 +3567,6 @@
     }
 
     @media (max-width: 768px) {
-      /* Move scroll-top button to left side on tablet/mobile */
-      .scroll-top {
-        left: 20px;
-        right: auto;
-        bottom: 20px;
-        width: 46px;
-        height: 46px;
-      }
-      
       .nav-container {
         display: flex;
         justify-content: space-between;
@@ -3906,293 +3714,17 @@
     }
 
     @media (max-width: 480px) {
-      /* ===== HERO SECTION ===== */
-      .hero {
-        padding: 100px 0 40px;
-        min-height: auto;
-      }
-      
-      .hero-badge {
-        margin-top: 10px;
-      }
-      
       .hero-stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        grid-template-columns: 1fr;
       }
       
       .hero-title {
-        font-size: 1.75rem;
-        line-height: 1.2;
-      }
-      
-      .hero-description {
-        font-size: 0.9rem;
-        line-height: 1.5;
-      }
-      
-      .hero-badge {
-        font-size: 0.7rem;
-        padding: 6px 12px;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-        gap: 12px;
-      }
-      
-      .btn-lg {
-        padding: 12px 20px;
-        font-size: 0.9rem;
-        width: 100%;
-        justify-content: center;
-      }
-      
-      /* ===== STATS ===== */
-      .stat-card {
-        padding: 20px 16px;
-      }
-      
-      .stat-number {
-        font-size: 1.8rem;
-      }
-      
-      .stat-label {
-        font-size: 0.75rem;
-      }
-      
-      /* ===== SECTIONS ===== */
-      .section {
-        padding: 50px 0;
-      }
-      
-      .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-      }
-      
-      .section-subtitle {
-        font-size: 0.85rem;
-      }
-      
-      /* ===== SERVICES ===== */
-      .services-grid {
-        gap: 16px;
-      }
-      
-      .service-card {
-        padding: 20px 16px;
-      }
-      
-      .service-icon {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .service-title {
-        font-size: 1.1rem;
-      }
-      
-      .service-description {
-        font-size: 0.85rem;
-      }
-      
-      .service-tags {
-        gap: 6px;
-      }
-      
-      .service-tag {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-      }
-      
-      /* ===== TECHNOLOGY ===== */
-      .tech-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      
-      .tech-card {
-        padding: 20px 12px;
-      }
-      
-      .tech-name {
-        font-size: 0.9rem;
-      }
-      
-      .tech-level {
-        font-size: 0.7rem;
-      }
-      
-      /* ===== DIGITAL SOLUTIONS ===== */
-      .digital-content {
-        gap: 30px;
-      }
-      
-      .digital-mockup {
-        height: auto;
-        min-height: 300px;
-        margin-bottom: 20px;
-        padding-bottom: 60px;
-      }
-      
-      .mockup-slider {
-        height: auto;
-        min-height: 280px;
-      }
-      
-      .mockup-slide .mockup-window {
-        transform: scale(0.9);
-        transform-origin: top center;
-        height: auto;
-        min-height: 260px;
-      }
-      
-      .mockup-nav {
-        bottom: 0;
-      }
-      
-      .digital-feature {
-        padding: 12px;
-      }
-      
-      .digital-feature h4 {
-        font-size: 0.9rem;
-      }
-      
-      .digital-feature p {
-        font-size: 0.8rem;
-      }
-      
-      /* ===== PROJECTS SLIDER ===== */
-      .slider-container {
-        height: 220px;
-      }
-      
-      .projects-badge {
-        padding: 12px 16px;
-        bottom: 10px;
-        right: 10px;
-      }
-      
-      .badge-number {
-        font-size: 1.5rem;
-      }
-      
-      .badge-text {
-        font-size: 0.7rem;
-      }
-      
-      /* ===== EXPERTISE ===== */
-      .expertise-card {
-        padding: 20px;
-      }
-      
-      .expertise-visual {
-        height: 200px;
-        overflow: visible;
-      }
-      
-      .expertise-visual svg {
-        max-width: 100%;
-        height: auto;
-      }
-      
-      .expertise-title {
-        font-size: 1.1rem;
-      }
-      
-      .expertise-description {
-        font-size: 0.85rem;
-      }
-      
-      /* ===== VISION ===== */
-      .vision-quote p {
-        font-size: 1.1rem;
-        line-height: 1.5;
-      }
-      
-      .quote-mark {
         font-size: 2rem;
       }
       
-      .vision-values {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-      
-      .value-icon {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .value-title {
-        font-size: 0.85rem;
-      }
-      
-      /* ===== CONTACT ===== */
-      .contact-title {
-        font-size: 1.5rem;
-      }
-      
-      .contact-subtitle {
-        font-size: 0.9rem;
-      }
-      
-      .contact-form-wrapper {
-        padding: 20px 16px;
-      }
-      
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        padding: 12px 14px;
-        font-size: 0.9rem;
-      }
-      
-      .form-row {
-        flex-direction: column;
-        gap: 16px;
-      }
-      
-      /* ===== FOOTER ===== */
-      .footer {
-        padding: 40px 0 20px;
-      }
-      
-      .footer-brand {
-        text-align: center;
-      }
-      
-      .footer-logo {
-        font-size: 1.5rem;
-      }
-      
-      .footer-description {
-        font-size: 0.85rem;
-      }
-      
-      .footer-title {
+      .btn-lg {
+        padding: 14px 24px;
         font-size: 1rem;
-      }
-      
-      .footer-links li a {
-        font-size: 0.85rem;
-      }
-      
-      .contact-item {
-        font-size: 0.85rem;
-      }
-      
-      /* ===== MOBILE MENU ===== */
-      .mobile-menu-btn {
-        width: 32px;
-        height: 32px;
-      }
-      
-      /* ===== GENERAL SPACING ===== */
-      .container {
-        padding: 0 16px;
       }
     }
   </style>
@@ -4210,43 +3742,15 @@
       </a>
       
       <ul class="nav-menu">
-        <li><a href="#about">เกี่ยวกับเรา</a></li>
-        <li><a href="#services">บริการ</a></li>
-        <li><a href="#technology">เทคโนโลยี</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#technology">Technology</a></li>
         <li><a href="#digital">Digital Solutions</a></li>
-        <li><a href="#expertise">ความเชี่ยวชาญ</a></li>
-        <li><a href="#contact">ติดต่อ</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       
-      <div class="nav-right">
-        <!-- Language Dropdown -->
-        <div class="lang-dropdown">
-          <button class="lang-dropdown-btn">
-            <span class="lang-flag">🇹🇭</span>
-            <span class="lang-text">ไทย</span>
-            <span class="arrow">▼</span>
-          </button>
-          <div class="lang-dropdown-menu">
-            <a href="./" class="lang-option active">
-              <span class="lang-flag">🇹🇭</span>
-              <span class="lang-name">ภาษาไทย</span>
-              <span class="check">✓</span>
-            </a>
-            <a href="./en/" class="lang-option">
-              <span class="lang-flag">🇺🇸</span>
-              <span class="lang-name">English</span>
-              <span class="check">✓</span>
-            </a>
-            <a href="./zh/" class="lang-option">
-              <span class="lang-flag">🇨🇳</span>
-              <span class="lang-name">中文</span>
-              <span class="check">✓</span>
-            </a>
-          </div>
-        </div>
-        
-        <a href="#contact" class="btn btn-primary">ขอใบเสนอราคา</a>
-      </div>
+      <a href="#contact" class="btn btn-primary">Get a Quote</a>
       
       <!-- Mobile Menu Button -->
       <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -4269,48 +3773,48 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          ผู้นำด้าน Automation ตั้งแต่ปี 2014
+          Automation Excellence Since 2014
         </div>
         
         <h1 class="hero-title">
-          บุกเบิกอนาคต<br>
-          แห่ง <span class="gradient-text">การผลิต</span><br>
-          <span class="gradient-text">อัจฉริยะ</span>
+          Pioneering the<br>
+          Future of <span class="gradient-text">Intelligent</span><br>
+          <span class="gradient-text">Manufacturing</span>
         </h1>
         
         <p class="hero-description">
-          จากระบบ Industrial Automation สู่โซลูชัน AI — 
-          เราออกแบบระบบที่เพิ่มประสิทธิภาพ รับรองความปลอดภัย 
-          และเปลี่ยนโฉมโรงงานทั่วเอเชีย
+          From industrial automation to AI-powered solutions — 
+          we engineer systems that drive efficiency, ensure safety, 
+          and transform factories across Asia.
         </p>
         
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">
-            เริ่มโปรเจคของคุณ
+            Start Your Project
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="#services" class="btn btn-outline btn-lg">ดูบริการทั้งหมด</a>
+          <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
         </div>
       </div>
       
       <div class="hero-stats">
         <div class="stat-card">
           <span class="stat-number">11+</span>
-          <span class="stat-label">ปีประสบการณ์</span>
+          <span class="stat-label">Years Experience</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">100+</span>
-          <span class="stat-label">โปรเจคที่ส่งมอบ</span>
+          <span class="stat-label">Projects Delivered</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">3</span>
-          <span class="stat-label">ประเทศที่ให้บริการ</span>
+          <span class="stat-label">Countries Served</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">11</span>
-          <span class="stat-label">วิศวกรผู้เชี่ยวชาญ</span>
+          <span class="stat-label">Expert Engineers</span>
         </div>
       </div>
     </div>
@@ -4319,7 +3823,7 @@
   <!-- Clients Bar -->
   <section class="clients-bar">
     <div class="container">
-      <p class="clients-label">ได้รับความไว้วางใจจากบริษัทชั้นนำ</p>
+      <p class="clients-label">TRUSTED BY INDUSTRY LEADERS</p>
       <div class="clients-logos">
         <span class="client-logo">MICHELIN</span>
         <span class="client-logo">AkzoNobel</span>
@@ -4335,11 +3839,11 @@
         <div class="about-content">
           <div class="section-label">
             <span class="label-line"></span>
-            <span>เกี่ยวกับเรา</span>
+            <span>ABOUT US</span>
             <span class="label-line"></span>
           </div>
           
-          <h2 class="section-title">ความเป็นเลิศด้านวิศวกรรมตั้งแต่ปี 2014</h2>
+          <h2 class="section-title">Engineering Excellence Since 2014</h2>
           
           <p class="about-text">
             Auto Innovate Construction (A.I.C.) is a leading industrial automation company 
@@ -4362,8 +3866,8 @@
                 </svg>
               </div>
               <div class="feature-content">
-                <h4>Michelin Standard</h4>
-                <p>Programs built to global manufacturing standards</p>
+                <h4>มาตรฐาน Michelin</h4>
+                <p>โปรแกรมที่สร้างตามมาตรฐานการผลิตระดับโลก</p>
               </div>
             </div>
             
@@ -4375,8 +3879,8 @@
                 </svg>
               </div>
               <div class="feature-content">
-                <h4>Safety Certified</h4>
-                <p>Rockwell-trained Safety PLC specialists</p>
+                <h4>ได้รับการรับรองความปลอดภัย</h4>
+                <p>ผู้เชี่ยวชาญ Safety PLC ที่ผ่านการอบรมจาก Rockwell</p>
               </div>
             </div>
             
@@ -4389,8 +3893,8 @@
                 </svg>
               </div>
               <div class="feature-content">
-                <h4>International Reach</h4>
-                <p>Projects across Thailand, Indonesia & India</p>
+                <h4>ครอบคลุมระดับสากล</h4>
+                <p>โปรเจคทั่วประเทศไทย อินโดนีเซีย และอินเดีย</p>
               </div>
             </div>
           </div>
@@ -4433,15 +3937,6 @@
                 <img src="images/project-11.jpg" alt="A.I.C. Project">
               </div>
               <div class="slide">
-                <img src="images/AIC_Outing_2026_photo_1.jpg" alt="A.I.C. Outing 2026 - Team Meeting">
-              </div>
-              <div class="slide">
-                <img src="images/AIC_Outing_2026_photo_2.jpg" alt="A.I.C. Outing 2026 - Team Collaboration">
-              </div>
-              <div class="slide">
-                <img src="images/AIC_Outing_2026_photo_3.jpg" alt="A.I.C. Outing 2026 - Team Photo">
-              </div>
-              <div class="slide">
                 <img src="images/plc.png" alt="PLC Programming" class="full-image">
               </div>
               <div class="slide">
@@ -4474,15 +3969,12 @@
               <span class="dot"></span>
               <span class="dot"></span>
               <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
             </div>
           </div>
           
           <div class="projects-badge">
             <span class="badge-number">100+</span>
-            <span class="badge-text">Projects Completed</span>
+            <span class="badge-text">โปรเจคที่เสร็จสิ้น</span>
           </div>
         </div>
       </div>
@@ -4494,12 +3986,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>OUR VISION</span>
+        <span>วิสัยทัศน์ของเรา</span>
         <span class="label-line"></span>
       </div>
       
       <div class="vision-quote">
-        <p><span class="quote-mark">"</span>Pioneering the Future of Intelligent Manufacturing — bridging proven industrial automation expertise with next-generation AI and digital technologies.</p>
+        <p><span class="quote-mark">"</span>บุกเบิกอนาคตแห่งการผลิตอัจฉริยะ — เชื่อมโยงความเชี่ยวชาญด้านระบบอัตโนมัติอุตสาหกรรมที่พิสูจน์แล้ว กับเทคโนโลยี AI และดิจิทัลรุ่นใหม่</p>
       </div>
       
       <div class="vision-values">
@@ -4510,8 +4002,8 @@
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
           </div>
-          <h4>Excellence</h4>
-          <p>Michelin-grade standards</p>
+          <h4>ความเป็นเลิศ</h4>
+          <p>มาตรฐานระดับ Michelin</p>
         </div>
         
         <div class="value-item">
@@ -4521,8 +4013,8 @@
               <polyline points="9 12 11 14 15 10"/>
             </svg>
           </div>
-          <h4>Safety First</h4>
-          <p>Zero compromise on safety</p>
+          <h4>ความปลอดภัยต้องมาก่อน</h4>
+          <p>ไม่ยอมประนีประนอมเรื่องความปลอดภัย</p>
         </div>
         
         <div class="value-item">
@@ -4534,8 +4026,8 @@
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <h4>Partnership</h4>
-          <p>Growing with our clients</p>
+          <h4>ความร่วมมือ</h4>
+          <p>เติบโตไปพร้อมกับลูกค้า</p>
         </div>
         
         <div class="value-item">
@@ -4544,8 +4036,8 @@
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <h4>Innovation</h4>
-          <p>Embracing AI & digital tech</p>
+          <h4>นวัตกรรม</h4>
+          <p>เปิดรับเทคโนโลยี AI และดิจิทัล</p>
         </div>
       </div>
     </div>
@@ -4556,12 +4048,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>บริการของเรา</span>
+        <span>OUR SERVICES</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">โซลูชัน Automation ครบวงจร</h2>
-      <p class="section-subtitle">From initial design to commissioning and beyond — we deliver complete automation solutions tailored to your needs.</p>
+      <h2 class="section-title centered">End-to-End Automation Solutions</h2>
+      <p class="section-subtitle">ตั้งแต่การออกแบบเริ่มต้นจนถึงการติดตั้งและหลังจากนั้น — เราส่งมอบโซลูชันอัตโนมัติครบวงจรที่ตรงกับความต้องการของคุณ</p>
       
       <div class="services-grid">
         <!-- PLC Programming -->
@@ -4572,7 +4064,7 @@
               <polyline points="8 6 2 12 8 18"/>
             </svg>
           </div>
-          <h3>PLC Programming</h3>
+          <h3>การเขียนโปรแกรม PLC</h3>
           <p>Expert PLC programming following Michelin standards — structured, maintainable, and scalable code for complex automation systems.</p>
           <div class="service-tags">
             <span class="tag">Rockwell</span>
@@ -4589,7 +4081,7 @@
               <polyline points="9 12 11 14 15 10"/>
             </svg>
           </div>
-          <h3>Safety Systems</h3>
+          <h3>ระบบความปลอดภัย</h3>
           <p>Comprehensive safety design including Performance Level assessment, Safety PLC programming, and machine risk assessment.</p>
           <div class="service-tags">
             <span class="tag">Safety PLC</span>
@@ -4614,7 +4106,7 @@
               <line x1="1" y1="14" x2="4" y2="14"/>
             </svg>
           </div>
-          <h3>Hardware Design</h3>
+          <h3>การออกแบบฮาร์ดแวร์</h3>
           <p>Complete hardware architecture design based on your functional requirements — from concept to detailed specifications.</p>
           <div class="service-tags">
             <span class="tag">Architecture</span>
@@ -4632,7 +4124,7 @@
               <line x1="12" y1="17" x2="12" y2="21"/>
             </svg>
           </div>
-          <h3>Control Panels</h3>
+          <h3>ตู้ควบคุม</h3>
           <p>Professional control panel fabrication and wiring — from design to assembly, meeting international standards.</p>
           <div class="service-tags">
             <span class="tag">Fabrication</span>
@@ -4648,7 +4140,7 @@
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <h3>Electrical Installation</h3>
+          <h3>การติดตั้งระบบไฟฟ้า</h3>
           <p>Complete electrical system installation for machinery and facilities — from cable routing to final commissioning.</p>
           <div class="service-tags">
             <span class="tag">Machine</span>
@@ -4727,7 +4219,7 @@
             <span class="level-dot"></span>
             <span class="level-dot"></span>
           </div>
-          <p class="tech-desc">กำลังพัฒนา</p>
+          <p class="tech-desc">Growing Expertise</p>
         </div>
         
         <!-- Web / AI -->
@@ -4785,7 +4277,7 @@
                 </svg>
               </div>
               <div>
-                <h4>Real-time Dashboards</h4>
+                <h4>แดชบอร์ดเรียลไทม์</h4>
                 <p>Production monitoring & business analytics</p>
               </div>
             </div>
@@ -4980,7 +4472,7 @@
                     <span class="dot-yellow"></span>
                     <span class="dot-green"></span>
                   </div>
-                  <span class="mockup-title">Inventory Management</span>
+                  <span class="mockup-title">การจัดการสินค้าคงคลัง</span>
                 </div>
                 <div class="mockup-inventory">
                   <div class="inventory-summary">
@@ -5424,7 +4916,7 @@
           </div>
           <div class="expertise-content">
             <span class="expertise-tag purple">INDUSTRIAL AUTOMATION</span>
-            <h3>PLC Programming</h3>
+            <h3>การเขียนโปรแกรม PLC</h3>
             <p>Expert PLC programming in all IEC 61131-3 languages: Ladder Diagram, Sequential Function Chart, Structured Text, and Function Block Diagram.</p>
             <div class="expertise-tags">
               <span class="tag">Ladder</span>
@@ -5495,7 +4987,7 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag cyan">โซลูชันดิจิทัล</span>
+            <span class="expertise-tag cyan">DIGITAL SOLUTIONS</span>
             <h3>Operations Management System</h3>
             <p>Full-featured web application for project management, inventory tracking, workflow automation, and real-time reporting dashboards.</p>
             <div class="expertise-tags">
@@ -5607,18 +5099,18 @@
               <label>Service Interest</label>
               <select name="service">
                 <option value="">เลือกบริการ...</option>
-                <option value="PLC Programming">PLC Programming</option>
-                <option value="Safety Systems">Safety Systems</option>
-                <option value="Hardware Design">Hardware Design</option>
-                <option value="Control Panels">Control Panels</option>
-                <option value="Electrical Installation">Electrical Installation</option>
-                <option value="Web Applications">Web Applications</option>
+                <option value="PLC Programming">การเขียนโปรแกรม PLC</option>
+                <option value="Safety Systems">ระบบความปลอดภัย</option>
+                <option value="Hardware Design">การออกแบบฮาร์ดแวร์</option>
+                <option value="Control Panels">ตู้ควบคุม</option>
+                <option value="Electrical Installation">การติดตั้งระบบไฟฟ้า</option>
+                <option value="Web Applications">เว็บแอปพลิเคชัน</option>
               </select>
             </div>
             
             <div class="form-group">
               <label>รายละเอียดโปรเจค</label>
-              <textarea name="message" placeholder="บอกเราเกี่ยวกับโปรเจคของคุณ..." required></textarea>
+              <textarea name="message" placeholder="Tell us about your project..." required></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg full-width" id="submitBtn">
@@ -5663,9 +5155,9 @@
         <div class="footer-links">
           <h4>Services</h4>
           <ul>
-            <li><a href="#services">PLC Programming</a></li>
-            <li><a href="#services">Safety Systems</a></li>
-            <li><a href="#services">Control Panels</a></li>
+            <li><a href="#services">การเขียนโปรแกรม PLC</a></li>
+            <li><a href="#services">ระบบความปลอดภัย</a></li>
+            <li><a href="#services">ตู้ควบคุม</a></li>
             <li><a href="#digital-solutions">Digital Solutions</a></li>
           </ul>
         </div>
@@ -5975,948 +5467,5 @@
       
     });
   </script>
-
-  <!-- ============================================
-       AI SALES CHATBOT WIDGET
-       ============================================ -->
-  
-  <!-- Chatbot Styles -->
-  <style>
-    /* ---------- Chatbot Variables ---------- */
-    .aic-chatbot {
-      --chat-primary: #ffffff;
-      --chat-secondary: #fff7ed;
-      --chat-accent: #f97316;
-      --chat-accent-glow: #fb923c;
-      --chat-purple: #7c3aed;
-      --chat-text: #1e293b;
-      --chat-muted: #64748b;
-      --chat-white: #ffffff;
-      --chat-gradient: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-    }
-
-    /* ---------- Chatbot Toggle Button ---------- */
-    .chatbot-toggle {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 8px 32px rgba(249, 115, 22, 0.5);
-      z-index: 9998;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      animation: chatPulse 1.5s ease-in-out infinite;
-    }
-
-    .chatbot-toggle:hover {
-      transform: scale(1.15);
-      box-shadow: 0 12px 40px rgba(249, 115, 22, 0.6);
-    }
-
-    .chatbot-toggle.active {
-      animation: none;
-    }
-
-    .chatbot-toggle svg {
-      width: 28px;
-      height: 28px;
-      color: var(--chat-white);
-      transition: transform 0.3s ease;
-    }
-
-    .chatbot-toggle.active svg.chat-icon {
-      display: none;
-    }
-
-    .chatbot-toggle svg.close-icon {
-      display: none;
-    }
-
-    .chatbot-toggle.active svg.close-icon {
-      display: block;
-    }
-
-    @keyframes chatPulse {
-      0%, 100% { box-shadow: 0 8px 32px rgba(249, 115, 22, 0.5); }
-      50% { box-shadow: 0 8px 48px rgba(236, 72, 153, 0.7); }
-    }
-
-    /* Notification Badge */
-    .chat-badge {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      width: 24px;
-      height: 24px;
-      background: #ef4444;
-      border-radius: 50%;
-      font-size: 12px;
-      font-weight: 700;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: badgePulse 1s ease-in-out infinite;
-      border: 2px solid white;
-    }
-
-    @keyframes badgePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    /* ---------- Chatbot Window ---------- */
-    .chatbot-window {
-      position: fixed;
-      bottom: 180px;
-      right: 30px;
-      width: 400px;
-      height: 550px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px) scale(0.95);
-      transition: all 0.3s ease;
-      border: 1px solid #e2e8f0;
-    }
-
-    .chatbot-window.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
-    /* ---------- Chat Header ---------- */
-    .chat-header {
-      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: none;
-    }
-
-    .chat-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: white;
-      font-size: 16px;
-      position: relative;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-    }
-
-    .chat-header-info {
-      flex: 1;
-    }
-
-    .chat-close-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .chat-close-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.1);
-    }
-
-    .chat-close-btn svg {
-      width: 20px;
-      height: 20px;
-      color: white;
-    }
-
-    .chat-avatar::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      width: 10px;
-      height: 10px;
-      background: #4ade80;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-    }
-
-    .chat-header-info h4 {
-      color: #ffffff;
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .chat-header-info span {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .chat-header-info span::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: #4ade80;
-      border-radius: 50%;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* ---------- Chat Messages ---------- */
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .chat-messages::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .chat-messages::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .chat-messages::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 3px;
-    }
-
-    .message {
-      display: flex;
-      gap: 10px;
-      max-width: 85%;
-      animation: messageIn 0.3s ease;
-    }
-
-    @keyframes messageIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .message.bot {
-      align-self: flex-start;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
-    }
-
-    .message-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .message.user .message-avatar {
-      background: #fef3c7;
-      color: #f97316;
-    }
-
-    .message-content {
-      background: #fff7ed;
-      padding: 12px 16px;
-      border-radius: 16px;
-      border-top-left-radius: 4px;
-      color: #1e293b;
-      font-size: 14px;
-      line-height: 1.6;
-      border: 1px solid #fed7aa;
-    }
-
-    .message.user .message-content {
-      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-      color: white;
-      border-radius: 16px;
-      border-top-right-radius: 4px;
-      border: none;
-    }
-
-    /* Typing Indicator */
-    .typing-indicator {
-      display: flex;
-      gap: 4px;
-      padding: 8px 0;
-    }
-
-    .typing-indicator span {
-      width: 8px;
-      height: 8px;
-      background: #f97316;
-      border-radius: 50%;
-      animation: typing 1.4s ease-in-out infinite;
-    }
-
-    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes typing {
-      0%, 100% { opacity: 0.4; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Quick Actions */
-    .quick-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .quick-action {
-      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-      border: none;
-      color: #ffffff;
-      padding: 10px 16px;
-      border-radius: 25px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
-    }
-
-    .quick-action:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-    }
-
-    /* ---------- Chat Input ---------- */
-    .chat-input-area {
-      padding: 16px 20px;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-    }
-
-    .chat-input-wrapper {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .chat-input {
-      flex: 1;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 12px 16px;
-      color: #1e293b;
-      font-size: 14px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .chat-input::placeholder {
-      color: #94a3b8;
-    }
-
-    .chat-input:focus {
-      border-color: #f97316;
-      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-    }
-
-    .chat-send {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .chat-send:hover {
-      transform: scale(1.05);
-    }
-
-    .chat-send:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .chat-send svg {
-      width: 20px;
-      height: 20px;
-      color: white;
-    }
-
-    /* Powered by */
-    .chat-powered {
-      text-align: center;
-      padding: 8px;
-      font-size: 11px;
-      color: #64748b;
-      background: #f1f5f9;
-    }
-
-    .chat-powered a {
-      color: #0066cc;
-    }
-
-    /* ---------- Mobile Responsive ---------- */
-    @media (max-width: 480px) {
-      /* Move scroll-top button to left side on mobile */
-      .scroll-top {
-        left: 16px;
-        right: auto;
-        bottom: 16px;
-        width: 44px;
-        height: 44px;
-      }
-      
-      .chatbot-window {
-        position: fixed;
-        width: calc(100% - 20px);
-        height: 70vh;
-        max-height: 500px;
-        bottom: 90px;
-        right: 10px;
-        left: 10px;
-        border-radius: 20px;
-        z-index: 10000;
-      }
-
-      .chatbot-toggle {
-        bottom: 16px;
-        right: 16px;
-        width: 56px;
-        height: 56px;
-      }
-
-      .chatbot-toggle svg {
-        width: 24px;
-        height: 24px;
-      }
-
-      .chat-header {
-        padding: 12px 16px;
-      }
-
-      .chat-avatar {
-        width: 40px;
-        height: 40px;
-        font-size: 14px;
-      }
-
-      .chat-header-info h4 {
-        font-size: 14px;
-      }
-
-      .chat-header-info span {
-        font-size: 11px;
-      }
-
-      .chat-close-btn {
-        width: 32px;
-        height: 32px;
-      }
-
-      .chat-close-btn svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      .chat-messages {
-        padding: 12px;
-        max-height: calc(70vh - 180px);
-      }
-
-      .message-content {
-        font-size: 13px;
-        padding: 10px 14px;
-      }
-
-      .quick-action {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-
-      .chat-input-area {
-        padding: 10px 12px;
-      }
-
-      .chat-input {
-        padding: 10px 14px;
-        font-size: 14px;
-      }
-
-      .chat-send {
-        width: 40px;
-        height: 40px;
-      }
-
-      .chat-powered {
-        font-size: 10px;
-        padding: 6px;
-      }
-    }
-  </style>
-
-  <!-- Chatbot HTML -->
-  <button class="chatbot-toggle" id="chatbotToggle" aria-label="Chat with AI">
-    <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-    </svg>
-    <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="18" y1="6" x2="6" y2="18"/>
-      <line x1="6" y1="6" x2="18" y2="18"/>
-    </svg>
-    <span class="chat-badge" id="chatBadge">1</span>
-  </button>
-
-  <div class="chatbot-window" id="chatbotWindow">
-    <div class="chat-header">
-      <div class="chat-avatar">AIC</div>
-      <div class="chat-header-info">
-        <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - พร้อมให้บริการ!</span>
-      </div>
-      <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-    </div>
-
-    <div class="chat-messages" id="chatMessages">
-      <!-- Messages will be inserted here -->
-    </div>
-
-    <div class="chat-input-area">
-      <div class="chat-input-wrapper">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." autocomplete="off">
-        <button class="chat-send" id="chatSend" aria-label="Send message">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="chat-powered">
-      💬 ตอบกลับภายใน 1 นาที | A.I.C. © 2026
-    </div>
-  </div>
-
-  <!-- Chatbot JavaScript -->
-  <script>
-    (function() {
-      // ============================================
-      // A.I.C. AI SALES CHATBOT
-      // ============================================
-
-      // Configuration - Using aic-inventory Vercel API
-      const CONFIG = {
-        // API endpoint from your existing Vercel app
-        apiEndpoint: 'https://aic-inventory.vercel.app/api/website-chat',
-        // Alternative: Use your custom domain if available
-        // apiEndpoint: 'https://your-domain.com/api/website-chat',
-      };
-
-      // Company context is now handled server-side in the API
-
-      // Elements
-      const toggle = document.getElementById('chatbotToggle');
-      const window_chat = document.getElementById('chatbotWindow');
-      const messages = document.getElementById('chatMessages');
-      const input = document.getElementById('chatInput');
-      const sendBtn = document.getElementById('chatSend');
-      const badge = document.getElementById('chatBadge');
-
-      // State
-      let isOpen = false;
-      let conversationHistory = [];
-      let isFirstOpen = true;
-
-      // Welcome message - Sales Proactive Style! 🔥
-      const welcomeMessage = {
-        th: `🎯 สวัสดีครับ! ยินดีต้อนรับสู่ A.I.C.
-
-ผมเห็นว่าคุณกำลังสนใจด้าน Industrial Automation 
-
-✨ วันนี้เรามีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่!
-
-มีโปรเจคอะไรในใจบ้างครับ? ผมช่วยประเมินราคาเบื้องต้นให้ได้เลย!`,
-        en: `🎯 Hello! Welcome to A.I.C.
-
-I noticed you're interested in Industrial Automation!
-
-✨ We have special offers for new clients today!
-
-What project do you have in mind? I can provide a quick estimate!`
-      };
-
-      const quickActions = [
-        { text: '🔧 PLC Programming', value: 'สนใจ PLC Programming อยากทราบราคาเบื้องต้น' },
-        { text: '🛡️ Safety Systems', value: 'ต้องการระบบ Safety อยากปรึกษา' },
-        { text: '💻 Web/Dashboard', value: 'อยากได้ Web App หรือ Dashboard' },
-        { text: '📋 ขอใบเสนอราคา', value: 'ขอใบเสนอราคาครับ' }
-      ];
-
-      // Toggle chatbot
-      toggle.addEventListener('click', () => {
-        isOpen = !isOpen;
-        toggle.classList.toggle('active', isOpen);
-        window_chat.classList.toggle('open', isOpen);
-        
-        if (isOpen && isFirstOpen) {
-          badge.style.display = 'none';
-          setTimeout(() => {
-            addBotMessage(welcomeMessage.th, quickActions);
-          }, 500);
-          isFirstOpen = false;
-        }
-
-        if (isOpen) {
-          input.focus();
-        }
-      });
-
-      // Add message to chat
-      function addMessage(content, isBot = false, actions = null) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
-        
-        const avatar = document.createElement('div');
-        avatar.className = 'message-avatar';
-        avatar.textContent = isBot ? 'AI' : 'You';
-
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'message-content';
-        contentDiv.innerHTML = content.replace(/\n/g, '<br>');
-
-        // Add quick actions if provided
-        if (actions && actions.length > 0) {
-          const actionsDiv = document.createElement('div');
-          actionsDiv.className = 'quick-actions';
-          
-          actions.forEach(action => {
-            const btn = document.createElement('button');
-            btn.className = 'quick-action';
-            btn.textContent = action.text;
-            btn.addEventListener('click', () => {
-              sendMessage(action.value);
-            });
-            actionsDiv.appendChild(btn);
-          });
-          
-          contentDiv.appendChild(actionsDiv);
-        }
-
-        messageDiv.appendChild(avatar);
-        messageDiv.appendChild(contentDiv);
-        messages.appendChild(messageDiv);
-        messages.scrollTop = messages.scrollHeight;
-      }
-
-      function addBotMessage(content, actions = null) {
-        addMessage(content, true, actions);
-      }
-
-      function addUserMessage(content) {
-        addMessage(content, false);
-      }
-
-      // Show typing indicator
-      function showTyping() {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'message bot';
-        typingDiv.id = 'typingIndicator';
-        typingDiv.innerHTML = `
-          <div class="message-avatar">AI</div>
-          <div class="message-content">
-            <div class="typing-indicator">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        `;
-        messages.appendChild(typingDiv);
-        messages.scrollTop = messages.scrollHeight;
-      }
-
-      function hideTyping() {
-        const typing = document.getElementById('typingIndicator');
-        if (typing) typing.remove();
-      }
-
-      // Send message to AI
-      async function sendMessage(text) {
-        if (!text.trim()) return;
-
-        // Add user message
-        addUserMessage(text);
-        input.value = '';
-        sendBtn.disabled = true;
-
-        // Add to history
-        conversationHistory.push({
-          role: 'user',
-          content: text
-        });
-
-        // Show typing
-        showTyping();
-
-        try {
-          const response = await callClaudeAPI(text);
-          hideTyping();
-          addBotMessage(response);
-          
-          // Add to history
-          conversationHistory.push({
-            role: 'assistant',
-            content: response
-          });
-
-        } catch (error) {
-          hideTyping();
-          console.error('Chat error:', error);
-          
-          // Fallback response
-          const fallbackResponse = `ขอโทษครับ ระบบขัดข้องชั่วคราว 🙏
-
-กรุณาติดต่อทีมของเราโดยตรง:
-📧 nukools@autoinnovate.com
-
-หรือกรอกแบบฟอร์มด้านล่างครับ`;
-          
-          addBotMessage(fallbackResponse);
-        }
-
-        sendBtn.disabled = false;
-      }
-
-      // Call Claude API via proxy
-      async function callClaudeAPI(userMessage) {
-        // Build messages array
-        const apiMessages = conversationHistory.map(msg => ({
-          role: msg.role,
-          content: msg.content
-        }));
-
-        // Call the proxy API endpoint
-        const response = await fetch(CONFIG.apiEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            messages: apiMessages
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('API request failed');
-        }
-
-        const data = await response.json();
-        
-        if (data.success && data.response) {
-          return data.response;
-        }
-        
-        throw new Error(data.error || 'Unknown error');
-      }
-
-      // Event listeners
-      sendBtn.addEventListener('click', () => {
-        sendMessage(input.value);
-      });
-
-      input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          sendMessage(input.value);
-        }
-      });
-
-      // Close button event listener
-      const closeBtn = document.getElementById('chatCloseBtn');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          isOpen = false;
-          toggle.classList.remove('active');
-          window_chat.classList.remove('open');
-        });
-      }
-
-      // 🚀 AUTO-OPEN CHATBOT - Sales Proactive Approach!
-      const isMobile = window.innerWidth <= 768;
-      
-      // ทั้ง Desktop และ Mobile: แสดง greeting bubble ก่อน
-      setTimeout(() => {
-        showGreetingBubble(isMobile);
-      }, 2000);
-
-      // 📱 Greeting Bubble (ใช้ได้ทั้ง Desktop และ Mobile)
-      function showGreetingBubble(isMobileDevice) {
-        // สร้าง greeting bubble
-        const bubble = document.createElement('div');
-        bubble.id = 'greetingBubble';
-        bubble.innerHTML = `
-          <div class="greeting-content">
-            <span class="greeting-close">&times;</span>
-            <p>👋 สวัสดีครับ! มีอะไรให้ช่วยไหมครับ?</p>
-            <span class="greeting-tap">${isMobileDevice ? 'แตะ' : 'คลิก'}เพื่อคุยกับ AI Sales</span>
-          </div>
-        `;
-        
-        // ปรับ position ตามขนาดหน้าจอ
-        const bottomPos = isMobileDevice ? '85px' : '185px';
-        const rightPos = isMobileDevice ? '16px' : '30px';
-        const maxWidth = isMobileDevice ? '220px' : '260px';
-        
-        bubble.style.cssText = `
-          position: fixed;
-          bottom: ${bottomPos};
-          right: ${rightPos};
-          background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-          color: white;
-          padding: 0;
-          border-radius: 16px;
-          box-shadow: 0 8px 32px rgba(249, 115, 22, 0.4);
-          z-index: 9997;
-          max-width: ${maxWidth};
-          animation: bubbleSlideIn 0.5s ease-out;
-          cursor: pointer;
-        `;
-        
-        // Add styles for content
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes bubbleSlideIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-          }
-          @keyframes bubbleSlideOut {
-            from { opacity: 1; transform: translateY(0) scale(1); }
-            to { opacity: 0; transform: translateY(20px) scale(0.9); }
-          }
-          #greetingBubble .greeting-content {
-            padding: 14px 16px;
-            position: relative;
-          }
-          #greetingBubble .greeting-close {
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-          }
-          #greetingBubble .greeting-close:hover {
-            opacity: 1;
-          }
-          #greetingBubble p {
-            margin: 0 0 6px 0;
-            font-size: ${isMobileDevice ? '14px' : '15px'};
-            font-weight: 500;
-            padding-right: 16px;
-          }
-          #greetingBubble .greeting-tap {
-            font-size: ${isMobileDevice ? '11px' : '12px'};
-            opacity: 0.85;
-          }
-          #greetingBubble::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            right: 28px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #ec4899;
-          }
-          #greetingBubble:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 40px rgba(249, 115, 22, 0.5);
-          }
-        `;
-        document.head.appendChild(style);
-        document.body.appendChild(bubble);
-
-        // Click bubble to open chat
-        bubble.addEventListener('click', (e) => {
-          if (!e.target.classList.contains('greeting-close')) {
-            bubble.style.animation = 'bubbleSlideOut 0.3s ease-out forwards';
-            setTimeout(() => {
-              bubble.remove();
-              toggle.click();
-            }, 300);
-          }
-        });
-
-        // Close button
-        bubble.querySelector('.greeting-close').addEventListener('click', (e) => {
-          e.stopPropagation();
-          bubble.style.animation = 'bubbleSlideOut 0.3s ease-out forwards';
-          setTimeout(() => bubble.remove(), 300);
-        });
-
-        // Auto hide after 10 seconds (longer for desktop)
-        setTimeout(() => {
-          if (document.getElementById('greetingBubble')) {
-            bubble.style.animation = 'bubbleSlideOut 0.3s ease-out forwards';
-            setTimeout(() => bubble.remove(), 300);
-          }
-        }, 10000);
-      }
-
-    })();
-  </script>
-
 </body>
 </html>
