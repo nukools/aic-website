@@ -691,24 +691,38 @@
         display: none;
       }
 
+      /* Hide logo tagline on mobile */
+      .logo-tagline {
+        display: none;
+      }
+      
+      .logo-divider {
+        display: none;
+      }
+
+      /* Nav container - push items to edges */
+      .nav-container {
+        justify-content: space-between;
+      }
+
       /* Hide nav-right button, keep dropdown visible */
       .nav-right .btn {
         display: none;
       }
       
+      /* Group lang-dropdown and hamburger together on the right */
       .nav-right {
         display: flex;
         align-items: center;
         gap: 8px;
-        order: 2;
+        margin-left: auto;
       }
       
-      /* Hamburger button - next to lang dropdown */
+      /* Hamburger button */
       .mobile-menu-btn {
         display: flex;
         align-items: center;
         z-index: 99999;
-        order: 3;
       }
       
       .lang-dropdown {
@@ -720,12 +734,6 @@
         width: 40px;
         height: 32px;
         padding: 6px;
-      }
-      
-      /* Container layout for mobile */
-      .nav-container {
-        flex-wrap: nowrap;
-        padding-right: 10px;
       }
     }
 
