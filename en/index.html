@@ -196,6 +196,8 @@
     }
 
     .logo {
+      min-width: 340px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -207,6 +209,7 @@
     }
 
     .logo-text {
+      min-width: 90px;
       font-size: 2rem;
       font-weight: 800;
       display: inline-flex;
@@ -474,7 +477,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 9999;
+      z-index: 99999;
     }
 
     .mobile-menu-btn span {
@@ -540,7 +543,7 @@
       transform: translateY(-10px);
       transition: all 0.2s ease;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
+      z-index: 99999;
     }
 
     .lang-dropdown:hover .lang-dropdown-menu {
@@ -690,7 +693,7 @@
 
       /* Hamburger button z-index */
       .mobile-menu-btn {
-        z-index: 9999;
+        z-index: 99999;
       }
     }
 
@@ -3614,6 +3617,7 @@
     }
     
     .footer-brand .logo-text {
+      min-width: 90px;
       font-size: 2.5rem;
     }
     
@@ -3814,7 +3818,6 @@
         justify-content: space-between;
       }
       
-      .nav-menu,
       .navbar .btn {
         display: none;
       }
@@ -6145,7 +6148,7 @@
       background: #ffffff;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
+      z-index: 99999;
       display: flex;
       flex-direction: column;
       overflow: hidden;
