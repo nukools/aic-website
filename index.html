@@ -601,35 +601,6 @@
       border-radius: 2px;
     }
 
-    @media (max-width: 768px) {
-      .lang-dropdown {
-        position: absolute;
-        top: 50%;
-        right: 60px;
-        transform: translateY(-50%);
-        z-index: 1002;
-      }
-      
-      .lang-dropdown-btn {
-        width: 36px;
-        height: 28px;
-        padding: 4px;
-      }
-      
-      .lang-dropdown-btn .lang-flag {
-        width: 20px;
-        height: 14px;
-      }
-      
-      /* แสดงชื่อบริษัทบนมือถือ แต่ย่อขนาด */
-      .logo-tagline {
-        font-size: 0.55rem;
-      }
-      
-      .logo-divider {
-        margin: 0 6px;
-      }
-    }
 
     /* Mobile Menu Fullscreen */
     @media (max-width: 768px) {
@@ -691,34 +662,52 @@
         display: none;
       }
 
-      /* Hide nav-right button, keep dropdown visible */
+      /* Hide only the CTA button on mobile */
       .nav-right .btn {
         display: none;
       }
       
-      /* Hamburger button */
+      /* Nav container */
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      
+      /* Logo - stay left */
+      .logo {
+        flex: 0 1 auto;
+        min-width: auto;
+      }
+      
+      /* Push nav-right to the right, hamburger inside */
+      .nav-right {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        gap: 4px;
+      }
+      
+      /* Hamburger button - now inside nav-right */
       .mobile-menu-btn {
         display: flex;
         align-items: center;
         z-index: 99999;
-        flex-shrink: 0;
       }
       
+      /* Lang dropdown styling */
       .lang-dropdown {
         display: flex;
         align-items: center;
-        flex-shrink: 0;
       }
       
       .lang-dropdown-btn {
         width: 40px;
         height: 32px;
         padding: 6px;
-      }
-      
-      /* Logo text smaller on mobile */
-      .logo-tagline {
-        font-size: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -3837,11 +3826,6 @@
         height: 46px;
       }
       
-      .nav-container {
-        display: flex;
-        justify-content: space-between;
-      }
-      
       .navbar .btn {
         display: none;
       }
@@ -4336,14 +4320,14 @@
         </div>
         
         <a href="#contact" class="btn btn-primary">ขอใบเสนอราคา</a>
+        
+        <!-- Mobile Menu Button - ย้ายมาอยู่ใน nav-right -->
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
-      
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </nav>
 
