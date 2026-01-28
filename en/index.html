@@ -691,15 +691,7 @@
         display: none;
       }
 
-      /* Hamburger button */
-      .mobile-menu-btn {
-        display: flex;
-        align-items: center;
-        z-index: 99999;
-        padding: 8px;
-      }
-      
-      /* Hide only the button on mobile, keep lang-dropdown */
+      /* Hide nav-right button, keep dropdown visible */
       .nav-right .btn {
         display: none;
       }
@@ -707,22 +699,33 @@
       .nav-right {
         display: flex;
         align-items: center;
-        position: static;
-        margin: 0;
-        padding: 0;
-        gap: 10px;
+        gap: 8px;
+        order: 2;
+      }
+      
+      /* Hamburger button - next to lang dropdown */
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        z-index: 99999;
+        order: 3;
       }
       
       .lang-dropdown {
-        position: static;
         display: flex;
         align-items: center;
       }
       
       .lang-dropdown-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 40px;
+        height: 32px;
+        padding: 6px;
+      }
+      
+      /* Container layout for mobile */
+      .nav-container {
+        flex-wrap: nowrap;
+        padding-right: 10px;
       }
     }
 
