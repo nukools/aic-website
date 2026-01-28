@@ -697,9 +697,16 @@
         z-index: 99999;
       }
       
-      /* Hide nav-right on mobile */
-      .nav-right {
+      /* Hide only the button on mobile, keep lang-dropdown */
+      .nav-right .btn {
         display: none;
+      }
+      
+      .nav-right {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
 
