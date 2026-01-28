@@ -696,6 +696,10 @@
       .mobile-menu-btn {
         display: flex;
         z-index: 99999;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
       }
       
       /* Hide only the button on mobile, keep lang-dropdown */
@@ -705,11 +709,16 @@
       
       .nav-right {
         position: absolute;
-        right: 50px;
+        right: 55px;
         top: 50%;
         transform: translateY(-50%);
         margin: 0;
         padding: 0;
+        gap: 0;
+      }
+      
+      .lang-dropdown {
+        position: static;
       }
     }
 
