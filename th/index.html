@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,8 +81,9 @@
     }
 
     html {
-      scroll-behavior: smooth;
       overflow-x: hidden;
+      position: relative;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -196,12 +197,12 @@
     }
 
     .logo {
-      min-width: 340px;
-      flex-shrink: 0;
       display: flex;
       align-items: center;
       gap: 12px;
       transition: filter 0.3s ease;
+      min-width: 340px;
+      flex-shrink: 0;
     }
     
     .logo:hover {
@@ -209,11 +210,11 @@
     }
 
     .logo-text {
-      min-width: 90px;
       font-size: 2rem;
       font-weight: 800;
       display: inline-flex;
       perspective: 500px;
+      min-width: 90px;
     }
     
     .logo-text .letter {
@@ -599,7 +600,6 @@
       height: 18px;
       border-radius: 2px;
     }
-
 
 
     /* Mobile Menu Fullscreen */
@@ -3631,7 +3631,6 @@
     }
     
     .footer-brand .logo-text {
-      min-width: 90px;
       font-size: 2.5rem;
     }
     
@@ -4272,12 +4271,12 @@
       </a>
       
       <ul class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#technology">Technology</a></li>
+        <li><a href="#about">เกี่ยวกับเรา</a></li>
+        <li><a href="#services">บริการ</a></li>
+        <li><a href="#technology">เทคโนโลยี</a></li>
         <li><a href="#digital">Digital Solutions</a></li>
-        <li><a href="#expertise">Expertise</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#expertise">ความเชี่ยวชาญ</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
       </ul>
       
       <div class="nav-right">
@@ -4285,13 +4284,13 @@
         <div class="lang-dropdown">
           <button class="lang-dropdown-btn">
             <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
-              <path fill="#bf0a30" d="M0 0h640v480H0z"/>
-              <path fill="#fff" d="M0 37h640v37H0zm0 74h640v37H0zm0 74h640v37H0zm0 74h640v37H0zm0 74h640v37H0zm0 74h640v37H0z"/>
-              <path fill="#002868" d="M0 0h260v260H0z"/>
+              <path fill="#f4f5f8" d="M0 0h640v480H0z"/>
+              <path fill="#2d2a4a" d="M0 160h640v160H0z"/>
+              <path fill="#a51931" d="M0 0h640v80H0zM0 400h640v80H0z"/>
             </svg>
           </button>
           <div class="lang-dropdown-menu">
-            <a href="../th/" class="lang-option">
+            <a href="./" class="lang-option active">
               <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
                 <path fill="#f4f5f8" d="M0 0h640v480H0z"/>
                 <path fill="#2d2a4a" d="M0 160h640v160H0z"/>
@@ -4300,7 +4299,7 @@
               <span class="lang-name">ภาษาไทย</span>
               <span class="check">✓</span>
             </a>
-            <a href="./" class="lang-option active">
+            <a href="../en/" class="lang-option">
               <svg class="lang-flag" viewBox="0 0 640 480" width="24" height="18">
                 <path fill="#bf0a30" d="M0 0h640v480H0z"/>
                 <path fill="#fff" d="M0 37h640v37H0zm0 74h640v37H0zm0 74h640v37H0zm0 74h640v37H0zm0 74h640v37H0zm0 74h640v37H0z"/>
@@ -4320,7 +4319,7 @@
           </div>
         </div>
         
-        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+        <a href="#contact" class="btn btn-primary">ขอใบเสนอราคา</a>
         
         <!-- Mobile Menu Button - ย้ายมาอยู่ใน nav-right -->
         <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -4344,48 +4343,48 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          Automation Excellence Since 2014
+          ผู้นำด้าน Automation ตั้งแต่ปี 2014
         </div>
         
         <h1 class="hero-title">
-          Pioneering the<br>
-          Future of <span class="gradient-text">Intelligent</span><br>
-          <span class="gradient-text">Manufacturing</span>
+          บุกเบิกอนาคต<br>
+          แห่ง <span class="gradient-text">การผลิต</span><br>
+          <span class="gradient-text">อัจฉริยะ</span>
         </h1>
         
         <p class="hero-description">
-          From industrial automation to AI-powered solutions — 
-          we engineer systems that drive efficiency, ensure safety, 
-          and transform factories across Asia.
+          จากระบบ Industrial Automation สู่โซลูชัน AI — 
+          เราออกแบบระบบที่เพิ่มประสิทธิภาพ รับรองความปลอดภัย 
+          และเปลี่ยนโฉมโรงงานทั่วเอเชีย
         </p>
         
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary btn-lg">
-            Start Your Project
+            เริ่มโปรเจคของคุณ
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
+          <a href="#services" class="btn btn-outline btn-lg">ดูบริการทั้งหมด</a>
         </div>
       </div>
       
       <div class="hero-stats">
         <div class="stat-card">
           <span class="stat-number">11+</span>
-          <span class="stat-label">Years Experience</span>
+          <span class="stat-label">ปีประสบการณ์</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">100+</span>
-          <span class="stat-label">Projects Delivered</span>
+          <span class="stat-label">โปรเจคที่ส่งมอบ</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">3</span>
-          <span class="stat-label">Countries Served</span>
+          <span class="stat-label">ประเทศที่ให้บริการ</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">11</span>
-          <span class="stat-label">Expert Engineers</span>
+          <span class="stat-label">วิศวกรผู้เชี่ยวชาญ</span>
         </div>
       </div>
     </div>
@@ -4394,7 +4393,7 @@
   <!-- Clients Bar -->
   <section class="clients-bar">
     <div class="container">
-      <p class="clients-label">TRUSTED BY INDUSTRY LEADERS</p>
+      <p class="clients-label">ได้รับความไว้วางใจจากบริษัทชั้นนำ</p>
       <div class="clients-logos">
         <span class="client-logo">MICHELIN</span>
         <span class="client-logo">AkzoNobel</span>
@@ -4410,22 +4409,21 @@
         <div class="about-content">
           <div class="section-label">
             <span class="label-line"></span>
-            <span>About</span>
+            <span>เกี่ยวกับเรา</span>
             <span class="label-line"></span>
           </div>
           
-          <h2 class="section-title">Engineering Excellence Since 2014</h2>
+          <h2 class="section-title">ความเป็นเลิศด้านวิศวกรรมตั้งแต่ปี 2014</h2>
           
           <p class="about-text">
-            Auto Innovate Construction (A.I.C.) is a leading industrial automation company 
-            specializing in PLC programming, safety system design, and complete automation 
-            solutions.
+            Auto Innovate Construction (A.I.C.) เป็นบริษัทผู้นำด้านระบบอัตโนมัติอุตสาหกรรม 
+            เชี่ยวชาญในการเขียนโปรแกรม PLC ออกแบบระบบความปลอดภัย และโซลูชันระบบอัตโนมัติครบวงจร
           </p>
           
           <p class="about-text">
-            As a former Rockwell Automation System Integrator, we bring world-class expertise 
-            to every project. Our team has delivered hundreds of successful automation 
-            projects across Thailand, Indonesia, and India.
+            ในฐานะอดีต Rockwell Automation System Integrator เรานำความเชี่ยวชาญระดับโลก
+            มาสู่ทุกโปรเจค ทีมงานของเราได้ส่งมอบโปรเจคระบบอัตโนมัติที่ประสบความสำเร็จหลายร้อยโปรเจค
+            ทั่วประเทศไทย อินโดนีเซีย และอินเดีย
           </p>
           
           <div class="about-features">
@@ -4437,8 +4435,8 @@
                 </svg>
               </div>
               <div class="feature-content">
-                <h4>Michelin Standard</h4>
-                <p>Programs built to global manufacturing standards</p>
+                <h4>มาตรฐาน Michelin</h4>
+                <p>โปรแกรมที่สร้างตามมาตรฐานการผลิตระดับโลก</p>
               </div>
             </div>
             
@@ -4450,8 +4448,8 @@
                 </svg>
               </div>
               <div class="feature-content">
-                <h4>Safety Certified</h4>
-                <p>Rockwell-trained Safety PLC specialists</p>
+                <h4>ได้รับการรับรองความปลอดภัย</h4>
+                <p>ผู้เชี่ยวชาญ Safety PLC ที่ผ่านการอบรมจาก Rockwell</p>
               </div>
             </div>
             
@@ -4464,8 +4462,8 @@
                 </svg>
               </div>
               <div class="feature-content">
-                <h4>International Reach</h4>
-                <p>Projects across Thailand, Indonesia & India</p>
+                <h4>ครอบคลุมระดับสากล</h4>
+                <p>โปรเจคทั่วประเทศไทย อินโดนีเซีย และอินเดีย</p>
               </div>
             </div>
           </div>
@@ -4475,52 +4473,52 @@
           <div class="image-slider">
             <div class="slider-container">
               <div class="slide active">
-                <img src="../images/project-1.jpg" alt="Industrial Control Panel">
+                <img src="images/project-1.jpg" alt="Industrial Control Panel">
               </div>
               <div class="slide">
-                <img src="../images/project-2.jpg" alt="A.I.C. Engineer working">
+                <img src="images/project-2.jpg" alt="A.I.C. Engineer working">
               </div>
               <div class="slide">
-                <img src="../images/project-3.jpg" alt="Control panel maintenance">
+                <img src="images/project-3.jpg" alt="Control panel maintenance">
               </div>
               <div class="slide">
-                <img src="../images/project-4.jpg" alt="Safety system work">
+                <img src="images/project-4.jpg" alt="Safety system work">
               </div>
               <div class="slide">
-                <img src="../images/project-5.jpg" alt="A.I.C. Engineer on site">
+                <img src="images/project-5.jpg" alt="A.I.C. Engineer on site">
               </div>
               <div class="slide">
-                <img src="../images/project-6.jpg" alt="Industrial machinery">
+                <img src="images/project-6.jpg" alt="Industrial machinery">
               </div>
               <div class="slide">
-                <img src="../images/project-7.jpg" alt="Project work">
+                <img src="images/project-7.jpg" alt="Project work">
               </div>
               <div class="slide">
-                <img src="../images/project-8.jpg" alt="Automation project">
+                <img src="images/project-8.jpg" alt="Automation project">
               </div>
               <div class="slide">
-                <img src="../images/project-9.jpg" alt="Engineering work">
+                <img src="images/project-9.jpg" alt="Engineering work">
               </div>
               <div class="slide">
-                <img src="../images/project-10.jpg" alt="Industrial project">
+                <img src="images/project-10.jpg" alt="Industrial project">
               </div>
               <div class="slide">
-                <img src="../images/project-11.jpg" alt="A.I.C. Project">
+                <img src="images/project-11.jpg" alt="A.I.C. Project">
               </div>
               <div class="slide">
-                <img src="../images/AIC_Outing_2026_photo_1.jpg" alt="A.I.C. Outing 2026 - Team Meeting">
+                <img src="images/AIC_Outing_2026_photo_1.jpg" alt="A.I.C. Outing 2026 - Team Meeting">
               </div>
               <div class="slide">
-                <img src="../images/AIC_Outing_2026_photo_2.jpg" alt="A.I.C. Outing 2026 - Team Collaboration">
+                <img src="images/AIC_Outing_2026_photo_2.jpg" alt="A.I.C. Outing 2026 - Team Collaboration">
               </div>
               <div class="slide">
-                <img src="../images/AIC_Outing_2026_photo_3.jpg" alt="A.I.C. Outing 2026 - Team Photo">
+                <img src="images/AIC_Outing_2026_photo_3.jpg" alt="A.I.C. Outing 2026 - Team Photo">
               </div>
               <div class="slide">
-                <img src="../images/plc.png" alt="PLC Programming" class="full-image">
+                <img src="images/plc.png" alt="PLC Programming" class="full-image">
               </div>
               <div class="slide">
-                <img src="../images/hmi.png" alt="HMI Design" class="full-image">
+                <img src="images/hmi.png" alt="HMI Design" class="full-image">
               </div>
             </div>
             
@@ -4557,7 +4555,7 @@
           
           <div class="projects-badge">
             <span class="badge-number">100+</span>
-            <span class="badge-text">Projects Completed</span>
+            <span class="badge-text">โปรเจคที่เสร็จสิ้น</span>
           </div>
         </div>
       </div>
@@ -4569,12 +4567,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>OUR VISION</span>
+        <span>วิสัยทัศน์ของเรา</span>
         <span class="label-line"></span>
       </div>
       
       <div class="vision-quote">
-        <p><span class="quote-mark">"</span>Pioneering the Future of Intelligent Manufacturing — bridging proven industrial automation expertise with next-generation AI and digital technologies.</p>
+        <p><span class="quote-mark">"</span>บุกเบิกอนาคตแห่งการผลิตอัจฉริยะ — เชื่อมโยง ความเชี่ยวชาญด้านระบบอัตโนมัติอุตสาหกรรมที่พิสูจน์แล้ว กับ เทคโนโลยี AI และดิจิทัลรุ่นใหม่</p>
       </div>
       
       <div class="vision-values">
@@ -4585,8 +4583,8 @@
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
           </div>
-          <h4>Excellence</h4>
-          <p>Michelin-grade standards</p>
+          <h4>ความเป็นเลิศ</h4>
+          <p>มาตรฐานระดับ Michelin</p>
         </div>
         
         <div class="value-item">
@@ -4596,8 +4594,8 @@
               <polyline points="9 12 11 14 15 10"/>
             </svg>
           </div>
-          <h4>Safety First</h4>
-          <p>Zero compromise on safety</p>
+          <h4>ความปลอดภัยต้องมาก่อน</h4>
+          <p>ไม่ยอมประนีประนอมเรื่องความปลอดภัย</p>
         </div>
         
         <div class="value-item">
@@ -4609,8 +4607,8 @@
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <h4>Partnership</h4>
-          <p>Growing with our clients</p>
+          <h4>ความร่วมมือ</h4>
+          <p>เติบโตไปพร้อมกับลูกค้า</p>
         </div>
         
         <div class="value-item">
@@ -4619,8 +4617,8 @@
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <h4>Innovation</h4>
-          <p>Embracing AI & digital tech</p>
+          <h4>นวัตกรรม</h4>
+          <p>เปิดรับเทคโนโลยี AI และดิจิทัล</p>
         </div>
       </div>
     </div>
@@ -4631,12 +4629,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>OUR SERVICES</span>
+        <span>บริการของเรา</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">End-to-End Automation Solutions</h2>
-      <p class="section-subtitle">From initial design to commissioning and beyond — we deliver complete automation solutions.tailored to your needs.</p>
+      <h2 class="section-title centered">โซลูชัน Automation ครบวงจร</h2>
+      <p class="section-subtitle">ตั้งแต่การออกแบบเริ่มต้นจนถึงการติดตั้งและหลังจากนั้น — เราส่งมอบโซลูชัน อัตโนมัติครบวงจรที่ตอบโจทย์ความต้องการของคุณ</p>
       
       <div class="services-grid">
         <!-- PLC Programming -->
@@ -4647,8 +4645,8 @@
               <polyline points="8 6 2 12 8 18"/>
             </svg>
           </div>
-          <h3>PLC Programming</h3>
-          <p>Expert PLC programming following Michelin standards — structured, maintainable, and scalable code for complex automation systems.</p>
+          <h3>การเขียนโปรแกรม PLC</h3>
+          <p>การเขียนโปรแกรม PLC ตามมาตรฐาน Michelin — โค้ดที่มีโครงสร้าง ดูแลรักษาง่าย และขยายได้สำหรับระบบอัตโนมัติที่ซับซ้อน</p>
           <div class="service-tags">
             <span class="tag">Rockwell</span>
             <span class="tag">Nidec</span>
@@ -4664,12 +4662,12 @@
               <polyline points="9 12 11 14 15 10"/>
             </svg>
           </div>
-          <h3>Safety Systems</h3>
-          <p>Comprehensive safety design including Performance Level assessment, Safety PLC programming, and machine risk assessment.</p>
+          <h3>ระบบความปลอดภัย</h3>
+          <p>การออกแบบระบบความปลอดภัยครบวงจร รวมถึงการประเมิน Performance Level การเขียนโปรแกรม Safety PLC และการประเมินความเสี่ยงของเครื่องจักร</p>
           <div class="service-tags">
             <span class="tag">Safety PLC</span>
-            <span class="tag">Risk Assessment</span>
-            <span class="tag">PL Rating</span>
+            <span class="tag">การประเมินความเสี่ยง</span>
+            <span class="tag">ระดับ PL</span>
           </div>
         </div>
         
@@ -4689,12 +4687,12 @@
               <line x1="1" y1="14" x2="4" y2="14"/>
             </svg>
           </div>
-          <h3>Hardware Design</h3>
-          <p>Complete hardware architecture design based on your functional requirements — from concept to detailed specifications.</p>
+          <h3>การออกแบบฮาร์ดแวร์</h3>
+          <p>การออกแบบสถาปัตยกรรมฮาร์ดแวร์ครบวงจรตามความต้องการด้านฟังก์ชัน — ตั้งแต่แนวคิดจนถึงข้อกำหนดโดยละเอียด</p>
           <div class="service-tags">
-            <span class="tag">Architecture</span>
-            <span class="tag">I/O Design</span>
-            <span class="tag">Network</span>
+            <span class="tag">สถาปัตยกรรม</span>
+            <span class="tag">ออกแบบ I/O</span>
+            <span class="tag">เครือข่าย</span>
           </div>
         </div>
         
@@ -4707,12 +4705,12 @@
               <line x1="12" y1="17" x2="12" y2="21"/>
             </svg>
           </div>
-          <h3>Control Panels</h3>
-          <p>Professional control panel fabrication and wiring — from design to assembly, meeting international standards.</p>
+          <h3>ตู้ควบคุม</h3>
+          <p>การผลิตและเดินสายตู้ควบคุมแบบมืออาชีพ — ตั้งแต่การออกแบบจนถึงการประกอบ ตามมาตรฐานสากล</p>
           <div class="service-tags">
-            <span class="tag">Fabrication</span>
-            <span class="tag">Wiring</span>
-            <span class="tag">Testing</span>
+            <span class="tag">การผลิต</span>
+            <span class="tag">การเดินสาย</span>
+            <span class="tag">การทดสอบ</span>
           </div>
         </div>
         
@@ -4723,12 +4721,12 @@
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <h3>Electrical Installation</h3>
-          <p>Complete electrical system installation for machinery and facilities — from cable routing to final commissioning.</p>
+          <h3>การติดตั้งระบบไฟฟ้า</h3>
+          <p>การติดตั้งระบบไฟฟ้าครบวงจรสำหรับเครื่องจักรและโรงงาน — ตั้งแต่การเดินสายจนถึงการ Commissioning ขั้นสุดท้าย</p>
           <div class="service-tags">
-            <span class="tag">Machine</span>
-            <span class="tag">Factory</span>
-            <span class="tag">Commissioning</span>
+            <span class="tag">เครื่องจักร</span>
+            <span class="tag">โรงงาน</span>
+            <span class="tag">การ Commissioning</span>
           </div>
         </div>
         
@@ -4741,12 +4739,12 @@
               <line x1="9" y1="21" x2="9" y2="9"/>
             </svg>
           </div>
-          <h3>Web Applications & Dashboards</h3>
-          <p>Custom web applications, real-time monitoring dashboards, and operations management systems — tailored to your business needs.</p>
+          <h3>เว็บแอปพลิเคชันและแดชบอร์ด</h3>
+          <p>เว็บแอปพลิเคชันแบบกำหนดเอง แดชบอร์ดตรวจสอบแบบเรียลไทม์ และระบบจัดการการดำเนินงาน — ออกแบบตามความต้องการทางธุรกิจของคุณ</p>
           <div class="service-tags">
-            <span class="tag">Web App</span>
-            <span class="tag">Dashboard</span>
-            <span class="tag">Analytics</span>
+            <span class="tag">เว็บแอป</span>
+            <span class="tag">แดชบอร์ด</span>
+            <span class="tag">การวิเคราะห์</span>
           </div>
         </div>
       </div>
@@ -4758,12 +4756,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>Technology</span>
+        <span>เทคโนโลยี</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">Multi-Platform Expertise</h2>
-      <p class="section-subtitle">We work with leading automation platforms to deliver the best solution for your needs.</p>
+      <h2 class="section-title centered">ความเชี่ยวชาญหลายแพลตฟอร์ม</h2>
+      <p class="section-subtitle">เราทำงานร่วมกับแพลตฟอร์มอัตโนมัติชั้นนำเพื่อส่งมอบโซลูชันที่ดีที่สุดสำหรับความต้องการของคุณ</p>
       
       <div class="tech-grid">
         <!-- Rockwell -->
@@ -4776,7 +4774,7 @@
             <span class="level-dot filled"></span>
             <span class="level-dot filled"></span>
           </div>
-          <p class="tech-desc">Expert Level — Former System Integrator</p>
+          <p class="tech-desc">ระดับผู้เชี่ยวชาญ — อดีต System Integrator</p>
         </div>
         
         <!-- Nidec -->
@@ -4789,7 +4787,7 @@
             <span class="level-dot filled"></span>
             <span class="level-dot filled"></span>
           </div>
-          <p class="tech-desc">Expert Level — Specialized Partner</p>
+          <p class="tech-desc">ระดับผู้เชี่ยวชาญ — พันธมิตรเฉพาะทาง</p>
         </div>
         
         <!-- Siemens -->
@@ -4802,7 +4800,7 @@
             <span class="level-dot"></span>
             <span class="level-dot"></span>
           </div>
-          <p class="tech-desc">Growing Expertise</p>
+          <p class="tech-desc">กำลังพัฒนา</p>
         </div>
         
         <!-- Web / AI -->
@@ -4815,7 +4813,7 @@
             <span class="level-dot filled"></span>
             <span class="level-dot"></span>
           </div>
-          <p class="tech-desc">Digital Transformation</p>
+          <p class="tech-desc">การเปลี่ยนแปลงสู่ดิจิทัล</p>
         </div>
       </div>
     </div>
@@ -4828,13 +4826,13 @@
         <div class="digital-content">
           <div class="section-label">
             <span class="label-line"></span>
-            <span>Digital Transformation</span>
+            <span>การเปลี่ยนแปลงสู่ดิจิทัล</span>
             <span class="label-line"></span>
           </div>
           
-          <h2 class="section-title">Custom Web Applications<br><span class="gradient-text">&</span> Smart Dashboards</h2>
+          <h2 class="section-title">เว็บแอปพลิเคชันที่ปรับแต่งได้<br><span class="gradient-text">&</span> แดชบอร์ดอัจฉริยะ</h2>
           
-          <p class="digital-desc">Beyond industrial automation, we develop powerful web-based solutions that streamline your operations and provide real-time visibility into your business.</p>
+          <p class="digital-desc">นอกเหนือจากระบบอัตโนมัติอุตสาหกรรม เราพัฒนาโซลูชันเว็บที่ทรงพลัง ที่ช่วยปรับปรุงการดำเนินงานและให้การมองเห็นแบบเรียลไทม์ เข้าสู่ธุรกิจของคุณ</p>
           
           <div class="digital-features">
             <div class="digital-feature">
@@ -4846,8 +4844,8 @@
                 </svg>
               </div>
               <div>
-                <h4>Operations Management</h4>
-                <p>Project tracking, inventory, workflow automation</p>
+                <h4>การจัดการปฏิบัติการ</h4>
+                <p>การติดตามโปรเจค สินค้าคงคลัง ระบบอัตโนมัติเวิร์กโฟลว์</p>
               </div>
             </div>
             
@@ -4860,8 +4858,8 @@
                 </svg>
               </div>
               <div>
-                <h4>Real-time Dashboards</h4>
-                <p>Production monitoring & business analytics</p>
+                <h4>แดชบอร์ดเรียลไทม์</h4>
+                <p>การตรวจสอบการผลิต และ การวิเคราะห์ธุรกิจ</p>
               </div>
             </div>
             
@@ -4875,8 +4873,8 @@
                 </svg>
               </div>
               <div>
-                <h4>System Integration</h4>
-                <p>Connect PLC data to web dashboards</p>
+                <h4>การเชื่อมต่อระบบ</h4>
+                <p>เชื่อมต่อข้อมูล PLC กับแดชบอร์ดเว็บ</p>
               </div>
             </div>
             
@@ -4887,14 +4885,14 @@
                 </svg>
               </div>
               <div>
-                <h4>Cloud & On-Premise</h4>
-                <p>Flexible deployment options</p>
+                <h4>Cloud และ On-Premise</h4>
+                <p>ตัวเลือกการติดตั้งที่ยืดหยุ่น</p>
               </div>
             </div>
           </div>
           
           <a href="#contact" class="btn btn-primary btn-lg">
-            Discuss Your Project
+            ปรึกษาโปรเจคของคุณ
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -5055,7 +5053,7 @@
                     <span class="dot-yellow"></span>
                     <span class="dot-green"></span>
                   </div>
-                  <span class="mockup-title">Inventory Management</span>
+                  <span class="mockup-title">การจัดการสินค้าคงคลัง</span>
                 </div>
                 <div class="mockup-inventory">
                   <div class="inventory-summary">
@@ -5063,36 +5061,36 @@
                       <div class="inv-icon blue">📦</div>
                       <div class="inv-data">
                         <span class="inv-number">1,234</span>
-                        <span class="inv-label">Total SKUs</span>
+                        <span class="inv-label">SKU ทั้งหมด</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon green">✓</div>
                       <div class="inv-data">
                         <span class="inv-number">1,180</span>
-                        <span class="inv-label">In Stock</span>
+                        <span class="inv-label">ในสต็อก</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon orange">⚠</div>
                       <div class="inv-data">
                         <span class="inv-number">42</span>
-                        <span class="inv-label">Low Stock</span>
+                        <span class="inv-label">สต็อกต่ำ</span>
                       </div>
                     </div>
                     <div class="inv-card">
                       <div class="inv-icon red">✕</div>
                       <div class="inv-data">
                         <span class="inv-number">12</span>
-                        <span class="inv-label">Out of Stock</span>
+                        <span class="inv-label">หมดสต็อก</span>
                       </div>
                     </div>
                   </div>
                   <div class="inventory-alerts">
-                    <div class="alert-title">Recent Alerts</div>
+                    <div class="alert-title">การแจ้งเตือนล่าสุด</div>
                     <div class="alert-item warning">
                       <span class="alert-icon">⚠</span>
-                      <span class="alert-text">Material A - Low Stock (15 units)</span>
+                      <span class="alert-text">วัตถุดิบ A - สต็อกต่ำ (15 units)</span>
                       <span class="alert-time">2m ago</span>
                     </div>
                     <div class="alert-item critical">
@@ -5110,13 +5108,13 @@
                 <div class="analytics-stats">
                   <div class="stat-box">
                     <span class="stat-value">฿8.5M</span>
-                    <span class="stat-name">Inventory Value</span>
-                    <span class="stat-change green">Updated</span>
+                    <span class="stat-name">มูลค่าสินค้าคงคลัง</span>
+                    <span class="stat-change green">ปรับปรุงแล้ว</span>
                   </div>
                   <div class="stat-box">
                     <span class="stat-value">98.4%</span>
-                    <span class="stat-name">Fill Rate</span>
-                    <span class="stat-change green">↑ 2.1% this month</span>
+                    <span class="stat-name">อัตราการเติม</span>
+                    <span class="stat-change green">↑ 2.1% เดือนนี้</span>
                   </div>
                 </div>
               </div>
@@ -5278,8 +5276,8 @@
               <polyline points="20 6 9 17 4 12"/>
             </svg>
             <div>
-              <span>Ready for</span>
-              <strong>Your Business</strong>
+              <span>พร้อมสำหรับ</span>
+              <strong>ธุรกิจของคุณ</strong>
             </div>
           </div>
         </div>
@@ -5292,12 +5290,12 @@
     <div class="container">
       <div class="section-label centered">
         <span class="label-line"></span>
-        <span>WHAT WE DO</span>
+        <span>สิ่งที่เราทำ</span>
         <span class="label-line"></span>
       </div>
       
-      <h2 class="section-title centered">Our Expertise</h2>
-      <p class="section-subtitle">Comprehensive automation and digital solutions across various industries.</p>
+      <h2 class="section-title centered">ความเชี่ยวชาญของเรา</h2>
+      <p class="section-subtitle">โซลูชันอัตโนมัติและดิจิทัลที่ครอบคลุมในอุตสาหกรรมต่างๆ</p>
       
       <div class="expertise-grid">
         <!-- Tire Manufacturing -->
@@ -5383,9 +5381,9 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag orange">TIRE MANUFACTURING</span>
-            <h3>Production Line Automation</h3>
-            <p>Complete tire production automation from mixing through curing: SF preparation, TBM building machines, curing press, and after-cure inspection.</p>
+            <span class="expertise-tag orange">การผลิตยาง</span>
+            <h3>ระบบอัตโนมัติสายการผลิต</h3>
+            <p>ระบบอัตโนมัติการผลิตยางครบวงจรตั้งแต่การผสมจนถึงการอบ: การเตรียม SF เครื่องประกอบ TBM เครื่องอบยาง และการตรวจสอบหลังอบ</p>
             <div class="expertise-tags">
               <span class="tag">SF</span>
               <span class="tag">PREP</span>
@@ -5498,9 +5496,9 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag purple">INDUSTRIAL AUTOMATION</span>
-            <h3>PLC Programming</h3>
-            <p>Expert PLC programming in all IEC 61131-3 languages: Ladder Diagram, Sequential Function Chart, Structured Text, and Function Block Diagram.</p>
+            <span class="expertise-tag purple">ระบบอัตโนมัติอุตสาหกรรม</span>
+            <h3>การเขียนโปรแกรม PLC</h3>
+            <p>การเขียนโปรแกรม PLC ระดับผู้เชี่ยวชาญในภาษา IEC 61131-3 ทั้งหมด: Ladder Diagram, Sequential Function Chart, Structured Text และ Function Block Diagram</p>
             <div class="expertise-tags">
               <span class="tag">Ladder</span>
               <span class="tag">SFC</span>
@@ -5570,13 +5568,13 @@
             </div>
           </div>
           <div class="expertise-content">
-            <span class="expertise-tag cyan">DIGITAL SOLUTIONS</span>
-            <h3>Operations Management System</h3>
-            <p>Full-featured web application for project management, inventory tracking, workflow automation, and real-time reporting dashboards.</p>
+            <span class="expertise-tag cyan">โซลูชันดิจิทัล</span>
+            <h3>ระบบจัดการปฏิบัติการ</h3>
+            <p>เว็บแอปพลิเคชันเต็มรูปแบบสำหรับการจัดการโปรเจค การติดตามสินค้าคงคลัง ระบบอัตโนมัติเวิร์กโฟลว์ และแดชบอร์ดรายงานเรียลไทม์</p>
             <div class="expertise-tags">
-              <span class="tag">Web App</span>
-              <span class="tag">Dashboard</span>
-              <span class="tag">Real-time</span>
+              <span class="tag">เว็บแอป</span>
+              <span class="tag">แดชบอร์ด</span>
+              <span class="tag">เรียลไทม์</span>
             </div>
           </div>
         </div>
@@ -5589,8 +5587,8 @@
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info">
-          <h2 class="contact-title">Let's Build Something Great Together</h2>
-          <p class="contact-desc">Ready to transform your operations with intelligent automation? Get in touch with our team to discuss your project.</p>
+          <h2 class="contact-title">มาสร้างสิ่งยิ่งใหญ่ด้วยกัน</h2>
+          <p class="contact-desc">พร้อมที่จะเปลี่ยนโฉมการดำเนินงานด้วยระบบอัตโนมัติอัจฉริยะหรือยัง? ติดต่อทีมงานเพื่อปรึกษาโปรเจคของคุณ</p>
           
           <div class="contact-items">
             <div class="contact-item">
@@ -5600,7 +5598,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Phone</span>
+                <span class="contact-label">โทรศัพท์</span>
                 <a href="tel:+66891900588" class="contact-value">+66 89-190-0588</a>
               </div>
             </div>
@@ -5613,7 +5611,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Email</span>
+                <span class="contact-label">อีเมล</span>
                 <a href="#" class="contact-value" id="contactEmail" onclick="window.location.href='mail'+'to:'+'nukools'+'@'+'autoinnovate.com'">nukools<span>@</span>autoinnovate.com</a>
               </div>
             </div>
@@ -5626,7 +5624,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Location</span>
+                <span class="contact-label">ที่ตั้ง</span>
                 <span class="contact-value">126/15 Banglamung, Chonburi 20150, Thailand</span>
               </div>
             </div>
@@ -5640,7 +5638,7 @@
                 </svg>
               </div>
               <div>
-                <span class="contact-label">Website</span>
+                <span class="contact-label">เว็บไซต์</span>
                 <a href="https://www.autoinnovate.com" target="_blank" class="contact-value">www.autoinnovate.com</a>
               </div>
             </div>
@@ -5664,40 +5662,40 @@
           <!-- Contact Form -->
           <form class="contact-form" id="contactForm">
             <div class="form-group">
-              <label>Your Name</label>
+              <label>ชื่อของคุณ</label>
               <input type="text" name="name" placeholder="John Smith" required>
             </div>
             
             <div class="form-group">
-              <label>Email</label>
+              <label>อีเมล</label>
               <input type="email" name="email" placeholder="john@company.com" required>
             </div>
             
             <div class="form-group">
-              <label>Company</label>
-              <input type="text" name="company" placeholder="Your Company">
+              <label>บริษัท</label>
+              <input type="text" name="company" placeholder="บริษัทของคุณ">
             </div>
             
             <div class="form-group">
-              <label>Service Interest</label>
+              <label>บริการที่สนใจ</label>
               <select name="service">
-                <option value="">Select a service...</option>
-                <option value="PLC Programming">PLC Programming</option>
-                <option value="Safety Systems">Safety Systems</option>
-                <option value="Hardware Design">Hardware Design</option>
-                <option value="Control Panels">Control Panels</option>
-                <option value="Electrical Installation">Electrical Installation</option>
-                <option value="Web Applications">Web Applications</option>
+                <option value="">เลือกบริการ...</option>
+                <option value="PLC Programming">การเขียนโปรแกรม PLC</option>
+                <option value="Safety Systems">ระบบความปลอดภัย</option>
+                <option value="Hardware Design">การออกแบบฮาร์ดแวร์</option>
+                <option value="Control Panels">ตู้ควบคุม</option>
+                <option value="Electrical Installation">การติดตั้งระบบไฟฟ้า</option>
+                <option value="Web Applications">เว็บแอปพลิเคชัน</option>
               </select>
             </div>
             
             <div class="form-group">
-              <label>Project Details</label>
-              <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+              <label>รายละเอียดโปรเจค</label>
+              <textarea name="message" placeholder="บอกเราเกี่ยวกับโปรเจคของคุณ..." required></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg full-width" id="submitBtn">
-              <span class="btn-text">Send Message</span>
+              <span class="btn-text">ส่งข้อความ</span>
               <span class="btn-loading" style="display: none;">
                 <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
@@ -5722,31 +5720,31 @@
             </span>
           </div>
           <p>Auto Innovate Construction Co., Ltd.</p>
-          <p>Machinery and Automation System Development</p>
+          <p>พัฒนาระบบเครื่องจักรและระบบอัตโนมัติ</p>
         </div>
         
         <div class="footer-links">
-          <h4>Company</h4>
+          <h4>บริษัท</h4>
           <ul>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">เกี่ยวกับเรา</a></li>
+            <li><a href="#services">บริการ</a></li>
+            <li><a href="#expertise">ความเชี่ยวชาญ</a></li>
+            <li><a href="#contact">ติดต่อเรา</a></li>
           </ul>
         </div>
         
         <div class="footer-links">
-          <h4>Services</h4>
+          <h4>บริการ</h4>
           <ul>
-            <li><a href="#services">PLC Programming</a></li>
-            <li><a href="#services">Safety Systems</a></li>
-            <li><a href="#services">Control Panels</a></li>
-            <li><a href="#digital-solutions">Digital Solutions</a></li>
+            <li><a href="#services">การเขียนโปรแกรม PLC</a></li>
+            <li><a href="#services">ระบบความปลอดภัย</a></li>
+            <li><a href="#services">ตู้ควบคุม</a></li>
+            <li><a href="#digital-solutions">โซลูชันดิจิทัล</a></li>
           </ul>
         </div>
         
         <div class="footer-links">
-          <h4>Technology</h4>
+          <h4>เทคโนโลยี</h4>
           <ul>
             <li><a href="#technology">Rockwell</a></li>
             <li><a href="#technology">Siemens</a></li>
@@ -5756,7 +5754,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>© 2026 Auto Innovate Construction Co., Ltd. All rights reserved.</p>
+        <p>© 2026 Auto Innovate Construction Co., Ltd. สงวนลิขสิทธิ์.</p>
         <div class="social-links">
           <a href="#" aria-label="LinkedIn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -6195,7 +6193,7 @@
       background: #ffffff;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      z-index: 99999;
+      z-index: 9999;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -6690,7 +6688,7 @@
       <div class="chat-avatar">AIC</div>
       <div class="chat-header-info">
         <h4>🔥 A.I.C. Sales Team</h4>
-        <span>Online - Ready to help!</span>
+        <span>Online - พร้อมให้บริการ!</span>
       </div>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6717,7 +6715,7 @@
     </div>
 
     <div class="chat-powered">
-      💬 Replies within 1 minute | A.I.C. © 2026
+      💬 ตอบกลับภายใน 1 นาที | A.I.C. © 2026
     </div>
   </div>
 
@@ -6754,18 +6752,18 @@
       let isOpen = false;
       let conversationHistory = [];
       let isFirstOpen = true;
-      let currentAudio = null;
-      let isTTSEnabled = true;
+      let currentAudio = null; // สำหรับเก็บ audio ที่กำลังเล่น
+      let isTTSEnabled = true; // เปิด/ปิด TTS
 
       // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
-        th: `🎯 Hello! Welcome to A.I.C.
+        th: `🎯 สวัสดีครับ! ยินดีต้อนรับสู่ A.I.C.
 
-I noticed you're interested in Industrial Automation!
+ผมเห็นว่าคุณกำลังสนใจด้าน Industrial Automation 
 
-✨ We have special offers for new clients today!
+✨ วันนี้เรามีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่!
 
-What project do you have in mind? I can provide a quick estimate!`,
+มีโปรเจคอะไรในใจบ้างครับ? ผมช่วยประเมินราคาเบื้องต้นให้ได้เลย!`,
         en: `🎯 Hello! Welcome to A.I.C.
 
 I noticed you're interested in Industrial Automation!
@@ -6776,10 +6774,10 @@ What project do you have in mind? I can provide a quick estimate!`
       };
 
       const quickActions = [
-        { text: '🔧 PLC Programming', value: 'Interested in PLC Programming, want to know pricing' },
-        { text: '🛡️ Safety Systems', value: 'Need Safety systems, want to consult' },
-        { text: '💻 Web/Dashboard', value: 'Want Web App or Dashboard' },
-        { text: '📋 Get a Quote', value: 'I want to get a quote' }
+        { text: '🔧 PLC Programming', value: 'สนใจ PLC Programming อยากทราบราคาเบื้องต้น' },
+        { text: '🛡️ Safety Systems', value: 'ต้องการระบบ Safety อยากปรึกษา' },
+        { text: '💻 Web/Dashboard', value: 'อยากได้ Web App หรือ Dashboard' },
+        { text: '📋 ขอใบเสนอราคา', value: 'ขอใบเสนอราคาครับ' }
       ];
 
       // Toggle chatbot
@@ -6791,8 +6789,8 @@ What project do you have in mind? I can provide a quick estimate!`
         if (isOpen && isFirstOpen) {
           badge.style.display = 'none';
           setTimeout(() => {
-            // ✅ Auto-speak welcome message
-            addBotMessage(welcomeMessage.en, quickActions, false);
+            // ❌ ปิด autoSpeak - ให้ user กดปุ่ม 🔊 เอง
+            addBotMessage(welcomeMessage.th, quickActions, false);
           }, 500);
           isFirstOpen = false;
         }
@@ -6814,6 +6812,7 @@ What project do you have in mind? I can provide a quick estimate!`
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
         
+        // สร้าง wrapper สำหรับ content
         const contentWrapper = document.createElement('div');
         contentWrapper.className = 'message-content-wrapper';
         
@@ -6839,14 +6838,14 @@ What project do you have in mind? I can provide a quick estimate!`
           contentWrapper.appendChild(actionsDiv);
         }
 
-        // Add TTS button for bot messages
+        // เพิ่มปุ่ม TTS สำหรับข้อความ Bot
         if (isBot && isTTSEnabled) {
           const actionsRow = document.createElement('div');
           actionsRow.className = 'message-actions';
           
           const ttsBtn = document.createElement('button');
           ttsBtn.className = 'tts-button';
-          ttsBtn.title = 'Listen';
+          ttsBtn.title = 'ฟังเสียง';
           ttsBtn.innerHTML = `
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -6865,6 +6864,7 @@ What project do you have in mind? I can provide a quick estimate!`
         messages.appendChild(messageDiv);
         messages.scrollTop = messages.scrollHeight;
         
+        // Auto-speak ถ้าเปิดไว้
         if (isBot && autoSpeak && isTTSEnabled) {
           const ttsBtn = contentDiv.querySelector('.tts-button');
           if (ttsBtn) {
@@ -6928,7 +6928,7 @@ What project do you have in mind? I can provide a quick estimate!`
         try {
           const response = await callClaudeAPI(text);
           hideTyping();
-          // ✅ Auto-speak enabled
+          // ❌ ปิด autoSpeak - ให้ user กดปุ่ม 🔊 เอง
           addBotMessage(response, null, false);
           
           // Add to history
@@ -6942,12 +6942,12 @@ What project do you have in mind? I can provide a quick estimate!`
           console.error('Chat error:', error);
           
           // Fallback response
-          const fallbackResponse = `Sorry, the system is temporarily unavailable 🙏
+          const fallbackResponse = `ขอโทษครับ ระบบขัดข้องชั่วคราว 🙏
 
-Please contact our team directly:
+กรุณาติดต่อทีมของเราโดยตรง:
 📧 nukools@autoinnovate.com
 
-or fill out the form below`;
+หรือกรอกแบบฟอร์มด้านล่างครับ`;
           
           addBotMessage(fallbackResponse, null, false);
         }
@@ -6971,7 +6971,7 @@ or fill out the form below`;
           },
           body: JSON.stringify({
             messages: apiMessages,
-            language: 'en'
+            language: 'th'
           })
         });
 
@@ -7015,39 +7015,56 @@ or fill out the form below`;
         });
         button.dataset.wasPlaying = 'true';
         
+        // แสดง loading state
         button.classList.add('loading');
         button.disabled = true;
         
         try {
+          // ลบ emoji และ format พิเศษออก
           const cleanText = text
-            .replace(/[\u{1F300}-\u{1F9FF}]/gu, '')
+            .replace(/[\u{1F300}-\u{1F9FF}]/gu, '') // ลบ emoji ทั้งหมด
             .replace(/<br>/g, ' ')
             .replace(/\s+/g, ' ')
             .trim();
           
-          if (!cleanText) throw new Error('No text to speak');
+          if (!cleanText) {
+            throw new Error('No text to speak');
+          }
           
+          // เรียก TTS API
           const response = await fetch(CONFIG.ttsEndpoint, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: cleanText, voice: CONFIG.ttsVoice })
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              text: cleanText,
+              voice: CONFIG.ttsVoice
+            })
           });
           
-          if (!response.ok) throw new Error('TTS request failed');
+          if (!response.ok) {
+            throw new Error('TTS request failed');
+          }
           
           const data = await response.json();
           
           if (data.success && data.audio) {
+            // สร้าง audio จาก base64
             const audioBlob = base64ToBlob(data.audio, 'audio/mp3');
             const audioUrl = URL.createObjectURL(audioBlob);
             
             currentAudio = new Audio(audioUrl);
+            
+            // เปลี่ยนเป็น playing state
             button.classList.remove('loading');
             button.classList.add('playing');
             button.disabled = false;
             
+            // เล่นเสียง
             currentAudio.play();
             
+            // เมื่อเล่นจบ
             currentAudio.onended = () => {
               button.classList.remove('playing');
               button.dataset.wasPlaying = 'false';
@@ -7055,21 +7072,25 @@ or fill out the form below`;
               URL.revokeObjectURL(audioUrl);
             };
             
+            // เมื่อเกิด error
             currentAudio.onerror = () => {
               button.classList.remove('playing');
               button.dataset.wasPlaying = 'false';
               currentAudio = null;
+              console.error('Audio playback error');
             };
           }
         } catch (error) {
           console.error('TTS error:', error);
           button.classList.remove('loading');
           button.disabled = false;
-          button.dataset.wasPlaying = 'false';
+          
+          // Fallback: ใช้ Web Speech API
           fallbackSpeak(text, button);
         }
       }
       
+      // Helper: แปลง base64 เป็น Blob
       function base64ToBlob(base64, mimeType) {
         const byteCharacters = atob(base64);
         const byteNumbers = new Array(byteCharacters.length);
@@ -7080,14 +7101,24 @@ or fill out the form below`;
         return new Blob([byteArray], { type: mimeType });
       }
       
+      // Fallback: Web Speech API (ฟรี แต่เสียงหุ่นยนต์)
       function fallbackSpeak(text, button) {
         if ('speechSynthesis' in window) {
-          const cleanText = text.replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '').replace(/<br>/g, ' ').trim();
+          const cleanText = text
+            .replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '')
+            .replace(/<br>/g, ' ')
+            .trim();
+          
           const utterance = new SpeechSynthesisUtterance(cleanText);
-          utterance.lang = 'en-US';
+          utterance.lang = 'th-TH';
           utterance.rate = 0.9;
+          
           button.classList.add('playing');
-          utterance.onend = () => button.classList.remove('playing');
+          
+          utterance.onend = () => {
+            button.classList.remove('playing');
+          };
+          
           speechSynthesis.speak(utterance);
         }
       }
@@ -7129,8 +7160,8 @@ or fill out the form below`;
         bubble.innerHTML = `
           <div class="greeting-content">
             <span class="greeting-close">&times;</span>
-            <p>👋 Hello! How can I help you?</p>
-            <span class="greeting-tap">${isMobileDevice ? 'Tap' : 'Click'} to chat with AI Sales</span>
+            <p>👋 สวัสดีครับ! มีอะไรให้ช่วยไหมครับ?</p>
+            <span class="greeting-tap">${isMobileDevice ? 'แตะ' : 'คลิก'}เพื่อคุยกับ AI Sales</span>
           </div>
         `;
         
