@@ -195,6 +195,8 @@
       align-items: center;
       gap: 12px;
       transition: filter 0.3s ease;
+      min-width: 340px;  /* กำหนดความกว้างขั้นต่ำ */
+      flex-shrink: 0;    /* ไม่ให้หดตัว */
     }
     
     .logo:hover {
@@ -206,6 +208,7 @@
       font-weight: 800;
       display: inline-flex;
       perspective: 500px;
+      min-width: 90px;   /* ความกว้างคงที่สำหรับ A.I.C. */
     }
     
     .logo-text .letter {
@@ -347,13 +350,20 @@
       }
     }
     
-    /* Hover Effects - DISABLED to prevent navbar movement */
-    /* Logo จะมีแค่ glow effect ไม่มี animation ที่ทำให้ขยับ */
+    /* Hover Effects */
+    .logo:hover .logo-text .letter {
+      animation: letterFloat 0.4s ease forwards !important;
+      animation-delay: calc(var(--i) * 0.05s) !important;
+    }
+    
+    .logo:hover .logo-text .letter.dot {
+      animation: dotPulse 0.4s ease forwards !important;
+      animation-delay: calc(var(--i) * 0.05s) !important;
+    }
     
     @keyframes letterFloat {
       0%, 100% { 
         transform: translateY(0);
-        margin: 0;
       }
       50% { 
         transform: translateY(-6px); 
@@ -364,7 +374,6 @@
     @keyframes dotPulse {
       0%, 100% { 
         transform: scale(1);
-        margin: 0;
       }
       50% { 
         transform: scale(1.3);
@@ -372,7 +381,7 @@
       }
     }
     
-    /* Glow effect on hover - แค่เรืองแสง ไม่ขยับ */
+    /* Glow effect on hover */
     .logo:hover {
       filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.3));
     }
