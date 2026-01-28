@@ -353,15 +353,15 @@
       }
     }
     
-    /* Hover Effects */
-    .logo:hover .logo-text .letter {
-      animation: letterFloat 0.4s ease forwards !important;
-      animation-delay: calc(var(--i) * 0.05s) !important;
+    /* Hover Effects - ไม่กระทบ layout */
+    .navbar .logo:hover .logo-text .letter {
+      animation: none !important;
+      transform: none !important;
     }
     
-    .logo:hover .logo-text .letter.dot {
-      animation: dotPulse 0.4s ease forwards !important;
-      animation-delay: calc(var(--i) * 0.05s) !important;
+    .navbar .logo:hover .logo-text .letter.dot {
+      animation: none !important;
+      transform: none !important;
     }
     
     @keyframes letterFloat {
@@ -386,8 +386,8 @@
       }
     }
     
-    /* Glow effect on hover */
-    .logo:hover {
+    /* Glow effect on hover - แค่เปลี่ยนสี ไม่ขยับ */
+    .navbar .logo:hover {
       filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.3));
     }
 
@@ -475,7 +475,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 9999;
     }
 
     .mobile-menu-btn span {
@@ -541,7 +541,7 @@
       transform: translateY(-10px);
       transition: all 0.2s ease;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      z-index: 1001;
+      z-index: 9999;
     }
 
     .lang-dropdown:hover .lang-dropdown-menu {
