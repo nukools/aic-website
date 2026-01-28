@@ -694,7 +694,9 @@
       /* Hamburger button */
       .mobile-menu-btn {
         display: flex;
+        align-items: center;
         z-index: 99999;
+        padding: 8px;
       }
       
       /* Hide only the button on mobile, keep lang-dropdown */
@@ -708,15 +710,19 @@
         position: static;
         margin: 0;
         padding: 0;
-        gap: 5px;
-      }
-      
-      .nav-container {
-        position: relative;
+        gap: 10px;
       }
       
       .lang-dropdown {
         position: static;
+        display: flex;
+        align-items: center;
+      }
+      
+      .lang-dropdown-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
