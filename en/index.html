@@ -82,7 +82,6 @@
 
     html {
       scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
     body {
@@ -91,7 +90,6 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
-      position: relative;
     }
 
     a {
@@ -177,9 +175,6 @@
       background: rgba(10, 22, 40, 0.8);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(0, 168, 255, 0.1);
-      overflow-x: hidden;
-      width: 100%;
-      max-width: 100vw;
     }
 
     .nav-container {
@@ -352,16 +347,8 @@
       }
     }
     
-    /* Hover Effects - ไม่กระทบ layout */
-    .navbar .logo:hover .logo-text .letter {
-      animation: none !important;
-      transform: none !important;
-    }
-    
-    .navbar .logo:hover .logo-text .letter.dot {
-      animation: none !important;
-      transform: none !important;
-    }
+    /* Hover Effects - DISABLED to prevent navbar movement */
+    /* Logo จะมีแค่ glow effect ไม่มี animation ที่ทำให้ขยับ */
     
     @keyframes letterFloat {
       0%, 100% { 
@@ -385,8 +372,8 @@
       }
     }
     
-    /* Glow effect on hover - แค่เปลี่ยนสี ไม่ขยับ */
-    .navbar .logo:hover {
+    /* Glow effect on hover - แค่เรืองแสง ไม่ขยับ */
+    .logo:hover {
       filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.3));
     }
 
@@ -474,7 +461,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 9999;
+      z-index: 1001;
     }
 
     .mobile-menu-btn span {
@@ -540,7 +527,7 @@
       transform: translateY(-10px);
       transition: all 0.2s ease;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
+      z-index: 99999;
     }
 
     .lang-dropdown:hover .lang-dropdown-menu {
@@ -6303,66 +6290,6 @@
       border: none;
     }
 
-    /* TTS Speaker Button */
-    .tts-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      margin-left: 8px;
-      opacity: 0.6;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      vertical-align: middle;
-    }
-
-    .tts-button:hover {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    .tts-button.playing {
-      opacity: 1;
-      color: #f97316;
-    }
-
-    .tts-button.loading {
-      opacity: 0.5;
-      cursor: wait;
-    }
-
-    .tts-button svg {
-      width: 18px;
-      height: 18px;
-      color: #64748b;
-    }
-
-    .tts-button.playing svg {
-      color: #f97316;
-      animation: pulse-speaker 1s ease-in-out infinite;
-    }
-
-    @keyframes pulse-speaker {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    .message-content-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .message-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(0,0,0,0.05);
-    }
-
     /* Typing Indicator */
     .typing-indicator {
       display: flex;
@@ -6647,10 +6574,6 @@
       const CONFIG = {
         // API endpoint from your existing Vercel app
         apiEndpoint: 'https://aic-inventory.vercel.app/api/website-chat',
-        // TTS API endpoint
-        ttsEndpoint: 'https://aic-inventory.vercel.app/api/tts',
-        // TTS voice (nova = female, alloy = neutral, echo = male)
-        ttsVoice: 'nova',
         // Alternative: Use your custom domain if available
         // apiEndpoint: 'https://your-domain.com/api/website-chat',
       };
@@ -6669,8 +6592,6 @@
       let isOpen = false;
       let conversationHistory = [];
       let isFirstOpen = true;
-      let currentAudio = null;
-      let isTTSEnabled = true;
 
       // Welcome message - Sales Proactive Style! 🔥
       const welcomeMessage = {
@@ -6706,8 +6627,7 @@ What project do you have in mind? I can provide a quick estimate!`
         if (isOpen && isFirstOpen) {
           badge.style.display = 'none';
           setTimeout(() => {
-            // ✅ Auto-speak welcome message
-            addBotMessage(welcomeMessage.en, quickActions, false);
+            addBotMessage(welcomeMessage.en, quickActions);
           }, 500);
           isFirstOpen = false;
         }
@@ -6718,7 +6638,7 @@ What project do you have in mind? I can provide a quick estimate!`
       });
 
       // Add message to chat
-      function addMessage(content, isBot = false, actions = null, autoSpeak = false) {
+      function addMessage(content, isBot = false, actions = null) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
         
@@ -6728,13 +6648,7 @@ What project do you have in mind? I can provide a quick estimate!`
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        
-        const contentWrapper = document.createElement('div');
-        contentWrapper.className = 'message-content-wrapper';
-        
-        const textDiv = document.createElement('div');
-        textDiv.innerHTML = content.replace(/\n/g, '<br>');
-        contentWrapper.appendChild(textDiv);
+        contentDiv.innerHTML = content.replace(/\n/g, '<br>');
 
         // Add quick actions if provided
         if (actions && actions.length > 0) {
@@ -6751,47 +6665,17 @@ What project do you have in mind? I can provide a quick estimate!`
             actionsDiv.appendChild(btn);
           });
           
-          contentWrapper.appendChild(actionsDiv);
+          contentDiv.appendChild(actionsDiv);
         }
 
-        // Add TTS button for bot messages
-        if (isBot && isTTSEnabled) {
-          const actionsRow = document.createElement('div');
-          actionsRow.className = 'message-actions';
-          
-          const ttsBtn = document.createElement('button');
-          ttsBtn.className = 'tts-button';
-          ttsBtn.title = 'Listen';
-          ttsBtn.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-            </svg>
-          `;
-          ttsBtn.addEventListener('click', () => speakText(content, ttsBtn));
-          actionsRow.appendChild(ttsBtn);
-          contentWrapper.appendChild(actionsRow);
-        }
-
-        contentDiv.appendChild(contentWrapper);
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(contentDiv);
         messages.appendChild(messageDiv);
         messages.scrollTop = messages.scrollHeight;
-        
-        if (isBot && autoSpeak && isTTSEnabled) {
-          const ttsBtn = contentDiv.querySelector('.tts-button');
-          if (ttsBtn) {
-            setTimeout(() => speakText(content, ttsBtn), 300);
-          }
-        }
-        
-        return messageDiv;
       }
 
-      function addBotMessage(content, actions = null, autoSpeak = false) {
-        addMessage(content, true, actions, autoSpeak);
+      function addBotMessage(content, actions = null) {
+        addMessage(content, true, actions);
       }
 
       function addUserMessage(content) {
@@ -6843,8 +6727,7 @@ What project do you have in mind? I can provide a quick estimate!`
         try {
           const response = await callClaudeAPI(text);
           hideTyping();
-          // ✅ Auto-speak enabled
-          addBotMessage(response, null, false);
+          addBotMessage(response);
           
           // Add to history
           conversationHistory.push({
@@ -6864,7 +6747,7 @@ Please contact our team directly:
 
 or fill out the form below`;
           
-          addBotMessage(fallbackResponse, null, false);
+          addBotMessage(fallbackResponse);
         }
 
         sendBtn.disabled = false;
@@ -6901,110 +6784,6 @@ or fill out the form below`;
         }
         
         throw new Error(data.error || 'Unknown error');
-      }
-
-      // 🔊 Text-to-Speech Function (OpenAI TTS)
-      async function speakText(text, button) {
-        // 🔇 หยุดเสียงที่กำลังเล่นอยู่ทันที
-        if (currentAudio) {
-          currentAudio.pause();
-          currentAudio.currentTime = 0;
-          currentAudio = null;
-        }
-        
-        // Reset ปุ่มทั้งหมดที่กำลังเล่น/loading
-        document.querySelectorAll('.tts-button.playing, .tts-button.loading').forEach(btn => {
-          btn.classList.remove('playing', 'loading');
-          btn.disabled = false;
-        });
-        
-        // ถ้ากดปุ่มเดิมที่กำลังเล่นอยู่ = หยุดเฉยๆ
-        if (button.dataset.wasPlaying === 'true') {
-          button.dataset.wasPlaying = 'false';
-          return;
-        }
-        
-        // Mark ว่าปุ่มนี้กำลังจะเล่น
-        document.querySelectorAll('.tts-button').forEach(btn => {
-          btn.dataset.wasPlaying = 'false';
-        });
-        button.dataset.wasPlaying = 'true';
-        
-        button.classList.add('loading');
-        button.disabled = true;
-        
-        try {
-          const cleanText = text
-            .replace(/[\u{1F300}-\u{1F9FF}]/gu, '')
-            .replace(/<br>/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim();
-          
-          if (!cleanText) throw new Error('No text to speak');
-          
-          const response = await fetch(CONFIG.ttsEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: cleanText, voice: CONFIG.ttsVoice })
-          });
-          
-          if (!response.ok) throw new Error('TTS request failed');
-          
-          const data = await response.json();
-          
-          if (data.success && data.audio) {
-            const audioBlob = base64ToBlob(data.audio, 'audio/mp3');
-            const audioUrl = URL.createObjectURL(audioBlob);
-            
-            currentAudio = new Audio(audioUrl);
-            button.classList.remove('loading');
-            button.classList.add('playing');
-            button.disabled = false;
-            
-            currentAudio.play();
-            
-            currentAudio.onended = () => {
-              button.classList.remove('playing');
-              button.dataset.wasPlaying = 'false';
-              currentAudio = null;
-              URL.revokeObjectURL(audioUrl);
-            };
-            
-            currentAudio.onerror = () => {
-              button.classList.remove('playing');
-              button.dataset.wasPlaying = 'false';
-              currentAudio = null;
-            };
-          }
-        } catch (error) {
-          console.error('TTS error:', error);
-          button.classList.remove('loading');
-          button.disabled = false;
-          button.dataset.wasPlaying = 'false';
-          fallbackSpeak(text, button);
-        }
-      }
-      
-      function base64ToBlob(base64, mimeType) {
-        const byteCharacters = atob(base64);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        return new Blob([byteArray], { type: mimeType });
-      }
-      
-      function fallbackSpeak(text, button) {
-        if ('speechSynthesis' in window) {
-          const cleanText = text.replace(/[🎯✨📧📱💻🔧🛡️📋🎉⭐🔔👋💬]/g, '').replace(/<br>/g, ' ').trim();
-          const utterance = new SpeechSynthesisUtterance(cleanText);
-          utterance.lang = 'en-US';
-          utterance.rate = 0.9;
-          button.classList.add('playing');
-          utterance.onend = () => button.classList.remove('playing');
-          speechSynthesis.speak(utterance);
-        }
       }
 
       // Event listeners
@@ -7045,7 +6824,7 @@ or fill out the form below`;
           <div class="greeting-content">
             <span class="greeting-close">&times;</span>
             <p>👋 Hello! How can I help you?</p>
-            <span class="greeting-tap">${isMobileDevice ? 'Tap' : 'Click'} to chat with AI Sales</span>
+            <span class="greeting-tap">${isMobileDevice ? 'Tap' : 'Click'}to chat with AI Sales</span>
           </div>
         `;
         
