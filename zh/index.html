@@ -548,7 +548,8 @@
       z-index: 99999;
     }
 
-    .lang-dropdown:hover .lang-dropdown-menu {
+    .lang-dropdown:hover .lang-dropdown-menu,
+    .lang-dropdown.open .lang-dropdown-menu {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -5783,14 +5784,52 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       
+      // ---------- Language Dropdown Toggle (Mobile Support) ----------
+      const langDropdown = document.querySelector('.lang-dropdown');
+      const langDropdownBtn = document.querySelector('.lang-dropdown-btn');
+      const langDropdownMenu = document.querySelector('.lang-dropdown-menu');
+      
+      if (langDropdownBtn && langDropdownMenu) {
+        // Toggle dropdown on click
+        langDropdownBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          langDropdown.classList.toggle('open');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!langDropdown.contains(e.target)) {
+            langDropdown.classList.remove('open');
+          }
+        });
+        
+        // Close dropdown when selecting a language
+        langDropdownMenu.querySelectorAll('.lang-option').forEach(option => {
+          option.addEventListener('click', function() {
+            langDropdown.classList.remove('open');
+          });
+        });
+      }
+      
       // ---------- Mobile Menu Toggle ----------
       const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
       const navMenu = document.querySelector('.nav-menu');
       
-      if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
+      if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
           navMenu.classList.toggle('active');
           mobileMenuBtn.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        navMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+          });
         });
       }
       
