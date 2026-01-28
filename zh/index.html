@@ -3776,7 +3776,14 @@
         justify-content: space-between;
       }
       
-      .nav-menu,
+      .nav-menu {
+        display: none;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
       .navbar .btn {
         display: none;
       }
