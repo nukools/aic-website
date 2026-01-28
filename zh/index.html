@@ -692,31 +692,9 @@
         display: none;
       }
 
-      /* Hide logo tagline on mobile */
-      .logo-tagline {
-        display: none;
-      }
-      
-      .logo-divider {
-        display: none;
-      }
-
-      /* Nav container - push items to edges */
-      .nav-container {
-        justify-content: space-between;
-      }
-
       /* Hide nav-right button, keep dropdown visible */
       .nav-right .btn {
         display: none;
-      }
-      
-      /* Group lang-dropdown and hamburger together on the right */
-      .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-left: auto;
       }
       
       /* Hamburger button */
@@ -724,17 +702,24 @@
         display: flex;
         align-items: center;
         z-index: 99999;
+        flex-shrink: 0;
       }
       
       .lang-dropdown {
         display: flex;
         align-items: center;
+        flex-shrink: 0;
       }
       
       .lang-dropdown-btn {
         width: 40px;
         height: 32px;
         padding: 6px;
+      }
+      
+      /* Logo text smaller on mobile */
+      .logo-tagline {
+        font-size: 0.5rem;
       }
     }
 
