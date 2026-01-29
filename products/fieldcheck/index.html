@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FieldCheck - Workforce Management for Field Teams | A.I.C.</title>
+    <meta name="description" content="GPS check-in, selfie verification, real-time tracking for security guards, cleaning staff, and field workers. Starting at ฿990/month.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1628;
+            --primary-light: #132344;
+            --accent: #00a8ff;
+            --accent-glow: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text: #ffffff;
+            --text-muted: rgba(255,255,255,0.7);
+            --gradient-primary: linear-gradient(135deg, #00a8ff 0%, #7c3aed 100%);
+            --gradient-dark: linear-gradient(180deg, #0a1628 0%, #132344 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'Noto Sans Thai', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 168, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 168, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-large {
+            padding: 16px 36px;
+            font-size: 1.1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 168, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 168, 255, 0.15);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .hero-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .app-mockup {
+            background: linear-gradient(145deg, #1a2942 0%, #0d1829 100%);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mockup-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .mockup-info h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .mockup-info span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .mockup-status {
+            margin-left: auto;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .mockup-map {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-map::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(90deg, rgba(0,168,255,0.1) 1px, transparent 1px),
+                linear-gradient(rgba(0,168,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .map-pin {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 168, 255, 0.5);
+            animation: bounce 2s infinite;
+        }
+
+        .map-pin::after {
+            content: '📍';
+            transform: rotate(45deg);
+            font-size: 1.2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: rotate(-45deg) translateY(0); }
+            50% { transform: rotate(-45deg) translateY(-10px); }
+        }
+
+        .mockup-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .mockup-btn {
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mockup-btn.checkin {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .mockup-btn.checkout {
+            background: rgba(255,255,255,0.1);
+            color: var(--text);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(0, 168, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(180deg, rgba(0,168,255,0.05) 0%, transparent 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 40px 35px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--accent);
+            background: rgba(0, 168, 255, 0.08);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .pricing-target {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Early Bird Section */
+        .early-bird {
+            background: var(--gradient-primary);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .early-bird::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+        }
+
+        .early-bird-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .early-bird h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .early-bird p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .early-bird-form {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .early-bird-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            background: white;
+            color: var(--primary);
+        }
+
+        .early-bird-form input::placeholder {
+            color: #999;
+        }
+
+        .early-bird-form button {
+            padding: 16px 36px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .early-bird-form button:hover {
+            background: #0d1f35;
+            transform: translateY(-2px);
+        }
+
+        .early-bird-note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px 30px;
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin: 0 auto 30px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .early-bird {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+
+            .early-bird h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../../en/" class="logo">
+                <span class="logo-icon">📍</span>
+                <span>FieldCheck <small style="opacity:0.6">by A.I.C.</small></span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="../../en/#contact">Contact</a>
+            </div>
+            <a href="#early-bird" class="btn btn-primary">Get Early Access</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span class="pulse"></span>
+                        <span>Coming Soon — Early Bird 50% Off</span>
+                    </div>
+                    <h1>
+                        Workforce Management<br>
+                        for <span class="highlight">Field Teams</span>
+                    </h1>
+                    <p class="hero-description">
+                        GPS check-in, selfie verification, real-time tracking. 
+                        Perfect for security companies, cleaning services, and field workers.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#early-bird" class="btn btn-primary btn-large">🚀 Join Early Bird</a>
+                        <a href="#features" class="btn btn-outline btn-large">Learn More</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">฿990</div>
+                            <div class="stat-label">Starting price/mo</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">14</div>
+                            <div class="stat-label">Days free trial</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">50%</div>
+                            <div class="stat-label">Early Bird discount</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="app-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-avatar">👷</div>
+                            <div class="mockup-info">
+                                <h4>Somchai K.</h4>
+                                <span>Security Guard • Site A</span>
+                            </div>
+                            <div class="mockup-status">● On Duty</div>
+                        </div>
+                        <div class="mockup-map">
+                            <div class="map-pin"></div>
+                        </div>
+                        <div class="mockup-actions">
+                            <div class="mockup-btn checkin">📍 Check In</div>
+                            <div class="mockup-btn checkout">📤 Check Out</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Features</div>
+                <h2 class="section-title">Everything You Need to Manage Field Workers</h2>
+                <p class="section-desc">Built specifically for security companies, cleaning services, and businesses with distributed teams.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>GPS Check-in/out</h3>
+                    <p>Verify employee location with GPS coordinates. Set geofence for each work site to ensure accurate attendance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤳</div>
+                    <h3>Selfie Verification</h3>
+                    <p>Prevent buddy punching with selfie photos at check-in. AI-powered face matching coming soon.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Real-time Map View</h3>
+                    <p>See all your employees on a live map. Know who's where, who's late, and who's absent at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>QR Patrol System</h3>
+                    <p>Place QR codes at checkpoints. Guards scan to prove they've completed their patrol rounds.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>LINE Notifications</h3>
+                    <p>Get instant alerts via LINE when employees are late, absent, or miss patrol checkpoints.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Reports & Analytics</h3>
+                    <p>Automatic attendance reports, performance scores, and export to Excel/PDF for payroll.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Pricing</div>
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-desc">Choose the plan that fits your team size. All plans include 14-day free trial.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Starter</div>
+                    <div class="pricing-target">Small teams • 1-30 employees</div>
+                    <div class="pricing-price">฿990 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 30 employees</li>
+                        <li>Unlimited work sites</li>
+                        <li>GPS Check-in/out</li>
+                        <li>Selfie verification</li>
+                        <li>Basic reports</li>
+                        <li>LINE notifications</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#early-bird" class="btn btn-outline" style="width:100%">Get Started</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">🔥 Most Popular</div>
+                    <div class="pricing-name">Professional</div>
+                    <div class="pricing-target">Growing teams • 31-100 employees</div>
+                    <div class="pricing-price">฿2,490 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 100 employees</li>
+                        <li>Everything in Starter</li>
+                        <li>QR Patrol system</li>
+                        <li>Auto performance scoring</li>
+                        <li>Shift management</li>
+                        <li>Advanced reports</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#early-bird" class="btn btn-primary" style="width:100%">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-target">Large teams • 100+ employees</div>
+                    <div class="pricing-price">฿4,990 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 300 employees</li>
+                        <li>Everything in Professional</li>
+                        <li>Client portal access</li>
+                        <li>Custom branding</li>
+                        <li>API access</li>
+                        <li>Dedicated support</li>
+                        <li>Onboarding training</li>
+                    </ul>
+                    <a href="#early-bird" class="btn btn-outline" style="width:100%">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Bird Section -->
+    <section id="early-bird" class="section">
+        <div class="container">
+            <div class="early-bird">
+                <div class="early-bird-content">
+                    <h2>🎁 Early Bird Special</h2>
+                    <p>Join now and get 50% off your first 3 months when we launch!</p>
+                    <form class="early-bird-form" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
+                        <input type="email" name="entry.EMAIL_FIELD" placeholder="Your email address" required>
+                        <button type="submit">Join Waiting List</button>
+                    </form>
+                    <p class="early-bird-note">🔒 No spam. We'll only email you when we launch.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">FAQ</div>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>When will FieldCheck launch?</h4>
+                    <p>We're targeting Q1 2026 for our beta launch. Early bird members will get first access.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do employees need to download an app?</h4>
+                    <p>No! FieldCheck is a PWA (Progressive Web App). Employees just open a link in their browser — works on any smartphone.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What if employees don't have internet?</h4>
+                    <p>FieldCheck works offline. Data syncs automatically when connection is restored.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I try before I buy?</h4>
+                    <p>Absolutely! All plans include a 14-day free trial. No credit card required.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is my data secure?</h4>
+                    <p>Yes. We use industry-standard encryption and your data is stored securely on cloud servers.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I upgrade or downgrade anytime?</h4>
+                    <p>Yes, you can change your plan at any time. Changes take effect on your next billing cycle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">📍 <span>FieldCheck</span></div>
+            <p>Workforce Management by A.I.C.</p>
+            <p>Auto Innovate Construction Co., Ltd.</p>
+            <div class="footer-links">
+                <a href="../../en/">A.I.C. Website</a>
+                <a href="../../en/#contact">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.6; font-size: 0.85rem;">© 2026 A.I.C. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

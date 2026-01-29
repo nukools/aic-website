@@ -3381,6 +3381,220 @@
       gap: 8px;
     }
 
+    /* ---------- Products Section ---------- */
+    .products-section {
+      padding: 100px 0;
+      background: linear-gradient(180deg, rgba(0, 168, 255, 0.03) 0%, transparent 100%);
+    }
+
+    .products-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .products-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(0, 168, 255, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
+      border: 1px solid rgba(0, 168, 255, 0.3);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .products-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 15px;
+    }
+
+    .products-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 40px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .product-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 168, 255, 0.3);
+      transform: translateY(-8px);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 25px;
+    }
+
+    .product-status {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .product-status.coming-soon {
+      background: rgba(249, 115, 22, 0.2);
+      color: #f97316;
+    }
+
+    .product-status.available {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+    }
+
+    .product-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .product-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .product-features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .product-features li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .product-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .product-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+
+    .product-price span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+
+    .product-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .product-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 168, 255, 0.3);
+    }
+
+    .product-coming {
+      padding: 40px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+    }
+
+    .product-coming-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+
+    .product-coming h4 {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .product-coming p {
+      color: var(--text-muted);
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products-title {
+        font-size: 2rem;
+      }
+    }
+
     /* ---------- Contact Section ---------- */
     .contact-section {
       padding: 100px 0;
@@ -4275,7 +4489,7 @@
         <li><a href="#about">关于我们</a></li>
         <li><a href="#services">服务</a></li>
         <li><a href="#technology">技术</a></li>
-        <li><a href="#digital">数字解决方案</a></li>
+        <li><a href="#products">产品</a></li>
         <li><a href="#expertise">专业领域</a></li>
         <li><a href="#contact">联系我们</a></li>
       </ul>
@@ -5576,6 +5790,51 @@
               <span class="tag">实时</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="products-header">
+        <div class="products-badge">
+          <span>🚀</span>
+          <span>数字产品</span>
+        </div>
+        <h2 class="products-title">我们的产品</h2>
+        <p class="products-desc">由 A.I.C. 开发的软件解决方案，解决员工管理和运营中的实际业务问题。</p>
+      </div>
+
+      <div class="products-grid">
+        <!-- FieldCheck Product -->
+        <div class="product-card">
+          <div class="product-icon">📍</div>
+          <span class="product-status coming-soon">🔥 即将推出 — 早鸟优惠 50%</span>
+          <h3>FieldCheck</h3>
+          <p>外勤员工管理系统。GPS 签到、自拍验证、实时跟踪，适用于保安公司、清洁服务和外勤员工。</p>
+          <ul class="product-features">
+            <li>GPS 签到/签退并拍照</li>
+            <li>实时员工位置地图</li>
+            <li>QR码巡更系统</li>
+            <li>LINE 通知提醒</li>
+            <li>报表与数据分析</li>
+          </ul>
+          <div class="product-price">起价 ฿990 <span>/月</span></div>
+          <a href="../products/fieldcheck/" class="product-btn">
+            了解更多
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Coming Soon Placeholder -->
+        <div class="product-coming">
+          <div class="product-coming-icon">💡</div>
+          <h4>更多产品即将推出</h4>
+          <p>我们正在开发更多解决方案，帮助企业实现自动化和增长。</p>
         </div>
       </div>
     </div>
