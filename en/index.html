@@ -7020,26 +7020,113 @@
       const welcomeMessage = {
         th: `🎯 Hello! Welcome to A.I.C.
 
-I noticed you're interested in Industrial Automation!
+I noticed you're interested in our services!
 
-✨ We have special offers for new clients today!
+✨ We have special offers:
+• Industrial Automation Services
+• 📍 FieldCheck - Workforce Management App (Early Bird 50% OFF!)
 
-What project do you have in mind? I can provide a quick estimate!`,
+What are you looking for today?`,
         en: `🎯 Hello! Welcome to A.I.C.
 
-I noticed you're interested in Industrial Automation!
+I noticed you're interested in our services!
 
-✨ We have special offers for new clients today!
+✨ We have special offers:
+• Industrial Automation Services
+• 📍 FieldCheck - Workforce Management App (Early Bird 50% OFF!)
 
-What project do you have in mind? I can provide a quick estimate!`
+What are you looking for today?`
       };
 
       const quickActions = [
+        { text: '📍 FieldCheck App', value: 'Tell me about FieldCheck workforce management app' },
         { text: '🔧 PLC Programming', value: 'Interested in PLC Programming, want to know pricing' },
         { text: '🛡️ Safety Systems', value: 'Need Safety systems, want to consult' },
-        { text: '💻 Web/Dashboard', value: 'Want Web App or Dashboard' },
         { text: '📋 Get a Quote', value: 'I want to get a quote' }
       ];
+
+      // FieldCheck Product Information for AI Context
+      const fieldCheckInfo = {
+        name: 'FieldCheck',
+        tagline: 'Workforce Management for Field Teams',
+        description: 'GPS check-in, selfie verification, real-time tracking for security guards, cleaning staff, and field workers.',
+        targetCustomers: ['Security companies (รปภ.)', 'Cleaning service companies (แม่บ้าน)', 'Outsourcing companies', 'Businesses with field workers'],
+        features: {
+          employeeApp: [
+            'GPS Check-in/out with selfie photo',
+            'QR Code scanning for patrol checkpoints',
+            'View work schedule',
+            'Request leave / swap shifts',
+            'LINE notifications'
+          ],
+          managerDashboard: [
+            'Real-time map view of all employees',
+            'Attendance reports (late/absent)',
+            'Auto performance scoring',
+            'Shift management',
+            'Export to Excel/PDF'
+          ],
+          notifications: [
+            'Late arrival alerts',
+            'Missed check-out alerts',
+            'Incomplete patrol alerts',
+            'Daily/weekly summary reports'
+          ]
+        },
+        pricing: {
+          starter: {
+            name: 'Starter',
+            price: 990,
+            employees: '1-30',
+            features: ['Up to 30 employees', 'Unlimited work sites', 'GPS Check-in/out', 'Selfie verification', 'Basic reports', 'LINE notifications', 'Email support']
+          },
+          professional: {
+            name: 'Professional',
+            price: 2490,
+            employees: '31-100',
+            popular: true,
+            features: ['Up to 100 employees', 'Everything in Starter', 'QR Patrol system', 'Auto performance scoring', 'Shift management', 'Advanced reports', 'Priority support']
+          },
+          enterprise: {
+            name: 'Enterprise',
+            price: 4990,
+            employees: '100+',
+            features: ['Up to 300 employees', 'Everything in Professional', 'Client portal access', 'Custom branding', 'API access', 'Dedicated support', 'Onboarding training']
+          }
+        },
+        earlyBird: {
+          discount: '50%',
+          duration: 'first 3 months',
+          status: 'Coming Soon - Q1 2026'
+        },
+        freeTrial: '14 days',
+        landingPage: '/products/fieldcheck/',
+        keyBenefits: [
+          'No app download needed - works in browser (PWA)',
+          'Works offline - syncs when online',
+          'Prevent buddy punching with selfie',
+          'Real-time visibility of all field workers',
+          'Automatic reports for payroll'
+        ],
+        comparison: {
+          vs_paper: 'Replace paper timesheets - no more lost forms, automatic calculations',
+          vs_fingerprint: 'No hardware needed - works with any smartphone',
+          vs_competitors: 'Thai-focused, LINE integration, affordable pricing'
+        }
+      };
+
+      // Enhance message with FieldCheck context
+      function enhanceMessageWithFieldCheckContext(userMessage) {
+        const lowerMsg = userMessage.toLowerCase();
+        const fieldCheckKeywords = ['fieldcheck', 'field check', 'workforce', 'gps', 'check-in', 'checkin', 'attendance', 'security guard', 'cleaning', 'รปภ', 'แม่บ้าน', 'เช็คอิน', 'ลงเวลา', 'พนักงาน'];
+        
+        const isFieldCheckQuery = fieldCheckKeywords.some(keyword => lowerMsg.includes(keyword));
+        
+        if (isFieldCheckQuery) {
+          return `[CONTEXT: User is asking about FieldCheck product. Here's the product info: ${JSON.stringify(fieldCheckInfo)}]\n\nUser question: ${userMessage}`;
+        }
+        return userMessage;
+      }
 
       // Toggle chatbot
       toggle.addEventListener('click', () => {
@@ -7216,11 +7303,47 @@ or fill out the form below`;
 
       // Call Claude API via proxy
       async function callClaudeAPI(userMessage) {
-        // Build messages array
-        const apiMessages = conversationHistory.map(msg => ({
+        // Enhance message with FieldCheck context if relevant
+        const enhancedMessage = enhanceMessageWithFieldCheckContext(userMessage);
+        
+        // Build messages array with enhanced context
+        const apiMessages = conversationHistory.map((msg, index) => ({
           role: msg.role,
-          content: msg.content
+          content: index === conversationHistory.length - 1 && msg.role === 'user' 
+            ? enhancedMessage 
+            : msg.content
         }));
+
+        // Add FieldCheck info to system context
+        const fieldCheckContext = `
+
+IMPORTANT - FieldCheck Product Information (A.I.C.'s SaaS Product):
+- Product: FieldCheck - Workforce Management for Field Teams
+- Target: Security companies, cleaning services, outsourcing companies
+- Status: Coming Soon (Q1 2026) - Early Bird 50% OFF first 3 months!
+- Free Trial: 14 days
+
+PRICING:
+• Starter (1-30 employees): ฿990/month - GPS check-in, selfie, basic reports
+• Professional (31-100 employees): ฿2,490/month - QR patrol, shift management, advanced reports
+• Enterprise (100+ employees): ฿4,990/month - Client portal, API, custom branding
+
+KEY FEATURES:
+• GPS Check-in/out with selfie verification
+• Real-time map view of all employees
+• QR Code patrol system
+• LINE notifications (late, absent, missed patrol)
+• Automatic reports, export to Excel/PDF
+• PWA - no app download needed, works on any smartphone
+• Works offline
+
+SALES APPROACH:
+- If asked about FieldCheck, explain benefits enthusiastically
+- Recommend package based on their team size
+- Emphasize Early Bird 50% discount
+- Suggest visiting /products/fieldcheck/ for more details
+- Offer to help them sign up for waiting list
+`;
 
         // Call the proxy API endpoint
         const response = await fetch(CONFIG.apiEndpoint, {
@@ -7230,7 +7353,8 @@ or fill out the form below`;
           },
           body: JSON.stringify({
             messages: apiMessages,
-            language: 'en'
+            language: 'en',
+            additionalContext: fieldCheckContext
           })
         });
 

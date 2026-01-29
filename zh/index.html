@@ -7017,26 +7017,59 @@
       const welcomeMessage = {
         zh: `🎯 您好！欢迎来到 A.I.C.
 
-我注意到您对工业自动化感兴趣！
+我注意到您对我们的服务感兴趣！
 
-✨ 今天我们为新客户提供特别优惠！
+✨ 我们有特别优惠：
+• 工业自动化服务
+• 📍 FieldCheck - 外勤员工管理应用 (早鸟优惠 50%!)
 
-您有什么项目想法吗？我可以帮您做初步报价！`,
+今天有什么可以帮您的？`,
         en: `🎯 Hello! Welcome to A.I.C.
 
-I noticed you're interested in Industrial Automation!
+I noticed you're interested in our services!
 
-✨ We have special offers for new clients today!
+✨ We have special offers:
+• Industrial Automation Services
+• 📍 FieldCheck - Workforce Management App (Early Bird 50% OFF!)
 
-What project do you have in mind? I can provide a quick estimate!`
+What are you looking for today?`
       };
 
       const quickActions = [
+        { text: '📍 FieldCheck App', value: '想了解FieldCheck外勤员工管理应用' },
         { text: '🔧 PLC编程', value: '对PLC编程感兴趣，想了解价格' },
         { text: '🛡️ 安全系统', value: '需要安全系统，想咨询' },
-        { text: '💻 网络应用/仪表板', value: '想要网络应用或仪表板' },
         { text: '📋 获取报价', value: '我想获取报价' }
       ];
+
+      // FieldCheck Product Information for AI Context
+      const fieldCheckInfo = {
+        name: 'FieldCheck',
+        tagline: '外勤员工管理系统',
+        description: 'GPS签到、自拍验证、实时跟踪，适用于保安公司、清洁服务和外勤员工。',
+        targetCustomers: ['保安公司', '清洁服务公司', '外包公司', '有外勤员工的企业'],
+        pricing: {
+          starter: { name: 'Starter', price: 990, employees: '1-30人' },
+          professional: { name: 'Professional', price: 2490, employees: '31-100人', popular: true },
+          enterprise: { name: 'Enterprise', price: 4990, employees: '100+人' }
+        },
+        earlyBird: { discount: '50%', duration: '前3个月', status: '即将推出 - 2026年Q1' },
+        freeTrial: '14天',
+        landingPage: '/products/fieldcheck/'
+      };
+
+      // Enhance message with FieldCheck context
+      function enhanceMessageWithFieldCheckContext(userMessage) {
+        const lowerMsg = userMessage.toLowerCase();
+        const fieldCheckKeywords = ['fieldcheck', 'field check', 'workforce', 'gps', 'check-in', 'checkin', 'attendance', 'security', 'cleaning', '保安', '清洁', '签到', '员工', '外勤'];
+        
+        const isFieldCheckQuery = fieldCheckKeywords.some(keyword => lowerMsg.includes(keyword));
+        
+        if (isFieldCheckQuery) {
+          return `[CONTEXT: User is asking about FieldCheck product. Here's the product info: ${JSON.stringify(fieldCheckInfo)}]\n\nUser question: ${userMessage}`;
+        }
+        return userMessage;
+      }
 
       // Toggle chatbot
       toggle.addEventListener('click', () => {
@@ -7214,10 +7247,47 @@ What project do you have in mind? I can provide a quick estimate!`
       // Call Claude API via proxy
       async function callClaudeAPI(userMessage) {
         // Build messages array
-        const apiMessages = conversationHistory.map(msg => ({
+        // Enhance message with FieldCheck context if relevant
+        const enhancedMessage = enhanceMessageWithFieldCheckContext(userMessage);
+        
+        // Build messages array with enhanced context
+        const apiMessages = conversationHistory.map((msg, index) => ({
           role: msg.role,
-          content: msg.content
+          content: index === conversationHistory.length - 1 && msg.role === 'user' 
+            ? enhancedMessage 
+            : msg.content
         }));
+
+        // Add FieldCheck info to system context
+        const fieldCheckContext = `
+
+重要 - FieldCheck产品信息 (A.I.C.的SaaS产品):
+- 产品: FieldCheck - 外勤员工管理系统
+- 目标客户: 保安公司、清洁服务公司、外包公司
+- 状态: 即将推出 (2026年Q1) - 早鸟优惠前3个月50%折扣!
+- 免费试用: 14天
+
+价格:
+• Starter (1-30人): ฿990/月 - GPS签到、自拍、基本报表
+• Professional (31-100人): ฿2,490/月 - QR巡更、班次管理、高级报表
+• Enterprise (100+人): ฿4,990/月 - 客户门户、API、定制品牌
+
+主要功能:
+• GPS签到/签退，自拍验证
+• 实时员工位置地图
+• QR码巡更系统
+• LINE通知（迟到、缺勤、漏巡）
+• 自动报表，导出Excel/PDF
+• PWA - 无需下载应用，任何智能手机都可使用
+• 离线可用
+
+销售方式:
+- 如被问到FieldCheck，热情地解释其优势
+- 根据团队规模推荐套餐
+- 强调早鸟50%折扣
+- 建议访问 /products/fieldcheck/ 了解更多
+- 提供帮助注册等候名单
+`;
 
         // Call the proxy API endpoint
         const response = await fetch(CONFIG.apiEndpoint, {
@@ -7227,7 +7297,8 @@ What project do you have in mind? I can provide a quick estimate!`
           },
           body: JSON.stringify({
             messages: apiMessages,
-            language: 'zh'
+            language: 'zh',
+            additionalContext: fieldCheckContext
           })
         });
 
