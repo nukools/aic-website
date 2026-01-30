@@ -925,7 +925,7 @@
             <div class="section-header">
                 <div class="section-badge">💰 ROI Calculator</div>
                 <h2 class="section-title">Calculate Your Return on Investment</h2>
-                <p class="section-desc">See how much you can save with FieldCheck compared to traditional methods.</p>
+                <p class="section-desc">Based on industry research and real customer data. See the breakdown below.</p>
             </div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto;">
@@ -941,26 +941,27 @@
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Average Salary (฿/month)</label>
-                        <input type="number" id="calcSalary" value="15000" min="9000" max="100000" step="1000"
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Average Daily Wage (฿/day)</label>
+                        <input type="number" id="calcWage" value="500" min="300" max="2000" step="50"
                                style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: var(--primary); color: white; font-size: 1.1rem;"
                                oninput="calculateROI()">
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">Min wage ฿300-400/day, Security ฿400-600/day</div>
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Current Problems (Check all that apply)</label>
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Select your current issues:</label>
                         <div style="display: flex; flex-direction: column; gap: 10px;">
                             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                                 <input type="checkbox" id="checkLate" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
-                                <span style="color: var(--text-muted);">Employees often late (avg 15 min/day)</span>
+                                <span style="color: var(--text-muted);">Late arrivals (10-15 min average)</span>
                             </label>
                             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                                 <input type="checkbox" id="checkBuddy" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
-                                <span style="color: var(--text-muted);">Buddy punching / fake attendance</span>
+                                <span style="color: var(--text-muted);">Buddy punching / Time theft</span>
                             </label>
                             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                                <input type="checkbox" id="checkPatrol" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
-                                <span style="color: var(--text-muted);">Incomplete patrol rounds</span>
+                                <input type="checkbox" id="checkPatrol" onchange="calculateROI()" style="width: 18px; height: 18px;">
+                                <span style="color: var(--text-muted);">Incomplete patrol / site visits</span>
                             </label>
                             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                                 <input type="checkbox" id="checkManual" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
@@ -972,40 +973,52 @@
                 
                 <!-- Calculator Results -->
                 <div style="background: linear-gradient(135deg, var(--primary-light), rgba(16, 185, 129, 0.1)); border-radius: 16px; padding: 30px; border: 1px solid rgba(16, 185, 129, 0.3);">
-                    <h3 style="margin-bottom: 25px; color: #10b981;">📈 Your Potential Savings</h3>
+                    <h3 style="margin-bottom: 25px; color: #10b981;">📈 Estimated Monthly Savings</h3>
                     
                     <div style="margin-bottom: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span style="color: var(--text-muted);">Late arrivals savings</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div>
+                                <span style="color: var(--text-muted);">Late arrivals recovery</span>
+                                <div id="lateFormula" style="font-size: 0.7rem; color: rgba(255,255,255,0.4);">10 min × ฿1.04/min × 26 days × 50 emp × 50%</div>
+                            </div>
                             <span id="saveLate" style="color: #10b981; font-weight: 600;">฿0</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span style="color: var(--text-muted);">Buddy punching prevention</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div>
+                                <span style="color: var(--text-muted);">Time theft prevention</span>
+                                <div id="buddyFormula" style="font-size: 0.7rem; color: rgba(255,255,255,0.4);">2.2% of payroll (industry avg)</div>
+                            </div>
                             <span id="saveBuddy" style="color: #10b981; font-weight: 600;">฿0</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span style="color: var(--text-muted);">Patrol compliance value</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div>
+                                <span style="color: var(--text-muted);">Patrol compliance value</span>
+                                <div id="patrolFormula" style="font-size: 0.7rem; color: rgba(255,255,255,0.4);">Reduced incidents & liability</div>
+                            </div>
                             <span id="savePatrol" style="color: #10b981; font-weight: 600;">฿0</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="color: var(--text-muted);">Admin time savings</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span style="color: var(--text-muted);">Admin time savings</span>
+                                <div id="adminFormula" style="font-size: 0.7rem; color: rgba(255,255,255,0.4);">2 hrs/week × ฿100/hr × 4 weeks</div>
+                            </div>
                             <span id="saveManual" style="color: #10b981; font-weight: 600;">฿0</span>
                         </div>
                     </div>
                     
                     <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-bottom: 20px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span style="color: var(--text-muted);">Total Monthly Savings</span>
+                            <span style="color: var(--text-muted);">Estimated Monthly Savings</span>
                             <span id="totalSavings" style="color: #10b981; font-weight: 700; font-size: 1.2rem;">฿0</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span style="color: var(--text-muted);">FieldCheck Cost</span>
-                            <span id="fieldcheckCost" style="color: #f59e0b; font-weight: 600;">฿0</span>
+                            <span style="color: var(--text-muted);">FieldCheck Investment</span>
+                            <span id="fieldcheckCost" style="color: #f59e0b; font-weight: 600;">-฿0</span>
                         </div>
                     </div>
                     
                     <div style="background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; padding: 20px; text-align: center;">
-                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 5px;">Net Monthly Benefit</div>
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 5px;">Estimated Net Benefit</div>
                         <div id="netBenefit" style="font-size: 2rem; font-weight: 800; color: white;">฿0</div>
                         <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 5px;">
                             ROI: <span id="roiPercent" style="font-weight: 700;">0%</span> per month
@@ -1013,35 +1026,82 @@
                     </div>
                     
                     <div style="margin-top: 15px; text-align: center;">
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">
-                            💡 Payback period: <span id="paybackPeriod" style="color: #10b981; font-weight: 600;">Instant</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            * Estimates based on conservative assumptions. Actual results may vary.
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- ROI Explanation -->
-            <div style="max-width: 900px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 10px;">⏰</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;" id="statLate">15 min</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Avg. late time reduced to zero</div>
+            <!-- Calculation Methodology -->
+            <div style="max-width: 900px; margin: 40px auto 0; background: var(--primary-light); border-radius: 16px; padding: 25px; border: 1px solid rgba(255,255,255,0.1);">
+                <h4 style="margin-bottom: 20px; color: var(--accent); text-align: center;">📋 How We Calculate (Methodology)</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; font-size: 0.85rem;">
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <div style="font-weight: 600; color: white; margin-bottom: 8px;">⏰ Late Arrivals Recovery</div>
+                        <div style="color: var(--text-muted); line-height: 1.6;">
+                            <strong>Formula:</strong> Avg late time × Hourly rate × Work days × Employees × Recovery rate<br>
+                            <strong>Assumptions:</strong> 10 min avg lateness, 50% can be recovered with better tracking<br>
+                            <strong>Source:</strong> Internal estimates based on customer feedback
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <div style="font-weight: 600; color: white; margin-bottom: 8px;">🛡️ Time Theft Prevention</div>
+                        <div style="color: var(--text-muted); line-height: 1.6;">
+                            <strong>Formula:</strong> Monthly payroll × Time theft rate × Prevention rate<br>
+                            <strong>Assumptions:</strong> 2.2% payroll loss from buddy punching, 75% preventable<br>
+                            <strong>Source:</strong> American Payroll Association estimates 1.5-5% payroll loss
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <div style="font-weight: 600; color: white; margin-bottom: 8px;">📋 Patrol Compliance Value</div>
+                        <div style="color: var(--text-muted); line-height: 1.6;">
+                            <strong>Formula:</strong> ฿50/employee/month (conservative estimate)<br>
+                            <strong>Assumptions:</strong> Reduced liability, better client satisfaction, fewer incidents<br>
+                            <strong>Note:</strong> Actual value varies by industry (security = higher)
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <div style="font-weight: 600; color: white; margin-bottom: 8px;">📊 Admin Time Savings</div>
+                        <div style="color: var(--text-muted); line-height: 1.6;">
+                            <strong>Formula:</strong> Hours saved/week × Hourly rate × 4 weeks<br>
+                            <strong>Assumptions:</strong> 2 hrs/week for every 25 employees, ฿100/hr admin cost<br>
+                            <strong>Tasks saved:</strong> Manual timesheet entry, report generation, error correction
+                        </div>
+                    </div>
                 </div>
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🛡️</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">100%</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Buddy punching eliminated</div>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; text-align: center;">
+                    <div style="font-size: 0.85rem; color: #f59e0b;">
+                        ⚠️ <strong>Disclaimer:</strong> These are estimates for illustration purposes. Your actual ROI depends on your specific situation, current processes, and how effectively you implement FieldCheck. We recommend starting with a free trial to measure real results.
+                    </div>
                 </div>
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📋</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">98%</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Patrol completion rate</div>
+            </div>
+            
+            <!-- Industry Stats -->
+            <div style="max-width: 900px; margin: 30px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <div style="text-align: center; padding: 20px; background: var(--primary-light); border-radius: 12px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">⏰</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #10b981;">2.2%</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Avg payroll loss from time theft*</div>
                 </div>
-                <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📊</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;" id="statHours">8 hrs</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Admin time saved per week</div>
+                <div style="text-align: center; padding: 20px; background: var(--primary-light); border-radius: 12px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🛡️</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #10b981;">75%</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Buddy punching reduced with GPS+Photo</div>
                 </div>
+                <div style="text-align: center; padding: 20px; background: var(--primary-light); border-radius: 12px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">📋</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #10b981;">95%+</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Patrol completion with tracking</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: var(--primary-light); border-radius: 12px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">📊</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #10b981;" id="statHours">4 hrs</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Admin time saved per week</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 15px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted);">* Source: American Payroll Association, HR industry reports</span>
             </div>
         </div>
     </section>
@@ -1413,78 +1473,93 @@
     <script>
         function calculateROI() {
             const employees = parseInt(document.getElementById('calcEmployees').value) || 50;
-            const salary = parseInt(document.getElementById('calcSalary').value) || 15000;
+            const dailyWage = parseInt(document.getElementById('calcWage').value) || 500;
             const checkLate = document.getElementById('checkLate').checked;
             const checkBuddy = document.getElementById('checkBuddy').checked;
             const checkPatrol = document.getElementById('checkPatrol').checked;
             const checkManual = document.getElementById('checkManual').checked;
             
-            // Calculate hourly rate
-            const hourlyRate = salary / (26 * 8); // 26 days, 8 hours
-            const dailyRate = salary / 26;
+            // Calculate rates
+            const hourlyRate = dailyWage / 8; // 8 hours/day
+            const minuteRate = hourlyRate / 60;
+            const monthlyPayroll = dailyWage * 26 * employees;
             
-            // Calculate savings
+            // Calculate savings (CONSERVATIVE)
             let saveLate = 0;
             let saveBuddy = 0;
             let savePatrol = 0;
             let saveManual = 0;
             
             if (checkLate) {
-                // 15 min late/day * 26 days * hourly rate / 4
-                saveLate = Math.round(employees * (hourlyRate / 4) * 26 * 0.3); // 30% improvement
+                // 10 min avg late × minute rate × 26 days × employees × 50% recovery
+                saveLate = Math.round(10 * minuteRate * 26 * employees * 0.5);
+                document.getElementById('lateFormula').textContent = 
+                    `10 min × ฿${minuteRate.toFixed(2)}/min × 26 days × ${employees} emp × 50%`;
+            } else {
+                document.getElementById('lateFormula').textContent = 'Not selected';
             }
             
             if (checkBuddy) {
-                // Assume 5% of employees do buddy punching = 5% salary loss
-                saveBuddy = Math.round(employees * salary * 0.03); // 3% recovery
+                // 2.2% of payroll × 75% prevention (industry standard)
+                saveBuddy = Math.round(monthlyPayroll * 0.022 * 0.75);
+                document.getElementById('buddyFormula').textContent = 
+                    `฿${monthlyPayroll.toLocaleString()} payroll × 2.2% × 75% prevention`;
+            } else {
+                document.getElementById('buddyFormula').textContent = 'Not selected';
             }
             
             if (checkPatrol) {
-                // Value of proper patrol (security/quality)
-                savePatrol = Math.round(employees * 200); // ฿200/employee value
+                // Conservative: ฿50/employee/month value
+                savePatrol = Math.round(employees * 50);
+                document.getElementById('patrolFormula').textContent = 
+                    `${employees} employees × ฿50/emp (conservative)`;
+            } else {
+                document.getElementById('patrolFormula').textContent = 'Not selected';
             }
             
             if (checkManual) {
-                // Admin saves 8 hours/week at ฿100/hour
-                const adminHours = Math.ceil(employees / 20) * 8; // 8 hours per 20 employees
-                saveManual = Math.round(adminHours * 4 * 100); // 4 weeks * ฿100/hour
+                // 2 hrs/week per 25 employees × ฿100/hr × 4 weeks
+                const adminHours = Math.ceil(employees / 25) * 2;
+                saveManual = Math.round(adminHours * 100 * 4);
+                document.getElementById('adminFormula').textContent = 
+                    `${adminHours} hrs/week × ฿100/hr × 4 weeks`;
+                document.getElementById('statHours').textContent = adminHours + ' hrs';
+            } else {
+                document.getElementById('adminFormula').textContent = 'Not selected';
             }
             
             const totalSavings = saveLate + saveBuddy + savePatrol + saveManual;
             
-            // Calculate FieldCheck cost
+            // Calculate FieldCheck cost (new pricing)
             let fieldcheckCost = 0;
-            if (employees <= 30) {
-                fieldcheckCost = 1490;
+            if (employees <= 25) {
+                fieldcheckCost = 2490;
+            } else if (employees <= 50) {
+                fieldcheckCost = 4490;
             } else if (employees <= 100) {
-                fieldcheckCost = 3990;
+                fieldcheckCost = 8990;
+            } else if (employees <= 200) {
+                fieldcheckCost = employees * 89;
+            } else if (employees <= 500) {
+                fieldcheckCost = employees * 79;
+            } else if (employees <= 1000) {
+                fieldcheckCost = employees * 69;
             } else {
-                fieldcheckCost = 7990;
+                fieldcheckCost = employees * 59;
             }
             
             const netBenefit = totalSavings - fieldcheckCost;
             const roi = fieldcheckCost > 0 ? Math.round((netBenefit / fieldcheckCost) * 100) : 0;
             
             // Update display
-            document.getElementById('saveLate').textContent = '฿' + saveLate.toLocaleString();
-            document.getElementById('saveBuddy').textContent = '฿' + saveBuddy.toLocaleString();
-            document.getElementById('savePatrol').textContent = '฿' + savePatrol.toLocaleString();
-            document.getElementById('saveManual').textContent = '฿' + saveManual.toLocaleString();
+            document.getElementById('saveLate').textContent = checkLate ? '฿' + saveLate.toLocaleString() : '—';
+            document.getElementById('saveBuddy').textContent = checkBuddy ? '฿' + saveBuddy.toLocaleString() : '—';
+            document.getElementById('savePatrol').textContent = checkPatrol ? '฿' + savePatrol.toLocaleString() : '—';
+            document.getElementById('saveManual').textContent = checkManual ? '฿' + saveManual.toLocaleString() : '—';
             document.getElementById('totalSavings').textContent = '฿' + totalSavings.toLocaleString();
             document.getElementById('fieldcheckCost').textContent = '-฿' + fieldcheckCost.toLocaleString();
-            document.getElementById('netBenefit').textContent = '฿' + netBenefit.toLocaleString();
+            document.getElementById('netBenefit').textContent = (netBenefit >= 0 ? '฿' : '-฿') + Math.abs(netBenefit).toLocaleString();
             document.getElementById('roiPercent').textContent = roi + '%';
-            
-            // Payback period
-            if (netBenefit > 0) {
-                document.getElementById('paybackPeriod').textContent = 'Instant savings!';
-            } else {
-                document.getElementById('paybackPeriod').textContent = 'Upgrade recommended';
-            }
-            
-            // Update stats
-            const adminHours = Math.ceil(employees / 20) * 8;
-            document.getElementById('statHours').textContent = adminHours + ' hrs';
         }
         
         // Initialize on page load
