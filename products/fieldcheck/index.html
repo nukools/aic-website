@@ -917,18 +917,61 @@
                 <div class="early-bird-content">
                     <h2>🎁 Early Bird Special</h2>
                     <p>Join now and get 50% off your first 3 months when we launch!</p>
-                    <form class="early-bird-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfvUQmCs-kwziEqH8SCQjpI_9Bmbq9RlUE_CjIRdXkMNPMw-A/formResponse" method="POST" target="hidden_iframe" onsubmit="showThankYou()">
-                        <input type="email" name="entry.1633416990" placeholder="Your email address" required>
-                        <button type="submit">Join Waiting List</button>
+                    <form class="early-bird-form" id="earlyBirdForm" onsubmit="submitEarlyBird(event)">
+                        <input type="email" id="earlyBirdEmail" placeholder="Your email address" required>
+                        <button type="submit" id="earlyBirdBtn">Join Waiting List</button>
                     </form>
-                    <iframe name="hidden_iframe" style="display:none;"></iframe>
                     <p class="early-bird-note" id="form-note">🔒 No spam. We'll only email you when we launch.</p>
+                    
                     <script>
-                        function showThankYou() {
-                            document.querySelector('.early-bird-form').style.display = 'none';
-                            document.getElementById('form-note').innerHTML = '✅ <strong>Thank you!</strong> We\'ll notify you when FieldCheck launches.';
-                            document.getElementById('form-note').style.color = '#10b981';
-                            document.getElementById('form-note').style.fontSize = '1.2rem';
+                        async function submitEarlyBird(e) {
+                            e.preventDefault();
+                            
+                            const email = document.getElementById('earlyBirdEmail').value;
+                            const btn = document.getElementById('earlyBirdBtn');
+                            const form = document.getElementById('earlyBirdForm');
+                            const note = document.getElementById('form-note');
+                            
+                            // Show loading
+                            btn.textContent = 'Submitting...';
+                            btn.disabled = true;
+                            
+                            try {
+                                // 1. Send to Google Form (backup storage)
+                                const googleFormData = new FormData();
+                                googleFormData.append('entry.1633416990', email);
+                                
+                                fetch('https://docs.google.com/forms/d/e/1FAIpQLSfvUQmCs-kwziEqH8SCQjpI_9Bmbq9RlUE_CjIRdXkMNPMw-A/formResponse', {
+                                    method: 'POST',
+                                    body: googleFormData,
+                                    mode: 'no-cors'
+                                });
+                                
+                                // 2. Send LINE notification
+                                await fetch('https://aic-inventory.vercel.app/api/fieldcheck-lead', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        email: email,
+                                        source: 'FieldCheck Early Bird',
+                                        timestamp: new Date().toISOString()
+                                    })
+                                });
+                                
+                                // Show success
+                                form.style.display = 'none';
+                                note.innerHTML = '✅ <strong>Thank you!</strong> We\'ll notify you when FieldCheck launches.';
+                                note.style.color = '#10b981';
+                                note.style.fontSize = '1.2rem';
+                                
+                            } catch (error) {
+                                console.error('Error:', error);
+                                // Still show success (Google Form likely succeeded)
+                                form.style.display = 'none';
+                                note.innerHTML = '✅ <strong>Thank you!</strong> We\'ll notify you when FieldCheck launches.';
+                                note.style.color = '#10b981';
+                                note.style.fontSize = '1.2rem';
+                            }
                         }
                     </script>
                 </div>
