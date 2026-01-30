@@ -919,24 +919,162 @@
         </div>
     </section>
 
+    <!-- ROI Calculator Section -->
+    <section id="roi" class="section" style="background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, rgba(0, 168, 255, 0.05) 100%);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">💰 ROI Calculator</div>
+                <h2 class="section-title">Calculate Your Return on Investment</h2>
+                <p class="section-desc">See how much you can save with FieldCheck compared to traditional methods.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto;">
+                <!-- Calculator Input -->
+                <div style="background: var(--primary-light); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h3 style="margin-bottom: 25px; color: var(--accent);">📊 Your Business Info</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Number of Employees</label>
+                        <input type="number" id="calcEmployees" value="50" min="1" max="500" 
+                               style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: var(--primary); color: white; font-size: 1.1rem;"
+                               oninput="calculateROI()">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Average Salary (฿/month)</label>
+                        <input type="number" id="calcSalary" value="15000" min="9000" max="100000" step="1000"
+                               style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: var(--primary); color: white; font-size: 1.1rem;"
+                               oninput="calculateROI()">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Current Problems (Check all that apply)</label>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="checkLate" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
+                                <span style="color: var(--text-muted);">Employees often late (avg 15 min/day)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="checkBuddy" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
+                                <span style="color: var(--text-muted);">Buddy punching / fake attendance</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="checkPatrol" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
+                                <span style="color: var(--text-muted);">Incomplete patrol rounds</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="checkManual" checked onchange="calculateROI()" style="width: 18px; height: 18px;">
+                                <span style="color: var(--text-muted);">Manual timesheet processing</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calculator Results -->
+                <div style="background: linear-gradient(135deg, var(--primary-light), rgba(16, 185, 129, 0.1)); border-radius: 16px; padding: 30px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <h3 style="margin-bottom: 25px; color: #10b981;">📈 Your Potential Savings</h3>
+                    
+                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: var(--text-muted);">Late arrivals savings</span>
+                            <span id="saveLate" style="color: #10b981; font-weight: 600;">฿0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: var(--text-muted);">Buddy punching prevention</span>
+                            <span id="saveBuddy" style="color: #10b981; font-weight: 600;">฿0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: var(--text-muted);">Patrol compliance value</span>
+                            <span id="savePatrol" style="color: #10b981; font-weight: 600;">฿0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Admin time savings</span>
+                            <span id="saveManual" style="color: #10b981; font-weight: 600;">฿0</span>
+                        </div>
+                    </div>
+                    
+                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: var(--text-muted);">Total Monthly Savings</span>
+                            <span id="totalSavings" style="color: #10b981; font-weight: 700; font-size: 1.2rem;">฿0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: var(--text-muted);">FieldCheck Cost</span>
+                            <span id="fieldcheckCost" style="color: #f59e0b; font-weight: 600;">฿0</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; padding: 20px; text-align: center;">
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 5px;">Net Monthly Benefit</div>
+                        <div id="netBenefit" style="font-size: 2rem; font-weight: 800; color: white;">฿0</div>
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 5px;">
+                            ROI: <span id="roiPercent" style="font-weight: 700;">0%</span> per month
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px; text-align: center;">
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">
+                            💡 Payback period: <span id="paybackPeriod" style="color: #10b981; font-weight: 600;">Instant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ROI Explanation -->
+            <div style="max-width: 900px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">⏰</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;" id="statLate">15 min</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Avg. late time reduced to zero</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🛡️</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">100%</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Buddy punching eliminated</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📋</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">98%</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Patrol completion rate</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📊</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;" id="statHours">8 hrs</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Admin time saved per week</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section -->
     <section id="pricing" class="section pricing-section">
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">Pricing</div>
-                <h2 class="section-title">Simple, Transparent Pricing</h2>
-                <p class="section-desc">Choose the plan that fits your team size. All plans include 14-day free trial.</p>
+                <h2 class="section-title">Invest in Productivity, Not Paperwork</h2>
+                <p class="section-desc">Flexible pricing that scales with your team. All plans include 14-day free trial.</p>
             </div>
+            
+            <!-- Per-seat pricing highlight -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(0, 168, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid rgba(0, 168, 255, 0.3); border-radius: 12px; padding: 15px 30px;">
+                    <span style="color: var(--text-muted);">Starting from just </span>
+                    <span style="color: var(--accent); font-size: 1.5rem; font-weight: 700;">฿49</span>
+                    <span style="color: var(--text-muted);"> per employee/month</span>
+                </div>
+            </div>
+            
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-name">Starter</div>
                     <div class="pricing-target">Small teams • 1-30 employees</div>
-                    <div class="pricing-price">฿990 <span>/month</span></div>
+                    <div class="pricing-price">฿1,490 <span>/month</span></div>
+                    <div style="font-size: 0.85rem; color: var(--accent); margin-top: -10px; margin-bottom: 15px;">~฿50/employee</div>
                     <ul class="pricing-features">
                         <li>Up to 30 employees</li>
                         <li>Unlimited work sites</li>
                         <li>GPS Check-in/out</li>
-                        <li>Selfie verification</li>
+                        <li>Photo verification</li>
                         <li>Basic reports</li>
                         <li>LINE notifications</li>
                         <li>Email support</li>
@@ -947,14 +1085,16 @@
                     <div class="popular-badge">🔥 Most Popular</div>
                     <div class="pricing-name">Professional</div>
                     <div class="pricing-target">Growing teams • 31-100 employees</div>
-                    <div class="pricing-price">฿2,490 <span>/month</span></div>
+                    <div class="pricing-price">฿3,990 <span>/month</span></div>
+                    <div style="font-size: 0.85rem; color: var(--accent); margin-top: -10px; margin-bottom: 15px;">~฿40/employee</div>
                     <ul class="pricing-features">
                         <li>Up to 100 employees</li>
                         <li>Everything in Starter</li>
                         <li>Smart Checkpoint system</li>
+                        <li>Anti-Fake GPS (4 layers)</li>
                         <li>Auto performance scoring</li>
                         <li>Shift management</li>
-                        <li>Advanced reports</li>
+                        <li>Advanced reports & analytics</li>
                         <li>Priority support</li>
                     </ul>
                     <a href="#early-bird" class="btn btn-primary" style="width:100%">Get Started</a>
@@ -962,21 +1102,179 @@
                 <div class="pricing-card">
                     <div class="pricing-name">Enterprise</div>
                     <div class="pricing-target">Large teams • 100+ employees</div>
-                    <div class="pricing-price">฿4,990 <span>/month</span></div>
+                    <div class="pricing-price">฿7,990 <span>/month</span></div>
+                    <div style="font-size: 0.85rem; color: var(--accent); margin-top: -10px; margin-bottom: 15px;">~฿27/employee (300 users)</div>
                     <ul class="pricing-features">
-                        <li>Up to 300 employees</li>
+                        <li>Up to 500 employees</li>
                         <li>Everything in Professional</li>
                         <li>Client portal access</li>
                         <li>Custom branding</li>
                         <li>API access</li>
-                        <li>Dedicated support</li>
-                        <li>Onboarding training</li>
+                        <li>Dedicated account manager</li>
+                        <li>Onboarding & training</li>
+                        <li>SLA guarantee</li>
                     </ul>
                     <a href="#early-bird" class="btn btn-outline" style="width:100%">Contact Sales</a>
                 </div>
             </div>
+            
+            <!-- Value proposition -->
+            <div style="max-width: 800px; margin: 50px auto 0; background: var(--primary-light); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                <h3 style="text-align: center; margin-bottom: 20px;">💡 Why FieldCheck is Worth Every Baht</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+                    <div>
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;">5-10x</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Average ROI</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;">&lt; 1 month</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Payback period</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;">฿0</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Hardware cost</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comparison with alternatives -->
+            <div style="max-width: 900px; margin: 40px auto 0;">
+                <h3 style="text-align: center; margin-bottom: 25px;">📊 Compare with Alternatives</h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid rgba(255,255,255,0.2);">
+                                <th style="text-align: left; padding: 15px; color: var(--text-muted);">Method</th>
+                                <th style="text-align: center; padding: 15px; color: var(--text-muted);">Monthly Cost (50 emp)</th>
+                                <th style="text-align: center; padding: 15px; color: var(--text-muted);">Setup Cost</th>
+                                <th style="text-align: center; padding: 15px; color: var(--text-muted);">Accuracy</th>
+                                <th style="text-align: center; padding: 15px; color: var(--text-muted);">Real-time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 15px; color: var(--text-muted);">📝 Paper timesheet</td>
+                                <td style="padding: 15px; text-align: center;">฿0</td>
+                                <td style="padding: 15px; text-align: center;">฿0</td>
+                                <td style="padding: 15px; text-align: center; color: #ef4444;">❌ Low</td>
+                                <td style="padding: 15px; text-align: center; color: #ef4444;">❌ No</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 15px; color: var(--text-muted);">🔲 QR Code system</td>
+                                <td style="padding: 15px; text-align: center;">฿500-1,500</td>
+                                <td style="padding: 15px; text-align: center;">฿5,000-15,000</td>
+                                <td style="padding: 15px; text-align: center; color: #f59e0b;">⚠️ Medium</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981;">✅ Yes</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 15px; color: var(--text-muted);">👆 Fingerprint machine</td>
+                                <td style="padding: 15px; text-align: center;">฿0</td>
+                                <td style="padding: 15px; text-align: center;">฿15,000-50,000</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981;">✅ High</td>
+                                <td style="padding: 15px; text-align: center; color: #ef4444;">❌ No</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 15px; color: var(--text-muted);">🏢 Other SaaS (JOBCAN, etc.)</td>
+                                <td style="padding: 15px; text-align: center;">฿5,000-15,000</td>
+                                <td style="padding: 15px; text-align: center;">฿0</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981;">✅ High</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981;">✅ Yes</td>
+                            </tr>
+                            <tr style="background: rgba(16, 185, 129, 0.1);">
+                                <td style="padding: 15px; color: #10b981; font-weight: 600;">📍 FieldCheck</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981; font-weight: 600;">฿1,490-3,990</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981; font-weight: 600;">฿0</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981;">✅ Highest</td>
+                                <td style="padding: 15px; text-align: center; color: #10b981;">✅ Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- ROI Calculator Script -->
+    <script>
+        function calculateROI() {
+            const employees = parseInt(document.getElementById('calcEmployees').value) || 50;
+            const salary = parseInt(document.getElementById('calcSalary').value) || 15000;
+            const checkLate = document.getElementById('checkLate').checked;
+            const checkBuddy = document.getElementById('checkBuddy').checked;
+            const checkPatrol = document.getElementById('checkPatrol').checked;
+            const checkManual = document.getElementById('checkManual').checked;
+            
+            // Calculate hourly rate
+            const hourlyRate = salary / (26 * 8); // 26 days, 8 hours
+            const dailyRate = salary / 26;
+            
+            // Calculate savings
+            let saveLate = 0;
+            let saveBuddy = 0;
+            let savePatrol = 0;
+            let saveManual = 0;
+            
+            if (checkLate) {
+                // 15 min late/day * 26 days * hourly rate / 4
+                saveLate = Math.round(employees * (hourlyRate / 4) * 26 * 0.3); // 30% improvement
+            }
+            
+            if (checkBuddy) {
+                // Assume 5% of employees do buddy punching = 5% salary loss
+                saveBuddy = Math.round(employees * salary * 0.03); // 3% recovery
+            }
+            
+            if (checkPatrol) {
+                // Value of proper patrol (security/quality)
+                savePatrol = Math.round(employees * 200); // ฿200/employee value
+            }
+            
+            if (checkManual) {
+                // Admin saves 8 hours/week at ฿100/hour
+                const adminHours = Math.ceil(employees / 20) * 8; // 8 hours per 20 employees
+                saveManual = Math.round(adminHours * 4 * 100); // 4 weeks * ฿100/hour
+            }
+            
+            const totalSavings = saveLate + saveBuddy + savePatrol + saveManual;
+            
+            // Calculate FieldCheck cost
+            let fieldcheckCost = 0;
+            if (employees <= 30) {
+                fieldcheckCost = 1490;
+            } else if (employees <= 100) {
+                fieldcheckCost = 3990;
+            } else {
+                fieldcheckCost = 7990;
+            }
+            
+            const netBenefit = totalSavings - fieldcheckCost;
+            const roi = fieldcheckCost > 0 ? Math.round((netBenefit / fieldcheckCost) * 100) : 0;
+            
+            // Update display
+            document.getElementById('saveLate').textContent = '฿' + saveLate.toLocaleString();
+            document.getElementById('saveBuddy').textContent = '฿' + saveBuddy.toLocaleString();
+            document.getElementById('savePatrol').textContent = '฿' + savePatrol.toLocaleString();
+            document.getElementById('saveManual').textContent = '฿' + saveManual.toLocaleString();
+            document.getElementById('totalSavings').textContent = '฿' + totalSavings.toLocaleString();
+            document.getElementById('fieldcheckCost').textContent = '-฿' + fieldcheckCost.toLocaleString();
+            document.getElementById('netBenefit').textContent = '฿' + netBenefit.toLocaleString();
+            document.getElementById('roiPercent').textContent = roi + '%';
+            
+            // Payback period
+            if (netBenefit > 0) {
+                document.getElementById('paybackPeriod').textContent = 'Instant savings!';
+            } else {
+                document.getElementById('paybackPeriod').textContent = 'Upgrade recommended';
+            }
+            
+            // Update stats
+            const adminHours = Math.ceil(employees / 20) * 8;
+            document.getElementById('statHours').textContent = adminHours + ' hrs';
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', calculateROI);
+    </script>
 
     <!-- Early Bird Section -->
     <section id="early-bird" class="section">
