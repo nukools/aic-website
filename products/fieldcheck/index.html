@@ -1055,16 +1055,20 @@
                 <p class="section-desc">Flexible pricing that scales with your team. All plans include 14-day free trial.</p>
             </div>
             
-            <!-- Per-seat pricing highlight -->
+            <!-- Pricing Toggle -->
             <div style="text-align: center; margin-bottom: 40px;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(0, 168, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid rgba(0, 168, 255, 0.3); border-radius: 12px; padding: 15px 30px;">
-                    <span style="color: var(--text-muted);">Starting from just </span>
-                    <span style="color: var(--accent); font-size: 1.5rem; font-weight: 700;">฿49</span>
-                    <span style="color: var(--text-muted);"> per employee/month</span>
+                <div style="display: inline-flex; background: var(--primary-light); border-radius: 12px; padding: 5px; border: 1px solid rgba(255,255,255,0.1);">
+                    <button id="pricingSmall" onclick="showPricing('small')" style="padding: 12px 24px; border-radius: 8px; border: none; background: var(--accent); color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                        SME (1-100 คน)
+                    </button>
+                    <button id="pricingLarge" onclick="showPricing('large')" style="padding: 12px 24px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                        Enterprise (100+ คน)
+                    </button>
                 </div>
             </div>
             
-            <div class="pricing-grid">
+            <!-- SME Pricing (1-100 employees) -->
+            <div id="smePricing" class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-name">Starter</div>
                     <div class="pricing-target">Small teams • 1-30 employees</div>
@@ -1100,23 +1104,156 @@
                     <a href="#early-bird" class="btn btn-primary" style="width:100%">Get Started</a>
                 </div>
                 <div class="pricing-card">
-                    <div class="pricing-name">Enterprise</div>
-                    <div class="pricing-target">Large teams • 100+ employees</div>
-                    <div class="pricing-price">฿7,990 <span>/month</span></div>
-                    <div style="font-size: 0.85rem; color: var(--accent); margin-top: -10px; margin-bottom: 15px;">~฿27/employee (300 users)</div>
+                    <div class="pricing-name">Business</div>
+                    <div class="pricing-target">Medium teams • 101-200 employees</div>
+                    <div class="pricing-price">฿6,990 <span>/month</span></div>
+                    <div style="font-size: 0.85rem; color: var(--accent); margin-top: -10px; margin-bottom: 15px;">~฿35/employee</div>
                     <ul class="pricing-features">
-                        <li>Up to 500 employees</li>
+                        <li>Up to 200 employees</li>
                         <li>Everything in Professional</li>
+                        <li>Multi-branch management</li>
                         <li>Client portal access</li>
-                        <li>Custom branding</li>
+                        <li>Custom reports</li>
                         <li>API access</li>
-                        <li>Dedicated account manager</li>
-                        <li>Onboarding & training</li>
-                        <li>SLA guarantee</li>
+                        <li>Dedicated support</li>
+                        <li>Onboarding training</li>
                     </ul>
-                    <a href="#early-bird" class="btn btn-outline" style="width:100%">Contact Sales</a>
+                    <a href="#early-bird" class="btn btn-outline" style="width:100%">Get Started</a>
                 </div>
             </div>
+            
+            <!-- Enterprise Pricing (100+ employees) -->
+            <div id="enterprisePricing" style="display: none;">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <!-- Per-seat pricing explanation -->
+                    <div style="background: linear-gradient(135deg, rgba(0, 168, 255, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid rgba(0, 168, 255, 0.3); border-radius: 16px; padding: 30px; margin-bottom: 30px; text-align: center;">
+                        <h3 style="margin-bottom: 15px;">💼 Enterprise Per-Seat Pricing</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 20px;">For organizations with 100+ employees, we offer flexible per-seat pricing that scales with your team.</p>
+                        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent);">฿39</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">per employee/month</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">100-300 employees</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent);">฿29</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">per employee/month</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">301-1,000 employees</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent);">฿19</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">per employee/month</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">1,000+ employees</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enterprise Calculator -->
+                    <div style="background: var(--primary-light); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                        <h3 style="margin-bottom: 20px; text-align: center;">🧮 Calculate Your Price</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; color: var(--text-muted);">Number of Employees</label>
+                                <input type="number" id="entEmployees" value="200" min="100" max="10000" 
+                                       style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: var(--primary); color: white; font-size: 1.2rem;"
+                                       oninput="calculateEnterprise()">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; color: var(--text-muted);">Your Monthly Price</label>
+                                <div style="padding: 15px; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); text-align: center;">
+                                    <span id="entPrice" style="font-size: 1.8rem; font-weight: 800; color: white;">฿7,800</span>
+                                    <span style="color: rgba(255,255,255,0.8);">/month</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                                <span id="entPerSeat">฿39</span>/employee × <span id="entCount">200</span> employees = <span id="entTotal" style="color: #10b981; font-weight: 600;">฿7,800/month</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Enterprise Features -->
+                    <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div style="background: var(--primary-light); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                            <h4 style="margin-bottom: 15px; color: var(--accent);">✅ All Enterprise Features</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">📍 Smart Checkpoint + Anti-Fake GPS</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">🏢 Multi-branch management</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">👥 Client portal for your customers</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">🎨 Custom branding (White-label)</li>
+                                <li style="padding: 8px 0;">🔗 API access for integration</li>
+                            </ul>
+                        </div>
+                        <div style="background: var(--primary-light); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                            <h4 style="margin-bottom: 15px; color: var(--accent);">🎯 Enterprise Support</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">👤 Dedicated account manager</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">📞 Priority phone support</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">🎓 Onboarding & training sessions</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">📊 Custom report development</li>
+                                <li style="padding: 8px 0;">📝 SLA guarantee (99.9% uptime)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="#early-bird" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">
+                            Contact Sales for Enterprise Quote
+                        </a>
+                        <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
+                            Or call us: <a href="tel:+66891900588" style="color: var(--accent);">+66 89-190-0588</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pricing Toggle Script -->
+            <script>
+                function showPricing(type) {
+                    const smeBtn = document.getElementById('pricingSmall');
+                    const largeBtn = document.getElementById('pricingLarge');
+                    const smePricing = document.getElementById('smePricing');
+                    const entPricing = document.getElementById('enterprisePricing');
+                    
+                    if (type === 'small') {
+                        smeBtn.style.background = 'var(--accent)';
+                        smeBtn.style.color = 'white';
+                        largeBtn.style.background = 'transparent';
+                        largeBtn.style.color = 'var(--text-muted)';
+                        smePricing.style.display = 'grid';
+                        entPricing.style.display = 'none';
+                    } else {
+                        largeBtn.style.background = 'var(--accent)';
+                        largeBtn.style.color = 'white';
+                        smeBtn.style.background = 'transparent';
+                        smeBtn.style.color = 'var(--text-muted)';
+                        smePricing.style.display = 'none';
+                        entPricing.style.display = 'block';
+                        calculateEnterprise();
+                    }
+                }
+                
+                function calculateEnterprise() {
+                    const employees = parseInt(document.getElementById('entEmployees').value) || 200;
+                    let perSeat = 39;
+                    
+                    if (employees >= 1000) {
+                        perSeat = 19;
+                    } else if (employees >= 301) {
+                        perSeat = 29;
+                    } else {
+                        perSeat = 39;
+                    }
+                    
+                    const total = employees * perSeat;
+                    
+                    document.getElementById('entPrice').textContent = '฿' + total.toLocaleString();
+                    document.getElementById('entPerSeat').textContent = '฿' + perSeat;
+                    document.getElementById('entCount').textContent = employees.toLocaleString();
+                    document.getElementById('entTotal').textContent = '฿' + total.toLocaleString() + '/month';
+                }
+            </script>
             
             <!-- Value proposition -->
             <div style="max-width: 800px; margin: 50px auto 0; background: var(--primary-light); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.1);">
@@ -1160,9 +1297,9 @@
                                 <td style="padding: 15px; text-align: center; color: #ef4444;">❌ No</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <td style="padding: 15px; color: var(--text-muted);">🔲 QR Code system</td>
-                                <td style="padding: 15px; text-align: center;">฿500-1,500</td>
-                                <td style="padding: 15px; text-align: center;">฿5,000-15,000</td>
+                                <td style="padding: 15px; color: var(--text-muted);">🔲 QR Code patrol</td>
+                                <td style="padding: 15px; text-align: center;">฿500-2,000</td>
+                                <td style="padding: 15px; text-align: center;">฿5,000-20,000</td>
                                 <td style="padding: 15px; text-align: center; color: #f59e0b;">⚠️ Medium</td>
                                 <td style="padding: 15px; text-align: center; color: #10b981;">✅ Yes</td>
                             </tr>
@@ -1174,8 +1311,8 @@
                                 <td style="padding: 15px; text-align: center; color: #ef4444;">❌ No</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <td style="padding: 15px; color: var(--text-muted);">🏢 Other SaaS (JOBCAN, etc.)</td>
-                                <td style="padding: 15px; text-align: center;">฿5,000-15,000</td>
+                                <td style="padding: 15px; color: var(--text-muted);">☁️ Traditional HR SaaS</td>
+                                <td style="padding: 15px; text-align: center;">฿5,000-20,000</td>
                                 <td style="padding: 15px; text-align: center;">฿0</td>
                                 <td style="padding: 15px; text-align: center; color: #10b981;">✅ High</td>
                                 <td style="padding: 15px; text-align: center; color: #10b981;">✅ Yes</td>
@@ -1190,6 +1327,7 @@
                         </tbody>
                     </table>
                 </div>
+                <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 15px;">* Prices are estimated based on market research. Actual costs may vary.</p>
             </div>
         </div>
     </section>
