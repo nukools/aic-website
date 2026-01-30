@@ -917,11 +917,20 @@
                 <div class="early-bird-content">
                     <h2>🎁 Early Bird Special</h2>
                     <p>Join now and get 50% off your first 3 months when we launch!</p>
-                    <form class="early-bird-form" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
-                        <input type="email" name="entry.EMAIL_FIELD" placeholder="Your email address" required>
+                    <form class="early-bird-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfvUQmCs-kwziEqH8SCQjpI_9Bmbq9RlUE_CjIRdXkMNPMw-A/formResponse" method="POST" target="hidden_iframe" onsubmit="showThankYou()">
+                        <input type="email" name="entry.1633416990" placeholder="Your email address" required>
                         <button type="submit">Join Waiting List</button>
                     </form>
-                    <p class="early-bird-note">🔒 No spam. We'll only email you when we launch.</p>
+                    <iframe name="hidden_iframe" style="display:none;"></iframe>
+                    <p class="early-bird-note" id="form-note">🔒 No spam. We'll only email you when we launch.</p>
+                    <script>
+                        function showThankYou() {
+                            document.querySelector('.early-bird-form').style.display = 'none';
+                            document.getElementById('form-note').innerHTML = '✅ <strong>Thank you!</strong> We\'ll notify you when FieldCheck launches.';
+                            document.getElementById('form-note').style.color = '#10b981';
+                            document.getElementById('form-note').style.fontSize = '1.2rem';
+                        }
+                    </script>
                 </div>
             </div>
         </div>
