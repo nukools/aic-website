@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIC Bridge - 连接所有设备、所有品牌的中间盒 | A.I.C.</title>
+    <meta name="description" content="AIC Bridge 是即装即用的控制器盒子，将任何品牌的机器、传感器、光伏系统和农场设备连接到同一个仪表板，并通过 LINE 提醒。现已开放预订。">
+    <link rel="alternate" hreflang="th" href="https://www.autoinnovate.com/products/bridge/">
+    <link rel="alternate" hreflang="en" href="https://www.autoinnovate.com/products/bridge/en/">
+    <link rel="alternate" hreflang="zh" href="https://www.autoinnovate.com/products/bridge/zh/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1628;
+            --primary-light: #132344;
+            --card: rgba(255,255,255,0.04);
+            --line: rgba(255,255,255,0.1);
+            --accent: #00a8ff;
+            --accent-glow: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #ffffff;
+            --text-muted: rgba(255,255,255,0.7);
+            --text-dim: rgba(255,255,255,0.5);
+            --gradient-primary: linear-gradient(135deg, #00a8ff 0%, #7c3aed 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Space Grotesk', 'Noto Sans Thai', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        a { color: inherit; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 14px 0;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+        }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
+        .logo small { opacity: 0.6; font-weight: 500; }
+        .logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--gradient-primary); display: grid; place-items: center; font-size: 0.8rem; font-weight: 800; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color .2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 14px; }
+        .lang { display: flex; border: 1px solid rgba(255,255,255,.2); border-radius: 8px; overflow: hidden; }
+        .lang a { padding: 6px 10px; font-size: .82rem; color: var(--text-muted); text-decoration: none; }
+        .lang a + a { border-left: 1px solid rgba(255,255,255,.2); }
+        .lang a:hover { color: #fff; }
+        .lang a[aria-current="page"] { background: rgba(0,168,255,.2); color: #fff; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 26px; border-radius: 10px; font-weight: 600; text-decoration: none;
+            transition: all .25s; cursor: pointer; border: none; font-size: 1rem; font-family: inherit;
+        }
+        .btn-primary { background: var(--gradient-primary); color: #fff; box-shadow: 0 4px 20px rgba(0,168,255,.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,168,255,.4); }
+        .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.3); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-large { padding: 16px 34px; font-size: 1.05rem; }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 25% 30%, rgba(0,168,255,.15) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 70%, rgba(124,58,237,.15) 0%, transparent 50%);
+        }
+        .hero-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(0,168,255,.15); border: 1px solid rgba(0,168,255,.3);
+            padding: 7px 16px; border-radius: 50px; font-size: .9rem; margin-bottom: 20px; color: var(--accent);
+        }
+        .pulse { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+        .hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 800; line-height: 1.25; margin-bottom: 20px; }
+        :lang(zh-CN) .hero h1 { font-size: clamp(2rem, 4.2vw, 3rem); word-break: keep-all; }
+        .highlight { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 32px; max-width: 560px; }
+        .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+        .hero-points { display: flex; gap: 28px; flex-wrap: wrap; }
+        .hero-points div { font-size: .95rem; color: var(--text-muted); }
+        .hero-points b { display: block; font-size: 1.5rem; color: #fff; font-weight: 700; }
+
+        /* Device mockup */
+        .device-wrap { position: relative; }
+        .device {
+            background: linear-gradient(160deg, #1b2c4d 0%, #0f1d36 100%);
+            border: 1px solid rgba(255,255,255,.15); border-radius: 18px; padding: 22px;
+            box-shadow: 0 30px 80px rgba(0,0,0,.45);
+        }
+        .device-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .device-name { font-weight: 700; letter-spacing: .5px; }
+        .device-name span { color: var(--accent); }
+        .leds { display: flex; gap: 8px; }
+        .led { width: 10px; height: 10px; border-radius: 50%; background: #2a3a58; }
+        .led.on { background: var(--success); box-shadow: 0 0 10px var(--success); }
+        .led.data { background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.2s infinite; }
+        .terminals { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; margin-bottom: 18px; }
+        .terminals i { display: block; height: 16px; border-radius: 3px; background: #2f8f4e; border: 1px solid rgba(0,0,0,.3); }
+        .terminals i:nth-child(3n) { background: #3a4b6b; }
+        .ports { display: flex; gap: 8px; flex-wrap: wrap; }
+        .port { font-size: .72rem; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--text-muted); }
+        .dash {
+            margin-top: 20px; background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+        }
+        .dash-head { display: flex; justify-content: space-between; font-size: .8rem; color: var(--text-dim); margin-bottom: 12px; }
+        .dash-head .live { color: var(--success); }
+        .machines { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .m { background: rgba(255,255,255,.04); border-radius: 10px; padding: 10px 12px; font-size: .8rem; }
+        .m b { display: block; font-size: .9rem; }
+        .st { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; margin-top: 2px; }
+        .st::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+        .st.run { color: var(--success); } .st.warn { color: var(--warning); } .st.stop { color: var(--danger); }
+        .line-alert {
+            position: absolute; right: -14px; bottom: -22px; background: #06c755; color: #fff;
+            padding: 10px 14px; border-radius: 12px; font-size: .82rem; font-weight: 600; max-width: 230px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.35);
+        }
+
+        /* Sections */
+        .section { padding: 96px 0; }
+        .section-alt { background: rgba(255,255,255,.02); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .section-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+        .eyebrow { color: var(--accent); font-weight: 600; font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+        .section-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
+        .section-head p { color: var(--text-muted); font-size: 1.05rem; }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; transition: border-color .25s, transform .25s; }
+        .card:hover { border-color: rgba(0,168,255,.4); transform: translateY(-3px); }
+        .card .ico { font-size: 1.8rem; margin-bottom: 14px; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .card p { color: var(--text-muted); font-size: .97rem; }
+
+        /* Flow */
+        .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 18px; align-items: center; }
+        .flow-col { display: flex; flex-direction: column; gap: 12px; }
+        .flow-item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+        .flow-item b { display: block; font-size: .98rem; }
+        .flow-item span { color: var(--text-dim); font-size: .85rem; }
+        .flow-hub {
+            background: var(--gradient-primary); border-radius: 18px; padding: 30px 22px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,168,255,.25);
+        }
+        .flow-hub b { display: block; font-size: 1.3rem; margin-bottom: 6px; }
+        .flow-hub span { font-size: .9rem; opacity: .9; }
+        .arrow { color: var(--accent); font-size: 1.6rem; text-align: center; }
+        .flow-note { text-align: center; color: var(--text-dim); font-size: .9rem; margin-top: 28px; }
+
+        /* Editions */
+        .edition { display: flex; flex-direction: column; }
+        .edition .tag { align-self: flex-start; font-size: .78rem; padding: 4px 12px; border-radius: 50px; margin-bottom: 16px; font-weight: 600; }
+        .tag-ind { background: rgba(0,168,255,.15); color: var(--accent); }
+        .tag-sol { background: rgba(245,158,11,.15); color: var(--warning); }
+        .tag-farm { background: rgba(16,185,129,.15); color: var(--success); }
+        .edition h3 { font-size: 1.45rem; }
+        .edition .for { color: var(--text-dim); font-size: .9rem; margin-bottom: 18px; }
+        .edition ul { list-style: none; margin: 0 0 22px; flex: 1; }
+        .edition li { padding: 7px 0 7px 26px; position: relative; color: var(--text-muted); font-size: .95rem; border-bottom: 1px dashed rgba(255,255,255,.07); }
+        .edition li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+        .edition .inbox { font-size: .85rem; color: var(--text-dim); margin-bottom: 18px; }
+        .edition .inbox b { color: var(--text-muted); font-weight: 600; }
+        .edition .btn { width: 100%; }
+
+        /* Steps */
+        .steps { counter-reset: s; }
+        .step { position: relative; padding-top: 52px; }
+        .step::before {
+            counter-increment: s; content: counter(s);
+            position: absolute; top: 0; left: 0; width: 38px; height: 38px; border-radius: 10px;
+            background: var(--gradient-primary); display: grid; place-items: center; font-weight: 700;
+        }
+
+        /* Spec table */
+        .spec { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+        .spec th, .spec td { text-align: left; padding: 14px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .spec th { width: 30%; color: var(--text-muted); font-weight: 500; }
+        .spec tr:last-child th, .spec tr:last-child td { border-bottom: none; }
+        .spec-note { color: var(--text-dim); font-size: .88rem; margin-top: 14px; text-align: center; }
+
+        /* Trust */
+        .trust { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+        .trust h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.3; margin-bottom: 16px; }
+        .trust p { color: var(--text-muted); margin-bottom: 14px; }
+        .trust-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .trust-stats div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+        .trust-stats b { display: block; font-size: 1.9rem; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .trust-stats span { color: var(--text-muted); font-size: .9rem; }
+
+        /* Reserve form */
+        .reserve { background: linear-gradient(135deg, rgba(0,168,255,.12), rgba(124,58,237,.12)); border: 1px solid rgba(0,168,255,.3); border-radius: 24px; padding: 48px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 44px; }
+        .reserve h2 { font-size: 2rem; line-height: 1.3; margin-bottom: 14px; }
+        .reserve p { color: var(--text-muted); margin-bottom: 18px; }
+        .perks { list-style: none; }
+        .perks li { padding: 8px 0 8px 30px; position: relative; color: var(--text-muted); }
+        .perks li::before { content: '🎁'; position: absolute; left: 0; }
+        form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-size: .88rem; color: var(--text-muted); margin-bottom: 6px; }
+        .field input, .field select, .field textarea {
+            width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18);
+            background: rgba(10,22,40,.7); color: #fff; font-family: inherit; font-size: .97rem;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+        .field select option { background: var(--primary); }
+        .choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; position: relative; }
+        .choice label {
+            border: 1px solid rgba(255,255,255,.18); border-radius: 10px; padding: 10px 8px; text-align: center; cursor: pointer;
+            font-size: .9rem; color: var(--text-muted); margin: 0; transition: all .2s;
+        }
+        .choice input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+        .choice input:checked + label { border-color: var(--accent); background: rgba(0,168,255,.15); color: #fff; }
+        .choice input:focus-visible + label { outline: 2px solid var(--accent); }
+        .err { color: #fca5a5; font-size: .85rem; margin-top: 6px; display: none; }
+        .err.show { display: block; }
+        .form-note { color: var(--text-dim); font-size: .85rem; margin-top: 10px; }
+        .success { display: none; text-align: center; padding: 40px 10px; }
+        .success.show { display: block; }
+        .success .big { font-size: 3rem; }
+        .success h3 { font-size: 1.5rem; margin: 10px 0; }
+        .success p { color: var(--text-muted); }
+
+        /* FAQ */
+        .faq { max-width: 820px; margin: 0 auto; }
+        .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; margin-bottom: 12px; }
+        .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; line-height: 1; }
+        .faq details[open] summary::after { content: '−'; }
+        .faq details p { color: var(--text-muted); margin-top: 12px; }
+
+        footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--text-dim); font-size: .9rem; }
+        .foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+        .foot a { color: var(--text-muted); text-decoration: none; margin-left: 18px; }
+        .foot a:hover { color: var(--accent); }
+
+        @media (max-width: 960px) {
+            .hero-content, .trust, .reserve { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
+            .flow { grid-template-columns: 1fr; }
+            .arrow { transform: rotate(90deg); }
+            .nav-links { display: none; }
+            .line-alert { right: 8px; }
+            .reserve { padding: 32px 22px; }
+        }
+        @media (max-width: 560px) {
+            .container { padding: 0 16px; }
+            .grid-4, form .row { grid-template-columns: 1fr; }
+            .choice { grid-template-columns: 1fr; }
+            .nav-container .btn { padding: 9px 12px; font-size: .85rem; }
+            .lang a { padding: 6px 7px; font-size: .78rem; }
+            .logo small { display: none; }
+            .spec th, .spec td { display: block; width: 100%; padding: 10px 16px; }
+            .spec th { border-bottom: none; padding-bottom: 0; }
+            .line-alert { position: static; margin-top: 14px; max-width: none; }
+            .section { padding: 72px 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../../../zh/" class="logo">
+                <span class="logo-mark">AIC</span>
+                <span>Bridge <small>by A.I.C.</small></span>
+            </a>
+            <div class="nav-links">
+                <a href="#how">工作原理</a>
+                <a href="#editions">版本</a>
+                <a href="#spec">规格</a>
+                <a href="#faq">常见问题</a>
+            </div>
+            <div class="nav-right">
+                <div class="lang" aria-label="Language"><a href="../" lang="th">TH</a><a href="../en/" lang="en">EN</a><a href="./" aria-current="page" lang="zh-CN">中文</a></div>
+                <a href="#reserve" class="btn btn-primary">预订</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <div class="badge"><span class="pulse"></span><span>开放预订 — 首批限量</span></div>
+                    <h1>一个盒子<br>连接<span class="highlight">所有设备、所有品牌</span><br>汇聚一屏</h1>
+                    <p class="hero-desc">
+                        AIC Bridge 是即装即用的控制器盒子，可从机器、传感器、光伏逆变器和农场设备采集数据，无论新旧、无论品牌，统一显示在一个仪表板上，并通过 LINE 提醒，无需修改现有 PLC 程序。
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#reserve" class="btn btn-primary btn-large">预订首批名额</a>
+                        <a href="#how" class="btn btn-outline btn-large">了解工作原理</a>
+                    </div>
+                    <div class="hero-points">
+                        <div><b>不改动 PLC</b>默认只读</div>
+                        <div><b>3 个版本</b>工厂 · 光伏 · 农场</div>
+                        <div><b>本地支持</b>泰国工程团队</div>
+                    </div>
+                </div>
+
+                <div class="device-wrap" aria-hidden="true">
+                    <div class="device">
+                        <div class="device-top">
+                            <div class="device-name">AIC <span>BRIDGE</span></div>
+                            <div class="leds"><i class="led on"></i><i class="led data"></i><i class="led on"></i><i class="led"></i></div>
+                        </div>
+                        <div class="terminals">
+                            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                        </div>
+                        <div class="ports">
+                            <span class="port">LAN ×2</span><span class="port">RS-485</span><span class="port">DI/DO 24V</span>
+                            <span class="port">4–20mA</span><span class="port">IO-Link</span><span class="port">CT</span><span class="port">4G / LoRa</span>
+                        </div>
+                        <div class="dash">
+                            <div class="dash-head"><span>A 厂 · 注塑线 2</span><span class="live">● LIVE</span></div>
+                            <div class="machines">
+                                <div class="m"><b>注塑机 #01</b><span class="st run">生产中 · 1,240 件</span></div>
+                                <div class="m"><b>注塑机 #02</b><span class="st warn">液压压力偏高</span></div>
+                                <div class="m"><b>主空压机</b><span class="st run">功率 18.4 kW</span></div>
+                                <div class="m"><b>冷水机</b><span class="st stop">已停机 12 分钟</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-alert">LINE · 注塑机 #02 油压高于正常值 14%，请检查油泵</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">我们解决的问题</div>
+                <h2>数据存在于每台设备中<br>却从未汇集到一起</h2>
+                <p>不同品牌说着不同的"语言"，老设备没有数据接口，新系统又各有各的应用。</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="ico">📋</div>
+                    <h3>仍靠纸笔记录</h3>
+                    <p>产量、停机时间、能耗都要手工抄写再录入，等发现问题时已过去好几天。</p>
+                </div>
+                <div class="card">
+                    <div class="ico">🧩</div>
+                    <h3>品牌多，应用多</h3>
+                    <p>机器、逆变器、泵各有各的厂商系统，没有任何地方能看到全局。</p>
+                </div>
+                <div class="card">
+                    <div class="ico">⚠️</div>
+                    <h3>坏了才知道</h3>
+                    <p>没有预警。每次停机都意味着产量损失、紧急维修费用和客户信任的流失。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How -->
+    <section class="section" id="how">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">工作原理</div>
+                <h2>一个盒子，四种数据采集方式</h2>
+                <p>AIC Bridge 为每台设备选择最佳方式：新设备直接读取控制器，没有任何接口的老设备则通过电流和传感器测量。</p>
+            </div>
+            <div class="flow">
+                <div class="flow-col">
+                    <div class="flow-item"><b>读取控制器</b><span>Modbus、OPC UA 及主流 PLC 协议</span></div>
+                    <div class="flow-item"><b>RS-485 设备</b><span>逆变器、电表、变频器</span></div>
+                    <div class="flow-item"><b>我们自己的传感器</b><span>模拟量 4–20mA、0–10V、IO-Link</span></div>
+                    <div class="flow-item"><b>电流互感器 (CT)</b><span>没有数据接口的老设备</span></div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-hub">
+                    <b>AIC Bridge</b>
+                    <span>把所有信号转换成统一语言<br>盒内 AI 分析</span>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-col">
+                    <div class="flow-item"><b>手机仪表板</b><span>实时查看所有设备、所有站点</span></div>
+                    <div class="flow-item"><b>LINE 提醒</b><span>故障发生前或数值异常时</span></div>
+                    <div class="flow-item"><b>自动报表</b><span>OEE、能耗、每班产量</span></div>
+                    <div class="flow-item"><b>对接其他系统</b><span>通过 MQTT / API 接入 ERP、MES、SCADA</span></div>
+                </div>
+            </div>
+            <p class="flow-note">可在工厂内网使用，无需联网 · 云服务为可选项</p>
+        </div>
+    </section>
+
+    <!-- Editions -->
+    <section class="section section-alt" id="editions">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">按用途选择，而非按规格</div>
+                <h2>3 个即用版本</h2>
+                <p>相同的核心硬件，每个版本都预装了对应用途的应用、配件和说明书。</p>
+            </div>
+            <div class="grid-3">
+                <div class="card edition">
+                    <span class="tag tag-ind">Industrial Edition</span>
+                    <h3>工厂设备</h3>
+                    <p class="for">制造工厂、零部件供应商、拥有多品牌设备的中小企业</p>
+                    <ul>
+                        <li>实时设备状态与停机时间</li>
+                        <li>自动计数产量并计算 OEE</li>
+                        <li>常见机型模板库</li>
+                        <li>监测液压、空压机、冷水机</li>
+                        <li>故障前异常预警</li>
+                    </ul>
+                    <p class="inbox"><b>包装内含：</b> 控制器、开口式 CT、信号线、安装说明</p>
+                    <a href="#reserve" class="btn btn-outline" data-edition="industrial">我感兴趣</a>
+                </div>
+                <div class="card edition">
+                    <span class="tag tag-sol">Solar Edition</span>
+                    <h3>屋顶光伏</h3>
+                    <p class="for">管理多站点、多品牌的光伏安装商和运维团队</p>
+                    <ul>
+                        <li>多品牌逆变器统一显示</li>
+                        <li>对比各站点发电量，找出异常偏低的站点</li>
+                        <li>读取电表，对比实际用电与发电</li>
+                        <li>在光伏发电高峰时启动负载</li>
+                        <li>每月向客户发送性能报告</li>
+                    </ul>
+                    <p class="inbox"><b>包装内含：</b> 控制器、RS-485 线缆、4G 模块（可选）、说明书</p>
+                    <a href="#reserve" class="btn btn-outline" data-edition="solar">我感兴趣</a>
+                </div>
+                <div class="card edition">
+                    <span class="tag tag-farm">Farm Edition</span>
+                    <h3>农场与温室</h3>
+                    <p class="for">中大型农场、温室、畜牧场</p>
+                    <ul>
+                        <li>定时控制水泵、阀门、风机、喷雾系统</li>
+                        <li>测量土壤湿度、温度、空气湿度</li>
+                        <li>按设定值自动控制</li>
+                        <li>无 Wi-Fi 区域可用 4G 或 LoRa</li>
+                        <li>水泵故障或停电时提醒</li>
+                    </ul>
+                    <p class="inbox"><b>包装内含：</b> 防水外壳、控制继电器、基础传感器、说明书</p>
+                    <a href="#reserve" class="btn btn-outline" data-edition="farm">我感兴趣</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup steps -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">可自行安装</div>
+                <h2>从开箱到看到数据，只需一天</h2>
+            </div>
+            <div class="grid-4 steps">
+                <div class="step"><h3>安装盒子</h3><p style="color:var(--text-muted)">安装在电柜 DIN 导轨上，使用标准 24V 电源</p></div>
+                <div class="step"><h3>接线</h3><p style="color:var(--text-muted)">按图示说明连接信号线或夹上 CT</p></div>
+                <div class="step"><h3>扫描二维码</h3><p style="color:var(--text-muted)">打开应用，扫描盒子上的二维码，从库中选择机型</p></div>
+                <div class="step"><h3>查看数据</h3><p style="color:var(--text-muted)">数据即刻显示在仪表板上，可立即设置 LINE 提醒</p></div>
+            </div>
+            <p class="flow-note">需要打开电柜的工作应由持证电工完成 · A.I.C. 团队可提供安装服务</p>
+        </div>
+    </section>
+
+    <!-- Spec -->
+    <section class="section section-alt" id="spec">
+        <div class="container" style="max-width:900px">
+            <div class="section-head">
+                <div class="eyebrow">初步规格</div>
+                <h2>工业级硬件</h2>
+            </div>
+            <table class="spec">
+                <tr><th>处理器</th><td>Raspberry Pi Compute Module 5 + RP2350 微控制器（用于实时任务）</td></tr>
+                <tr><th>盒内 AI</th><td>在盒内完成异常检测，无需上传原始数据（支持可选 AI 加速器）</td></tr>
+                <tr><th>输入/输出</th><td>隔离 24V 数字量、模拟量 4–20mA / 0–10V、温度、CT 电流、继电器输出</td></tr>
+                <tr><th>通信接口</th><td>Ethernet ×2、RS-485 (Modbus RTU)、IO-Link（扩展卡）</td></tr>
+                <tr><th>无线</th><td>Wi-Fi、蓝牙 · 4G LTE 和 LoRa（可选）</td></tr>
+                <tr><th>协议</th><td>Modbus TCP/RTU, OPC UA, MQTT, REST API</td></tr>
+                <tr><th>安装</th><td>DIN 导轨 · 24V DC 供电 · 农场版配防水外壳</td></tr>
+                <tr><th>安全</th><td>默认只读、设备网络与互联网隔离、加密远程更新</td></tr>
+            </table>
+            <p class="spec-note">* 规格仍在开发中，正式发售前可能变更。预订客户的反馈将用于确定最终规格。</p>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="section">
+        <div class="container">
+            <div class="trust">
+                <div>
+                    <div class="eyebrow">为什么选择 A.I.C.</div>
+                    <h2>由深耕工厂现场 11 年以上的团队打造</h2>
+                    <p>自 2014 年起，我们为领先制造企业编写 PLC 程序、设计安全系统、制造控制柜。我们深知现场有多复杂，也清楚工厂真正需要哪些数据。</p>
+                    <p>因此，AIC Bridge 的设计不会干扰现有系统，新旧设备皆可使用，并由我们在泰国的工程团队提供支持。</p>
+                </div>
+                <div class="trust-stats">
+                    <div><b>11+</b><span>年自动化经验</span></div>
+                    <div><b>100+</b><span>个已交付项目</span></div>
+                    <div><b>3</b><span>个国家：泰国、印度尼西亚、印度</span></div>
+                    <div><b>前</b><span>Rockwell Automation System Integrator</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reserve -->
+    <section class="section section-alt" id="reserve">
+        <div class="container">
+            <div class="reserve">
+                <div>
+                    <h2>预订首批名额<br>免费</h2>
+                    <p>登记即可优先获得名额。您的信息将帮助我们决定先生产哪个版本、加入哪些功能。</p>
+                    <ul class="perks">
+                        <li>首批预订专享价</li>
+                        <li>上市初期免费试用云服务</li>
+                        <li>参与制定规格与功能</li>
+                        <li>有机会与 A.I.C. 工程师共同参与试点项目</li>
+                    </ul>
+                </div>
+                <div>
+                    <form id="reserveForm" novalidate>
+                        <div class="field">
+                            <label>感兴趣的版本 *</label>
+                            <div class="choice" role="radiogroup" aria-label="感兴趣的版本">
+                                <input type="radio" name="edition" id="ed-ind" value="industrial"><label for="ed-ind">工厂</label>
+                                <input type="radio" name="edition" id="ed-sol" value="solar"><label for="ed-sol">屋顶光伏</label>
+                                <input type="radio" name="edition" id="ed-farm" value="farm"><label for="ed-farm">农业</label>
+                            </div>
+                            <div class="err" id="err-edition">请选择感兴趣的版本</div>
+                        </div>
+                        <div class="row">
+                            <div class="field">
+                                <label for="name">姓名 *</label>
+                                <input id="name" name="name" autocomplete="name">
+                                <div class="err" id="err-name">请输入姓名</div>
+                            </div>
+                            <div class="field">
+                                <label for="company">公司 / 农场</label>
+                                <input id="company" name="company" autocomplete="organization">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="field">
+                                <label for="email">邮箱 *</label>
+                                <input id="email" name="email" type="email" autocomplete="email">
+                                <div class="err" id="err-email">请输入有效的邮箱</div>
+                            </div>
+                            <div class="field">
+                                <label for="phone">电话 / LINE ID</label>
+                                <input id="phone" name="phone" autocomplete="tel">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="field">
+                                <label for="role">您的身份</label>
+                                <select id="role" name="role">
+                                    <option value="">请选择...</option>
+                                    <option>工厂老板 / 管理者</option>
+                                    <option>工程师 / 维修部门</option>
+                                    <option>系统集成商 / 承包商</option>
+                                    <option>光伏安装商 / 运维</option>
+                                    <option>设备制造商 / 进口商</option>
+                                    <option>农户 / 农场主</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="qty">预计使用数量</label>
+                                <select id="qty" name="quantity">
+                                    <option value="">请选择...</option>
+                                    <option>1</option>
+                                    <option>2–5</option>
+                                    <option>6–20</option>
+                                    <option>21–100</option>
+                                    <option>100 以上</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="budget">每台可接受预算（不含额外传感器）</label>
+                            <select id="budget" name="budget">
+                                <option value="">请选择...</option>
+                                <option>低于 5,000 泰铢</option>
+                                <option>5,000–10,000 泰铢</option>
+                                <option>10,000–20,000 泰铢</option>
+                                <option>20,000–40,000 泰铢</option>
+                                <option>超过 40,000 泰铢（如能满足需求）</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="usecase">希望它帮您解决什么问题？</label>
+                            <textarea id="usecase" name="usecase" rows="3" placeholder="例如：想知道 20 台注塑机为什么停机 / 管理 50 个多品牌光伏站点"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large" id="submitBtn" style="width:100%">预订首批名额</button>
+                        <p class="form-note">🔒 此信息仅用于联系您关于 AIC Bridge 的事宜，预订不构成购买义务。</p>
+                        <div class="err" id="err-submit">提交失败，请重试或致电 +66 89-190-0588。</div>
+                    </form>
+                    <div class="success" id="reserveSuccess" role="status">
+                        <div class="big">✅</div>
+                        <h3>已收到您的预订，谢谢！</h3>
+                        <p>A.I.C. 团队将在首批开放时与您联系；如您有意参与试点，我们会更早联系您。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">FAQ</div>
+                <h2>常见问题</h2>
+            </div>
+            <div class="faq">
+                <details>
+                    <summary>需要修改现有设备的 PLC 程序吗？</summary>
+                    <p>不需要。AIC Bridge 默认只读。如果设备不开放数据读取，可通过测量电流或加装独立传感器实现，不触碰原有控制系统。</p>
+                </details>
+                <details>
+                    <summary>没有 PLC 的老旧设备能用吗？</summary>
+                    <p>可以。在电源线上夹 CT 即可获取设备状态和运行周期，或接入状态灯信号，并加装模拟量传感器测量压力、温度等数值。</p>
+                </details>
+                <details>
+                    <summary>需要一直联网吗？</summary>
+                    <p>不需要。盒子内置仪表板，可在内网使用。如需在外查看手机端、接收 LINE 提醒或合并查看多个站点，可选用云服务。</p>
+                </details>
+                <details>
+                    <summary>可以自行安装吗，还是需要你们的团队上门？</summary>
+                    <p>产品按照可自行安装设计，并附图示说明；但需要打开电柜的工作应由持证电工完成。A.I.C. 及合作伙伴可提供安装服务。</p>
+                </details>
+                <details>
+                    <summary>支持哪些品牌的设备 / 逆变器？</summary>
+                    <p>大多数支持 Modbus 或 OPC UA 的设备可直接连接，我们也在陆续增加热门机型的现成模板。请在表单中告诉我们您使用的品牌和型号，我们会优先支持。</p>
+                </details>
+                <details>
+                    <summary>预订需要付款吗？</summary>
+                    <p>不需要。预订免费且无任何义务。首批开售时，我们会优先向预订客户提供专享价格。</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container foot">
+            <span>© Auto Innovate Construction Co., Ltd. · 泰国春武里</span>
+            <span><a href="../../../zh/">A.I.C. 首页</a><a href="../../fieldcheck/">FieldCheck</a><a href="../../../zh/#contact">联系我们</a></span>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var form = document.getElementById('reserveForm');
+            var success = document.getElementById('reserveSuccess');
+            var btn = document.getElementById('submitBtn');
+            var params = new URLSearchParams(location.search);
+
+            function pick(ed) {
+                var r = form.querySelector('input[name="edition"][value="' + ed + '"]');
+                if (r) { r.checked = true; document.getElementById('err-edition').classList.remove('show'); }
+            }
+            document.querySelectorAll('[data-edition]').forEach(function (a) {
+                a.addEventListener('click', function () { pick(a.getAttribute('data-edition')); });
+            });
+            if (params.get('edition')) pick(params.get('edition'));
+
+            function clearOnInput(id, errId) {
+                var el = document.getElementById(id);
+                el.addEventListener('input', function () { document.getElementById(errId).classList.remove('show'); });
+            }
+            clearOnInput('name', 'err-name');
+            clearOnInput('email', 'err-email');
+            form.querySelectorAll('input[name="edition"]').forEach(function (r) {
+                r.addEventListener('change', function () { document.getElementById('err-edition').classList.remove('show'); });
+            });
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                var ok = true;
+                var edition = form.querySelector('input[name="edition"]:checked');
+                var name = document.getElementById('name').value.trim();
+                var email = document.getElementById('email').value.trim();
+                if (!edition) { document.getElementById('err-edition').classList.add('show'); ok = false; }
+                if (!name) { document.getElementById('err-name').classList.add('show'); ok = false; }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('err-email').classList.add('show'); ok = false; }
+                if (!ok) return;
+
+                btn.disabled = true; btn.textContent = '提交中...';
+                document.getElementById('err-submit').classList.remove('show');
+
+                var data = new FormData(form);
+                data.append('_subject', 'AIC Bridge pre-order: ' + edition.value);
+                data.append('source', 'AIC Bridge Pre-order');
+                data.append('lang', document.documentElement.lang);
+                data.append('utm_source', params.get('utm_source') || '');
+                data.append('utm_campaign', params.get('utm_campaign') || '');
+
+                try {
+                    var res = await fetch('https://formspree.io/f/xzdzlwqa', {
+                        method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+                    });
+                    if (!res.ok) throw new Error('formspree');
+
+                    fetch('https://aic-inventory.vercel.app/api/fieldcheck-lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: email,
+                            name: name,
+                            edition: edition.value,
+                            source: 'AIC Bridge Pre-order (' + edition.value + ')',
+                            timestamp: new Date().toISOString()
+                        })
+                    }).catch(function () {});
+
+                    form.style.display = 'none';
+                    success.classList.add('show');
+                } catch (err) {
+                    document.getElementById('err-submit').classList.add('show');
+                    btn.disabled = false; btn.textContent = '预订首批名额';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

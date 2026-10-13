@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIC Bridge - One Box to Connect Every Machine, Every Brand | A.I.C.</title>
+    <meta name="description" content="AIC Bridge is a ready-to-use controller box that connects machines, sensors, solar systems and farm equipment of any brand to one dashboard with LINE alerts. Pre-orders now open.">
+    <link rel="alternate" hreflang="th" href="https://www.autoinnovate.com/products/bridge/">
+    <link rel="alternate" hreflang="en" href="https://www.autoinnovate.com/products/bridge/en/">
+    <link rel="alternate" hreflang="zh" href="https://www.autoinnovate.com/products/bridge/zh/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1628;
+            --primary-light: #132344;
+            --card: rgba(255,255,255,0.04);
+            --line: rgba(255,255,255,0.1);
+            --accent: #00a8ff;
+            --accent-glow: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #ffffff;
+            --text-muted: rgba(255,255,255,0.7);
+            --text-dim: rgba(255,255,255,0.5);
+            --gradient-primary: linear-gradient(135deg, #00a8ff 0%, #7c3aed 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Space Grotesk', 'Noto Sans Thai', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        a { color: inherit; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 14px 0;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+        }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
+        .logo small { opacity: 0.6; font-weight: 500; }
+        .logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--gradient-primary); display: grid; place-items: center; font-size: 0.8rem; font-weight: 800; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color .2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 14px; }
+        .lang { display: flex; border: 1px solid rgba(255,255,255,.2); border-radius: 8px; overflow: hidden; }
+        .lang a { padding: 6px 10px; font-size: .82rem; color: var(--text-muted); text-decoration: none; }
+        .lang a + a { border-left: 1px solid rgba(255,255,255,.2); }
+        .lang a:hover { color: #fff; }
+        .lang a[aria-current="page"] { background: rgba(0,168,255,.2); color: #fff; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 26px; border-radius: 10px; font-weight: 600; text-decoration: none;
+            transition: all .25s; cursor: pointer; border: none; font-size: 1rem; font-family: inherit;
+        }
+        .btn-primary { background: var(--gradient-primary); color: #fff; box-shadow: 0 4px 20px rgba(0,168,255,.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,168,255,.4); }
+        .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.3); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-large { padding: 16px 34px; font-size: 1.05rem; }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 25% 30%, rgba(0,168,255,.15) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 70%, rgba(124,58,237,.15) 0%, transparent 50%);
+        }
+        .hero-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(0,168,255,.15); border: 1px solid rgba(0,168,255,.3);
+            padding: 7px 16px; border-radius: 50px; font-size: .9rem; margin-bottom: 20px; color: var(--accent);
+        }
+        .pulse { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+        .hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 800; line-height: 1.25; margin-bottom: 20px; }
+        :lang(zh-CN) .hero h1 { font-size: clamp(2rem, 4.2vw, 3rem); word-break: keep-all; }
+        .highlight { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 32px; max-width: 560px; }
+        .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+        .hero-points { display: flex; gap: 28px; flex-wrap: wrap; }
+        .hero-points div { font-size: .95rem; color: var(--text-muted); }
+        .hero-points b { display: block; font-size: 1.5rem; color: #fff; font-weight: 700; }
+
+        /* Device mockup */
+        .device-wrap { position: relative; }
+        .device {
+            background: linear-gradient(160deg, #1b2c4d 0%, #0f1d36 100%);
+            border: 1px solid rgba(255,255,255,.15); border-radius: 18px; padding: 22px;
+            box-shadow: 0 30px 80px rgba(0,0,0,.45);
+        }
+        .device-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .device-name { font-weight: 700; letter-spacing: .5px; }
+        .device-name span { color: var(--accent); }
+        .leds { display: flex; gap: 8px; }
+        .led { width: 10px; height: 10px; border-radius: 50%; background: #2a3a58; }
+        .led.on { background: var(--success); box-shadow: 0 0 10px var(--success); }
+        .led.data { background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.2s infinite; }
+        .terminals { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; margin-bottom: 18px; }
+        .terminals i { display: block; height: 16px; border-radius: 3px; background: #2f8f4e; border: 1px solid rgba(0,0,0,.3); }
+        .terminals i:nth-child(3n) { background: #3a4b6b; }
+        .ports { display: flex; gap: 8px; flex-wrap: wrap; }
+        .port { font-size: .72rem; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--text-muted); }
+        .dash {
+            margin-top: 20px; background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+        }
+        .dash-head { display: flex; justify-content: space-between; font-size: .8rem; color: var(--text-dim); margin-bottom: 12px; }
+        .dash-head .live { color: var(--success); }
+        .machines { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .m { background: rgba(255,255,255,.04); border-radius: 10px; padding: 10px 12px; font-size: .8rem; }
+        .m b { display: block; font-size: .9rem; }
+        .st { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; margin-top: 2px; }
+        .st::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+        .st.run { color: var(--success); } .st.warn { color: var(--warning); } .st.stop { color: var(--danger); }
+        .line-alert {
+            position: absolute; right: -14px; bottom: -22px; background: #06c755; color: #fff;
+            padding: 10px 14px; border-radius: 12px; font-size: .82rem; font-weight: 600; max-width: 230px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.35);
+        }
+
+        /* Sections */
+        .section { padding: 96px 0; }
+        .section-alt { background: rgba(255,255,255,.02); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .section-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+        .eyebrow { color: var(--accent); font-weight: 600; font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+        .section-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
+        .section-head p { color: var(--text-muted); font-size: 1.05rem; }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; transition: border-color .25s, transform .25s; }
+        .card:hover { border-color: rgba(0,168,255,.4); transform: translateY(-3px); }
+        .card .ico { font-size: 1.8rem; margin-bottom: 14px; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .card p { color: var(--text-muted); font-size: .97rem; }
+
+        /* Flow */
+        .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 18px; align-items: center; }
+        .flow-col { display: flex; flex-direction: column; gap: 12px; }
+        .flow-item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+        .flow-item b { display: block; font-size: .98rem; }
+        .flow-item span { color: var(--text-dim); font-size: .85rem; }
+        .flow-hub {
+            background: var(--gradient-primary); border-radius: 18px; padding: 30px 22px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,168,255,.25);
+        }
+        .flow-hub b { display: block; font-size: 1.3rem; margin-bottom: 6px; }
+        .flow-hub span { font-size: .9rem; opacity: .9; }
+        .arrow { color: var(--accent); font-size: 1.6rem; text-align: center; }
+        .flow-note { text-align: center; color: var(--text-dim); font-size: .9rem; margin-top: 28px; }
+
+        /* Editions */
+        .edition { display: flex; flex-direction: column; }
+        .edition .tag { align-self: flex-start; font-size: .78rem; padding: 4px 12px; border-radius: 50px; margin-bottom: 16px; font-weight: 600; }
+        .tag-ind { background: rgba(0,168,255,.15); color: var(--accent); }
+        .tag-sol { background: rgba(245,158,11,.15); color: var(--warning); }
+        .tag-farm { background: rgba(16,185,129,.15); color: var(--success); }
+        .edition h3 { font-size: 1.45rem; }
+        .edition .for { color: var(--text-dim); font-size: .9rem; margin-bottom: 18px; }
+        .edition ul { list-style: none; margin: 0 0 22px; flex: 1; }
+        .edition li { padding: 7px 0 7px 26px; position: relative; color: var(--text-muted); font-size: .95rem; border-bottom: 1px dashed rgba(255,255,255,.07); }
+        .edition li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+        .edition .inbox { font-size: .85rem; color: var(--text-dim); margin-bottom: 18px; }
+        .edition .inbox b { color: var(--text-muted); font-weight: 600; }
+        .edition .btn { width: 100%; }
+
+        /* Steps */
+        .steps { counter-reset: s; }
+        .step { position: relative; padding-top: 52px; }
+        .step::before {
+            counter-increment: s; content: counter(s);
+            position: absolute; top: 0; left: 0; width: 38px; height: 38px; border-radius: 10px;
+            background: var(--gradient-primary); display: grid; place-items: center; font-weight: 700;
+        }
+
+        /* Spec table */
+        .spec { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+        .spec th, .spec td { text-align: left; padding: 14px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .spec th { width: 30%; color: var(--text-muted); font-weight: 500; }
+        .spec tr:last-child th, .spec tr:last-child td { border-bottom: none; }
+        .spec-note { color: var(--text-dim); font-size: .88rem; margin-top: 14px; text-align: center; }
+
+        /* Trust */
+        .trust { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+        .trust h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.3; margin-bottom: 16px; }
+        .trust p { color: var(--text-muted); margin-bottom: 14px; }
+        .trust-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .trust-stats div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+        .trust-stats b { display: block; font-size: 1.9rem; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .trust-stats span { color: var(--text-muted); font-size: .9rem; }
+
+        /* Reserve form */
+        .reserve { background: linear-gradient(135deg, rgba(0,168,255,.12), rgba(124,58,237,.12)); border: 1px solid rgba(0,168,255,.3); border-radius: 24px; padding: 48px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 44px; }
+        .reserve h2 { font-size: 2rem; line-height: 1.3; margin-bottom: 14px; }
+        .reserve p { color: var(--text-muted); margin-bottom: 18px; }
+        .perks { list-style: none; }
+        .perks li { padding: 8px 0 8px 30px; position: relative; color: var(--text-muted); }
+        .perks li::before { content: '🎁'; position: absolute; left: 0; }
+        form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-size: .88rem; color: var(--text-muted); margin-bottom: 6px; }
+        .field input, .field select, .field textarea {
+            width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18);
+            background: rgba(10,22,40,.7); color: #fff; font-family: inherit; font-size: .97rem;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+        .field select option { background: var(--primary); }
+        .choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; position: relative; }
+        .choice label {
+            border: 1px solid rgba(255,255,255,.18); border-radius: 10px; padding: 10px 8px; text-align: center; cursor: pointer;
+            font-size: .9rem; color: var(--text-muted); margin: 0; transition: all .2s;
+        }
+        .choice input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+        .choice input:checked + label { border-color: var(--accent); background: rgba(0,168,255,.15); color: #fff; }
+        .choice input:focus-visible + label { outline: 2px solid var(--accent); }
+        .err { color: #fca5a5; font-size: .85rem; margin-top: 6px; display: none; }
+        .err.show { display: block; }
+        .form-note { color: var(--text-dim); font-size: .85rem; margin-top: 10px; }
+        .success { display: none; text-align: center; padding: 40px 10px; }
+        .success.show { display: block; }
+        .success .big { font-size: 3rem; }
+        .success h3 { font-size: 1.5rem; margin: 10px 0; }
+        .success p { color: var(--text-muted); }
+
+        /* FAQ */
+        .faq { max-width: 820px; margin: 0 auto; }
+        .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; margin-bottom: 12px; }
+        .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; line-height: 1; }
+        .faq details[open] summary::after { content: '−'; }
+        .faq details p { color: var(--text-muted); margin-top: 12px; }
+
+        footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--text-dim); font-size: .9rem; }
+        .foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+        .foot a { color: var(--text-muted); text-decoration: none; margin-left: 18px; }
+        .foot a:hover { color: var(--accent); }
+
+        @media (max-width: 960px) {
+            .hero-content, .trust, .reserve { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
+            .flow { grid-template-columns: 1fr; }
+            .arrow { transform: rotate(90deg); }
+            .nav-links { display: none; }
+            .line-alert { right: 8px; }
+            .reserve { padding: 32px 22px; }
+        }
+        @media (max-width: 560px) {
+            .container { padding: 0 16px; }
+            .grid-4, form .row { grid-template-columns: 1fr; }
+            .choice { grid-template-columns: 1fr; }
+            .nav-container .btn { padding: 9px 12px; font-size: .85rem; }
+            .lang a { padding: 6px 7px; font-size: .78rem; }
+            .logo small { display: none; }
+            .spec th, .spec td { display: block; width: 100%; padding: 10px 16px; }
+            .spec th { border-bottom: none; padding-bottom: 0; }
+            .line-alert { position: static; margin-top: 14px; max-width: none; }
+            .section { padding: 72px 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../../../en/" class="logo">
+                <span class="logo-mark">AIC</span>
+                <span>Bridge <small>by A.I.C.</small></span>
+            </a>
+            <div class="nav-links">
+                <a href="#how">How it works</a>
+                <a href="#editions">Editions</a>
+                <a href="#spec">Specs</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <div class="nav-right">
+                <div class="lang" aria-label="Language"><a href="../" lang="th">TH</a><a href="./" aria-current="page" lang="en">EN</a><a href="../zh/" lang="zh-CN">中文</a></div>
+                <a href="#reserve" class="btn btn-primary">Pre-order</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <div class="badge"><span class="pulse"></span><span>Pre-orders open — limited first batch</span></div>
+                    <h1>One box to<br>connect <span class="highlight">every machine, every brand</span><br>to one screen</h1>
+                    <p class="hero-desc">
+                        AIC Bridge is a ready-to-use controller box that pulls data from machines, sensors, solar inverters and farm equipment, old or new, any brand, into one dashboard with LINE alerts, without modifying your existing PLC program.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#reserve" class="btn btn-primary btn-large">Reserve first-batch spot</a>
+                        <a href="#how" class="btn btn-outline btn-large">See how it works</a>
+                    </div>
+                    <div class="hero-points">
+                        <div><b>No PLC changes</b>Read-only by default</div>
+                        <div><b>3 editions</b>Factory · Solar · Farm</div>
+                        <div><b>Local support</b>Engineers in Thailand</div>
+                    </div>
+                </div>
+
+                <div class="device-wrap" aria-hidden="true">
+                    <div class="device">
+                        <div class="device-top">
+                            <div class="device-name">AIC <span>BRIDGE</span></div>
+                            <div class="leds"><i class="led on"></i><i class="led data"></i><i class="led on"></i><i class="led"></i></div>
+                        </div>
+                        <div class="terminals">
+                            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                        </div>
+                        <div class="ports">
+                            <span class="port">LAN ×2</span><span class="port">RS-485</span><span class="port">DI/DO 24V</span>
+                            <span class="port">4–20mA</span><span class="port">IO-Link</span><span class="port">CT</span><span class="port">4G / LoRa</span>
+                        </div>
+                        <div class="dash">
+                            <div class="dash-head"><span>Plant A · Molding line 2</span><span class="live">● LIVE</span></div>
+                            <div class="machines">
+                                <div class="m"><b>Injection #01</b><span class="st run">Running · 1,240 pcs</span></div>
+                                <div class="m"><b>Injection #02</b><span class="st warn">High hydraulic pressure</span></div>
+                                <div class="m"><b>Main air compressor</b><span class="st run">Drawing 18.4 kW</span></div>
+                                <div class="m"><b>Chiller</b><span class="st stop">Stopped 12 min</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-alert">LINE · Injection #02 oil pressure 14% above normal. Check the pump.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">The problem</div>
+                <h2>The data is in every machine<br>but never in one place</h2>
+                <p>Different brands speak different languages, old machines have no data port, and every new system comes with its own separate app.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="ico">📋</div>
+                    <h3>Still on paper</h3>
+                    <p>Output, downtime and energy are written down by hand and typed in again later. By the time you see a problem, days have passed.</p>
+                </div>
+                <div class="card">
+                    <div class="ico">🧩</div>
+                    <h3>Many brands, many apps</h3>
+                    <p>Machines, inverters and pumps each have their own vendor system. Nowhere shows you the full picture.</p>
+                </div>
+                <div class="card">
+                    <div class="ico">⚠️</div>
+                    <h3>You find out after it breaks</h3>
+                    <p>No early warning. Every breakdown costs output, emergency repairs and customer trust.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How -->
+    <section class="section" id="how">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">How it works</div>
+                <h2>One box, four ways to get data</h2>
+                <p>AIC Bridge uses the best method for each machine. New machines are read from the controller; old machines with nothing to connect to are measured through electrical current and sensors.</p>
+            </div>
+            <div class="flow">
+                <div class="flow-col">
+                    <div class="flow-item"><b>Read from the controller</b><span>Modbus, OPC UA and major PLC protocols</span></div>
+                    <div class="flow-item"><b>RS-485 devices</b><span>Inverters, power meters, VFDs</span></div>
+                    <div class="flow-item"><b>Our own sensors</b><span>Analog 4–20mA, 0–10V, IO-Link</span></div>
+                    <div class="flow-item"><b>Current clamp (CT)</b><span>Old machines with no data port</span></div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-hub">
+                    <b>AIC Bridge</b>
+                    <span>Turns every signal into one language<br>with on-box AI analysis</span>
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-col">
+                    <div class="flow-item"><b>Mobile dashboard</b><span>Every machine, every site, in real time</span></div>
+                    <div class="flow-item"><b>LINE alerts</b><span>Before breakdowns or on abnormal values</span></div>
+                    <div class="flow-item"><b>Automatic reports</b><span>OEE, energy, output per shift</span></div>
+                    <div class="flow-item"><b>Send to other systems</b><span>MQTT / API to ERP, MES, SCADA</span></div>
+                </div>
+            </div>
+            <p class="flow-note">Works on your local plant network without internet · Cloud service is optional</p>
+        </div>
+    </section>
+
+    <!-- Editions -->
+    <section class="section section-alt" id="editions">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">Choose by job, not by spec</div>
+                <h2>3 ready-to-use editions</h2>
+                <p>Same core hardware. Each edition comes with the apps, accessories and guide for its job already set up.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card edition">
+                    <span class="tag tag-ind">Industrial Edition</span>
+                    <h3>Factory machines</h3>
+                    <p class="for">Manufacturers, parts suppliers, SMEs with mixed-brand machines</p>
+                    <ul>
+                        <li>Real-time machine status and downtime</li>
+                        <li>Automatic output counting and OEE</li>
+                        <li>Template library for popular machine models</li>
+                        <li>Monitor hydraulics, air compressors, chillers</li>
+                        <li>Anomaly alerts before breakdowns</li>
+                    </ul>
+                    <p class="inbox"><b>In the box:</b> Controller, clamp-on CT, signal cables, install guide</p>
+                    <a href="#reserve" class="btn btn-outline" data-edition="industrial">I'm interested</a>
+                </div>
+                <div class="card edition">
+                    <span class="tag tag-sol">Solar Edition</span>
+                    <h3>Solar rooftop</h3>
+                    <p class="for">Solar installers and O&amp;M teams managing many sites and brands</p>
+                    <ul>
+                        <li>Multiple inverter brands on one screen</li>
+                        <li>Compare yield across sites, spot underperformers</li>
+                        <li>Read power meters: consumption vs. generation</li>
+                        <li>Run loads when solar output is high</li>
+                        <li>Monthly performance reports for clients</li>
+                    </ul>
+                    <p class="inbox"><b>In the box:</b> Controller, RS-485 cable, 4G module (optional), guide</p>
+                    <a href="#reserve" class="btn btn-outline" data-edition="solar">I'm interested</a>
+                </div>
+                <div class="card edition">
+                    <span class="tag tag-farm">Farm Edition</span>
+                    <h3>Farms and greenhouses</h3>
+                    <p class="for">Medium to large farms, greenhouses, livestock</p>
+                    <ul>
+                        <li>Schedule and control pumps, valves, fans, misting</li>
+                        <li>Measure soil moisture, temperature, humidity</li>
+                        <li>Automatic control by set points</li>
+                        <li>4G or LoRa where there is no Wi-Fi</li>
+                        <li>Alerts on pump failure or power outage</li>
+                    </ul>
+                    <p class="inbox"><b>In the box:</b> Waterproof enclosure, control relays, basic sensors, guide</p>
+                    <a href="#reserve" class="btn btn-outline" data-edition="farm">I'm interested</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup steps -->
+    <section class="section">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">Self-install</div>
+                <h2>From unboxing to live data in one day</h2>
+            </div>
+            <div class="grid-4 steps">
+                <div class="step"><h3>Mount the box</h3><p style="color:var(--text-muted)">DIN rail in the panel, standard 24V supply</p></div>
+                <div class="step"><h3>Wire it</h3><p style="color:var(--text-muted)">Connect signal wires or clamp the CT using the illustrated guide</p></div>
+                <div class="step"><h3>Scan the QR</h3><p style="color:var(--text-muted)">Open the app, scan the QR on the box, pick your machine model</p></div>
+                <div class="step"><h3>See your data</h3><p style="color:var(--text-muted)">Data appears on the dashboard; set up LINE alerts right away</p></div>
+            </div>
+            <p class="flow-note">Work inside electrical panels should be done by a licensed electrician · The A.I.C. team can install it for you</p>
+        </div>
+    </section>
+
+    <!-- Spec -->
+    <section class="section section-alt" id="spec">
+        <div class="container" style="max-width:900px">
+            <div class="section-head">
+                <div class="eyebrow">Preliminary specs</div>
+                <h2>Industrial-grade hardware</h2>
+            </div>
+            <table class="spec">
+                <tr><th>Processor</th><td>Raspberry Pi Compute Module 5 + RP2350 microcontroller for real-time tasks</td></tr>
+                <tr><th>On-box AI</th><td>Anomaly detection on the box, no raw data sent to the cloud (optional AI accelerator)</td></tr>
+                <tr><th>I/O</th><td>Isolated 24V digital, analog 4–20mA / 0–10V, temperature, CT current, relay outputs</td></tr>
+                <tr><th>Ports</th><td>Ethernet ×2, RS-485 (Modbus RTU), IO-Link (add-on card)</td></tr>
+                <tr><th>Wireless</th><td>Wi-Fi, Bluetooth · 4G LTE and LoRa (optional)</td></tr>
+                <tr><th>Protocols</th><td>Modbus TCP/RTU, OPC UA, MQTT, REST API</td></tr>
+                <tr><th>Mounting</th><td>DIN rail · 24V DC supply · Farm edition in waterproof enclosure</td></tr>
+                <tr><th>Security</th><td>Read-only by default, machine network separated from the internet, encrypted remote updates</td></tr>
+            </table>
+            <p class="spec-note">* Specs are in development and may change before release. Feedback from pre-order customers will shape the final specs.</p>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="section">
+        <div class="container">
+            <div class="trust">
+                <div>
+                    <div class="eyebrow">Why A.I.C.</div>
+                    <h2>Built by a team with 11+ years on real factory floors</h2>
+                    <p>We have been programming PLCs, designing safety systems and building control panels for leading manufacturers since 2014. We know how hard real sites are, and what data factories actually need.</p>
+                    <p>That is why AIC Bridge is designed not to disturb existing systems, works with old and new machines, and is backed by our engineering team in Thailand.</p>
+                </div>
+                <div class="trust-stats">
+                    <div><b>11+</b><span>years in automation</span></div>
+                    <div><b>100+</b><span>projects delivered</span></div>
+                    <div><b>3</b><span>countries: Thailand, Indonesia, India</span></div>
+                    <div><b>Former</b><span>Rockwell Automation System Integrator</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reserve -->
+    <section class="section section-alt" id="reserve">
+        <div class="container">
+            <div class="reserve">
+                <div>
+                    <h2>Reserve first-batch spot<br>Free of charge</h2>
+                    <p>Sign up for early access. Your answers help us decide which edition to build first and which features to include.</p>
+                    <ul class="perks">
+                        <li>Special price for first-batch reservations</li>
+                        <li>Free cloud service trial at launch</li>
+                        <li>Help shape specs and features</li>
+                        <li>Chance to join a pilot with A.I.C. engineers</li>
+                    </ul>
+                </div>
+                <div>
+                    <form id="reserveForm" novalidate>
+                        <div class="field">
+                            <label>Edition *</label>
+                            <div class="choice" role="radiogroup" aria-label="Edition">
+                                <input type="radio" name="edition" id="ed-ind" value="industrial"><label for="ed-ind">Factory</label>
+                                <input type="radio" name="edition" id="ed-sol" value="solar"><label for="ed-sol">Solar rooftop</label>
+                                <input type="radio" name="edition" id="ed-farm" value="farm"><label for="ed-farm">Farm</label>
+                            </div>
+                            <div class="err" id="err-edition">Please choose an edition</div>
+                        </div>
+                        <div class="row">
+                            <div class="field">
+                                <label for="name">Name *</label>
+                                <input id="name" name="name" autocomplete="name">
+                                <div class="err" id="err-name">Please enter your name</div>
+                            </div>
+                            <div class="field">
+                                <label for="company">Company / farm</label>
+                                <input id="company" name="company" autocomplete="organization">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="field">
+                                <label for="email">Email *</label>
+                                <input id="email" name="email" type="email" autocomplete="email">
+                                <div class="err" id="err-email">Please enter a valid email</div>
+                            </div>
+                            <div class="field">
+                                <label for="phone">Phone / LINE ID</label>
+                                <input id="phone" name="phone" autocomplete="tel">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="field">
+                                <label for="role">You are</label>
+                                <select id="role" name="role">
+                                    <option value="">Select...</option>
+                                    <option>Factory owner / manager</option>
+                                    <option>Engineer / maintenance</option>
+                                    <option>System integrator / contractor</option>
+                                    <option>Solar installer / O&amp;M</option>
+                                    <option>Machine builder / importer</option>
+                                    <option>Farmer / farm owner</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="qty">Expected number of boxes</label>
+                                <select id="qty" name="quantity">
+                                    <option value="">Select...</option>
+                                    <option>1</option>
+                                    <option>2–5</option>
+                                    <option>6–20</option>
+                                    <option>21–100</option>
+                                    <option>More than 100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="budget">Budget per box (excluding extra sensors)</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select...</option>
+                                <option>Under 5,000 THB</option>
+                                <option>5,000–10,000 THB</option>
+                                <option>10,000–20,000 THB</option>
+                                <option>20,000–40,000 THB</option>
+                                <option>Over 40,000 THB if it fits the need</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="usecase">What problem should it solve for you?</label>
+                            <textarea id="usecase" name="usecase" rows="3" placeholder="e.g. find out why our 20 molding machines stop / manage 50 solar sites with mixed brands"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large" id="submitBtn" style="width:100%">Reserve first-batch spot</button>
+                        <p class="form-note">🔒 We only use this to contact you about AIC Bridge. Reserving does not commit you to buy.</p>
+                        <div class="err" id="err-submit">Could not send. Please try again or call +66 89-190-0588.</div>
+                    </form>
+                    <div class="success" id="reserveSuccess" role="status">
+                        <div class="big">✅</div>
+                        <h3>Reservation received. Thank you!</h3>
+                        <p>The A.I.C. team will contact you when the first batch opens, or sooner if you would like to join a pilot.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-head">
+                <div class="eyebrow">FAQ</div>
+                <h2>FAQ</h2>
+            </div>
+            <div class="faq">
+                <details>
+                    <summary>Do I need to change the existing PLC program?</summary>
+                    <p>No. AIC Bridge is read-only by default. If a machine does not allow data access, it can measure electrical current or use separate sensors without touching the existing control system.</p>
+                </details>
+                <details>
+                    <summary>Does it work on very old machines without a PLC?</summary>
+                    <p>Yes. Clamp a CT on the power cable to get machine status and cycles, or take the signal from the status light, and add analog sensors for values such as pressure or temperature.</p>
+                </details>
+                <details>
+                    <summary>Does it need a constant internet connection?</summary>
+                    <p>No. The box has a built-in dashboard you can use on your local network. The optional cloud service adds remote mobile access, LINE alerts and multi-site views.</p>
+                </details>
+                <details>
+                    <summary>Can I install it myself, or does your team need to?</summary>
+                    <p>It is designed for self-install with an illustrated guide, but work inside electrical panels should be done by a licensed electrician. A.I.C. and our partners can install it for you.</p>
+                </details>
+                <details>
+                    <summary>Which machine and inverter brands are supported?</summary>
+                    <p>Most devices that support Modbus or OPC UA connect right away, and we are adding ready-made templates for popular models. Tell us your brands and models in the form and we will prioritize them.</p>
+                </details>
+                <details>
+                    <summary>Do I have to pay to reserve?</summary>
+                    <p>No. Reserving is free with no commitment. When the first batch goes on sale, reservation holders get the special price first.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container foot">
+            <span>© Auto Innovate Construction Co., Ltd. · Chonburi, Thailand</span>
+            <span><a href="../../../en/">A.I.C. Home</a><a href="../../fieldcheck/">FieldCheck</a><a href="../../../en/#contact">Contact us</a></span>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var form = document.getElementById('reserveForm');
+            var success = document.getElementById('reserveSuccess');
+            var btn = document.getElementById('submitBtn');
+            var params = new URLSearchParams(location.search);
+
+            function pick(ed) {
+                var r = form.querySelector('input[name="edition"][value="' + ed + '"]');
+                if (r) { r.checked = true; document.getElementById('err-edition').classList.remove('show'); }
+            }
+            document.querySelectorAll('[data-edition]').forEach(function (a) {
+                a.addEventListener('click', function () { pick(a.getAttribute('data-edition')); });
+            });
+            if (params.get('edition')) pick(params.get('edition'));
+
+            function clearOnInput(id, errId) {
+                var el = document.getElementById(id);
+                el.addEventListener('input', function () { document.getElementById(errId).classList.remove('show'); });
+            }
+            clearOnInput('name', 'err-name');
+            clearOnInput('email', 'err-email');
+            form.querySelectorAll('input[name="edition"]').forEach(function (r) {
+                r.addEventListener('change', function () { document.getElementById('err-edition').classList.remove('show'); });
+            });
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                var ok = true;
+                var edition = form.querySelector('input[name="edition"]:checked');
+                var name = document.getElementById('name').value.trim();
+                var email = document.getElementById('email').value.trim();
+                if (!edition) { document.getElementById('err-edition').classList.add('show'); ok = false; }
+                if (!name) { document.getElementById('err-name').classList.add('show'); ok = false; }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('err-email').classList.add('show'); ok = false; }
+                if (!ok) return;
+
+                btn.disabled = true; btn.textContent = 'Sending...';
+                document.getElementById('err-submit').classList.remove('show');
+
+                var data = new FormData(form);
+                data.append('_subject', 'AIC Bridge pre-order: ' + edition.value);
+                data.append('source', 'AIC Bridge Pre-order');
+                data.append('lang', document.documentElement.lang);
+                data.append('utm_source', params.get('utm_source') || '');
+                data.append('utm_campaign', params.get('utm_campaign') || '');
+
+                try {
+                    var res = await fetch('https://formspree.io/f/xzdzlwqa', {
+                        method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+                    });
+                    if (!res.ok) throw new Error('formspree');
+
+                    fetch('https://aic-inventory.vercel.app/api/fieldcheck-lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: email,
+                            name: name,
+                            edition: edition.value,
+                            source: 'AIC Bridge Pre-order (' + edition.value + ')',
+                            timestamp: new Date().toISOString()
+                        })
+                    }).catch(function () {});
+
+                    form.style.display = 'none';
+                    success.classList.add('show');
+                } catch (err) {
+                    document.getElementById('err-submit').classList.add('show');
+                    btn.disabled = false; btn.textContent = 'Reserve first-batch spot';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

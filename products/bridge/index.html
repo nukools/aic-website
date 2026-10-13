@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIC Bridge - กล่องตัวกลางเชื่อมทุกเครื่อง ทุกยี่ห้อ | A.I.C.</title>
     <meta name="description" content="AIC Bridge กล่อง controller สำเร็จรูปพร้อมใช้ เชื่อมเครื่องจักร เซนเซอร์ ระบบโซลาร์ และฟาร์ม ทุกยี่ห้อเข้าแดชบอร์ดเดียว แจ้งเตือนผ่าน LINE เปิดรับจองล่วงหน้า">
+    <link rel="alternate" hreflang="th" href="https://www.autoinnovate.com/products/bridge/">
+    <link rel="alternate" hreflang="en" href="https://www.autoinnovate.com/products/bridge/en/">
+    <link rel="alternate" hreflang="zh" href="https://www.autoinnovate.com/products/bridge/zh/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -52,6 +55,12 @@
         .nav-links { display: flex; gap: 28px; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color .2s; }
         .nav-links a:hover { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 14px; }
+        .lang { display: flex; border: 1px solid rgba(255,255,255,.2); border-radius: 8px; overflow: hidden; }
+        .lang a { padding: 6px 10px; font-size: .82rem; color: var(--text-muted); text-decoration: none; }
+        .lang a + a { border-left: 1px solid rgba(255,255,255,.2); }
+        .lang a:hover { color: #fff; }
+        .lang a[aria-current="page"] { background: rgba(0,168,255,.2); color: #fff; }
 
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -80,6 +89,7 @@
         .pulse { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
         .hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 800; line-height: 1.25; margin-bottom: 20px; }
+        :lang(zh-CN) .hero h1 { font-size: clamp(2rem, 4.2vw, 3rem); word-break: keep-all; }
         .highlight { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-desc { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 32px; max-width: 560px; }
         .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -255,7 +265,9 @@
             .container { padding: 0 16px; }
             .grid-4, form .row { grid-template-columns: 1fr; }
             .choice { grid-template-columns: 1fr; }
-            .nav-container .btn { padding: 10px 16px; font-size: .9rem; }
+            .nav-container .btn { padding: 9px 12px; font-size: .85rem; }
+            .lang a { padding: 6px 7px; font-size: .78rem; }
+            .logo small { display: none; }
             .spec th, .spec td { display: block; width: 100%; padding: 10px 16px; }
             .spec th { border-bottom: none; padding-bottom: 0; }
             .line-alert { position: static; margin-top: 14px; max-width: none; }
@@ -281,7 +293,10 @@
                 <a href="#spec">สเปก</a>
                 <a href="#faq">คำถามที่พบบ่อย</a>
             </div>
-            <a href="#reserve" class="btn btn-primary">จองล่วงหน้า</a>
+            <div class="nav-right">
+                <div class="lang" aria-label="Language"><a href="./" aria-current="page" lang="th">TH</a><a href="./en/" lang="en">EN</a><a href="./zh/" lang="zh-CN">中文</a></div>
+                <a href="#reserve" class="btn btn-primary">จองล่วงหน้า</a>
+            </div>
         </div>
     </nav>
 
@@ -699,6 +714,7 @@
                 var data = new FormData(form);
                 data.append('_subject', 'AIC Bridge pre-order: ' + edition.value);
                 data.append('source', 'AIC Bridge Pre-order');
+                data.append('lang', document.documentElement.lang);
                 data.append('utm_source', params.get('utm_source') || '');
                 data.append('utm_campaign', params.get('utm_campaign') || '');
 
